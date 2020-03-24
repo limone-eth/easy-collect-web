@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h2>Benvenuto su EasyCollect</h2>
+    <h4>Cerca un negozio sulla mappa, segui il link per il canale telegram e ordina i prodotti di cui hai bisogno</h4>
     <router-view></router-view>
   </div>
 </template>

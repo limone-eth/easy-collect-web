@@ -1,5 +1,7 @@
 <template>
-    <div id="home">TEST</div>
+    <div id="home">
+        <div class="btn btn-primary">TEST</div>
+    </div>
 
 </template>
 
