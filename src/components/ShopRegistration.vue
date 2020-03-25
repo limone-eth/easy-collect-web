@@ -16,18 +16,20 @@
                             <h5>Informazioni generali</h5>
                         </div>
                         <div class="form-group">
+
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" v-model="name"
                                    placeholder="Inserisci il nome della tua attività" required>
                         </div>
                         <div class="form-group">
-                            <label for="categories_id">Seleziona la tua categoria di appartenenza</label>
-                            <select class="form-control" id="categories_id" v-model="categories_id" required>
+                            <label for="categories_id">Seleziona fino a 3 categorie</label>
+                            <multiselect v-model="category" tag-placeholder="Aggiungi categoria" placeholder="Search or add a tag" label="name" track-by="id" :options="categories" :multiple="true" :taggable="true" @tag="addCategory"></multiselect>
+                           <!-- <select class="form-control" id="categories_id" v-model="categories_id" required>
                                 <option value="null" disabled>Scegli categoria</option>
                                 <option :key="category" v-for="category in categories" :value="category.id">
                                     {{category.name}}
                                 </option>
-                            </select>
+                            </select>-->
                         </div>
                         <div class="form-group">
                             <label for="address">Indirizzo</label>
@@ -73,11 +75,15 @@
         </div>
         <div v-else>
             <div class="text-center">
-                <h1 class="text-success"><font-awesome-icon :icon="['fa', 'check-circle']"/></h1>
+                <h1 class="text-success">
+                    <font-awesome-icon :icon="['fa', 'check-circle']"/>
+                </h1>
                 <h2>Complimenti!</h2>
                 <h4> La registrazione è avvenuta con successo.</h4>
                 <br>
-                <h5><router-link to="/home">Vai alla mappa</router-link></h5>
+                <h5>
+                    <router-link to="/home">Vai alla mappa</router-link>
+                </h5>
                 <br>
                 <router-link to="/home"><img src="../assets/map.png" alt="Fireworks" class="w-25"></router-link>
             </div>
@@ -86,6 +92,7 @@
 </template>
 
 <script>
+
   export default {
     name: "ShopRegistration",
     data() {
@@ -99,19 +106,23 @@
           {id: 6, name: "Altro"},
         ],
         name: null,
-        categories_id: null,
+        categories_ids: [],
         address: null,
         phone: null,
         telegram: null,
         facebook: null,
         error: null,
-        registered: true
+        registered: true,
+        category: {id: 1, name: "Enoteca"}
       }
     },
     mounted() {
       this.registered = false;
     },
     methods: {
+      addCategory: function(category){
+        this.categories_ids.push(category.id)
+      },
       registerForm: function (e) {
         if (!this.name) {
           this.error = 'Non hai inserito il nome!'

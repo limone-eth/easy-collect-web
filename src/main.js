@@ -7,8 +7,9 @@ import {faFish, faPhone, faExclamationCircle, faCheckCircle, faSearch} from '@fo
 import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueGeolocation from 'vue-browser-geolocation';
-
-
+import {Multiselect} from 'vue-multiselect'
+// register globally
+Vue.component('multiselect', Multiselect);
 
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';

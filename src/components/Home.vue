@@ -3,14 +3,12 @@
         <h2>Benvenuto su EasyCollect</h2>
         <h4>Cosa stai cercando?</h4>
 
-        <p>Hai un negozio?
+        <h6>Hai un negozio?
             <router-link to="/register" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
-        </p>
-
+        </h6>
 
         <!-- MAPPA -->
         <div class="container">
-
 
         <form @submit="searchForm"
               @submit.prevent="search">
@@ -47,6 +45,7 @@
                         <l-tile-layer :url="url">
 
                         </l-tile-layer>
+
                         <l-marker v-bind:key="marker" v-for="marker in markers"
                                   v-bind:lat-lng="[marker.lat,marker.lng]">
                             <l-popup>
@@ -86,8 +85,7 @@
 
 <script>
   import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
-  import {latLng} from "leaflet";
-  import {Icon} from 'leaflet';
+  import {latLng, Icon} from "leaflet";
 
   delete Icon.Default.prototype._getIconUrl;
   Icon.Default.mergeOptions({
@@ -95,12 +93,13 @@
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
   });
+
   export default {
     components: {
       LMap,
       LTileLayer,
       LMarker,
-      LPopup
+      LPopup,
     },
     mounted() {
       navigator.geolocation.getCurrentPosition(
@@ -109,7 +108,6 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          console.log(position.coords);
           this.markers.push({
             id: 1,
             name: "Test",
