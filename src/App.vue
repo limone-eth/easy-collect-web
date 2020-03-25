@@ -1,8 +1,5 @@
 <template>
-  <div id="app">
-
-  <h2>Benvenuto su EasyCollect</h2>
-  <h4>Cosa stai cercando?</h4>
+  <div id="app" class="container mb-5">
     
   <router-view></router-view>
   </div>
@@ -20,7 +17,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }

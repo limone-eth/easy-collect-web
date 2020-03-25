@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router/index'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faFish} from '@fortawesome/free-solid-svg-icons'
+import {faFish, faPhone, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
@@ -11,6 +12,11 @@ import 'leaflet/dist/leaflet.css';
 
 
 library.add(faFish);
+library.add(faExclamationCircle);
+library.add(faCheckCircle);
+library.add(faPhone);
+library.add(faFacebook);
+library.add(faTelegram);
 
 // leaflet
 Vue.component('l-map', LMap);

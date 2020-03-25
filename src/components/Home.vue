@@ -1,6 +1,7 @@
 <template>
-    <div class="row">
-    
+    <div class="container text-center">
+        <h2>Benvenuto su EasyCollect</h2>
+        <h4>Cosa stai cercando?</h4>
         <!-- MAPPA -->
     
         <div class="col-3"></div>
