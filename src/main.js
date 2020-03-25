@@ -6,6 +6,9 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {faFish, faPhone, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import VueGeolocation from 'vue-browser-geolocation';
+
+
 
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -29,7 +32,7 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
-
+Vue.use(VueGeolocation);
 
 
 import 'bootstrap/dist/css/bootstrap.css'

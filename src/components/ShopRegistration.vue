@@ -1,5 +1,5 @@
 <template>
-    <div id="register-container">
+    <div id="register-container" class="container">
         <div v-if="!registered">
 
             <div class="text-center">
