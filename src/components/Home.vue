@@ -2,6 +2,7 @@
     <div class="container text-center">
         <h2>Benvenuto su EasyCollect</h2>
         <h4>Cosa stai cercando?</h4>
+        <h5>Hai un negozio? <router-link to="/register" class="text-primary">Registrati per essere visibile sulla mappa</router-link></h5>
         <!-- MAPPA -->
     
         <div class="col-3"></div>

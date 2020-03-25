@@ -80,7 +80,6 @@
                 <h5><router-link to="/home">Vai alla mappa</router-link></h5>
                 <br>
                 <router-link to="/home"><img src="../assets/map.png" alt="Fireworks" class="w-25"></router-link>
-
             </div>
         </div>
     </div>
@@ -108,6 +107,9 @@
         error: null,
         registered: true
       }
+    },
+    mounted() {
+      this.registered = false;
     },
     methods: {
       registerForm: function (e) {
@@ -150,7 +152,7 @@
               this.error = e.response.data.message;
             }
           });*/
-      },
+      }
     }
   }
 </script>
