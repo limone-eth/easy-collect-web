@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="categories_id">Seleziona la tua categoria di appartenenza</label>
                             <select class="form-control" id="categories_id" v-model="categories_id" required>
-                                <option value="" selected>Scegli categoria</option>
+                                <option value="null" disabled>Scegli categoria</option>
                                 <option :key="category" v-for="category in categories" :value="category.id">
                                     {{category.name}}
                                 </option>
