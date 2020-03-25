@@ -1,11 +1,10 @@
 <template>
-
     <!-- GRID Categoria Negozio -->
     <div class="row">
-        
+    
         <div class="col-3"></div>
-
-
+    
+    
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
                 <div class="col-4">
@@ -18,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="col-4">
                     <div class="box alimentari">
                         <div class="box-title">
@@ -29,8 +28,8 @@
                         </div>
                     </div>
                 </div>
-
-
+    
+    
                 <div class="col-4">
                     <div class="box pesce">
                         <div class="box-title">
@@ -42,16 +41,14 @@
                     </div>
                 </div>
             </div>
-
+    
         </div>
-
-
+    
+    
         <div class="col-3"></div>
-
-
+    
+    
     </div>
-
-
 </template>
 
 
@@ -77,66 +74,58 @@ Momentaneamente levato la form
 
 
 <script>
-  export default {
+export default {
     name: "Home"
-  }
+}
 </script>
 
 
 <style>
+.box {
+    border-radius: 40px;
+    padding: 30px 0px;
+    margin: 60px 0px;
+    cursor: pointer;
+    align: center;
+    transition: all 0.5s ease-out;
+    box-shadow: 0 0 6px #4183D7;
+    width: 150px;
+    height: 150px;
+}
 
-    .box {
-        border-radius: 40px;
-        padding: 30px 0px;
-        margin: 60px 0px;
-        cursor: pointer;
-        align: center;
-        transition: all 0.5s ease-out;
-        box-shadow: 0 0 6px #4183D7;
-        width: 150px;
-        height: 150px;
-    }
+.frutta:hover {
+    box-shadow: #0FE804;
+    background: #0F9D58;
+    color: white;
+}
 
-
-    .frutta:hover {
-        box-shadow: #0FE804;
-        background: #0F9D58;
-        color: white;
-    }
-
-    .frutta:active {
+.frutta:active {
     width: 70px;
     height: 74px;
-    }
+}
 
-    .alimentari:hover {
-        box-shadow: #F05C12;
-        background: #DB4437;
-        color: white;
+.alimentari:hover {
+    box-shadow: #F05C12;
+    background: #DB4437;
+    color: white;
+}
 
-    }
+.pesce:hover {
+    box-shadow: #18D5DB;
+    background: #4285F4;
+    color: white;
+}
 
-    .pesce:hover {
-        box-shadow: #18D5DB;
-        background: #4285F4;
-        color: white;
+.box .box-text {
+    margin: 20px 0px;
+    font-size: 15px;
+    color: #4183D7;
+    line-height: 30px;
+}
 
-    }
-
-  
-
-
-    .box .box-text {
-        margin: 20px 0px;
-        font-size: 15px;
-        color: #4183D7;
-        line-height: 30px;
-    }
-
-    .box .box-btn a {
-        text-decoration: none;
-        color: #4183D7;
-        font-size: 16px;
-    }
-
+.box .box-btn a {
+    text-decoration: none;
+    color: #4183D7;
+    font-size: 16px;
+}
 </style>
