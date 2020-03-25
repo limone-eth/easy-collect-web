@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <h2>Benvenuto su EasyCollect</h2>
-    <h4>Cosa stai cercando?</h4>
-    <router-view></router-view>
+
+  <h2>Benvenuto su EasyCollect</h2>
+  <h4>Cosa stai cercando?</h4>
+    
+  <router-view></router-view>
   </div>
 </template>
 
