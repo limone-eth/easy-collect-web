@@ -97,7 +97,7 @@
     name: "ShopRegistration",
     data() {
       return {
-        categories: [
+        categories: [ //TODO - categorie da backend?
           {id: 1, name: "Enoteca"},
           {id: 2, name: "Pescheria"},
           {id: 3, name: "Macelleria"},
@@ -135,6 +135,10 @@
         }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error = 'Devi inserire almeno un contatto!'
+        }
+        if (this.categories_ids.length < 3)
+        {
+          this.error = 'Devi selezionare almeno 3 categorie!'
         }
         e.preventDefault();
       },

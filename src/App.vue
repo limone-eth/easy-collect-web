@@ -7,11 +7,13 @@
 
 <script>
 
+
 export default {
   name: 'App'
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
