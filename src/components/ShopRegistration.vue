@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label for="address">Breve descrizione (max 120 caratteri)</label>
                             <input type="text" class="form-control" id="description" v-model="description"
-                                   placeholder="Inserisci una breve descrizione" maxlength="120">
+                                   placeholder="Descrivi brevemente la tua attività" maxlength="120">
                         </div>
                         <div class="form-group">
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
