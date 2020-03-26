@@ -19,7 +19,7 @@ import 'leaflet/dist/leaflet.css';
 Vue.use({
   install (Vue) {
     Vue.prototype.$api = axios.create({
-      baseURL: "http://localhost:5000/"
+      baseURL: process.env.VUE_APP_API_URL
     })
   }
 });

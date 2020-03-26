@@ -53,7 +53,11 @@
                                 </span><br>
                                     <span v-bind:key="category" v-for="category in shop.categories"
                                           class="h6 font-weight-bold">
-                                        {{category.name}}
+                                        <span class="badge badge-success mr-1">{{category.name}}</span>
+                                    </span>
+                                    <br>
+                                    <span class="h6">
+                                        {{shop.description}}
                                     </span>
                                     <p class="h6" v-show="shop.phone !== null">
                                         <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
