@@ -8,6 +8,7 @@ import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueGeolocation from 'vue-browser-geolocation';
 import Multiselect from 'vue-multiselect';
+import axios from 'axios'
 
 // register globally
 Vue.component('multiselect', Multiselect);
@@ -15,6 +16,13 @@ Vue.component('multiselect', Multiselect);
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 
+Vue.use({
+  install (Vue) {
+    Vue.prototype.$api = axios.create({
+      baseURL: "http://localhost:5000/"
+    })
+  }
+});
 
 library.add(faFish);
 library.add(faExclamationCircle);

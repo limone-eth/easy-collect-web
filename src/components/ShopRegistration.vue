@@ -23,13 +23,16 @@
                         </div>
                         <div class="form-group">
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
-                            <multiselect v-model="category" tag-placeholder="Aggiungi categoria" placeholder="Search or add a tag" label="name" track-by="id" :options="categories" :multiple="true" :taggable="true" @tag="addCategory"></multiselect>
-                           <!-- <select class="form-control" id="categories_id" v-model="categories_id" required>
-                                <option value="null" disabled>Scegli categoria</option>
-                                <option :key="category" v-for="category in categories" :value="category.id">
-                                    {{category.name}}
-                                </option>
-                            </select>-->
+                            <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
+                                         placeholder="Search or add a tag" label="name" track-by="id"
+                                         :options="categories" :multiple="true" :taggable="true"
+                                         @tag="addCategory"></multiselect>
+                            <!-- <select class="form-control" id="categories_id" v-model="categories_id" required>
+                                 <option value="null" disabled>Scegli categoria</option>
+                                 <option :key="category" v-for="category in categories" :value="category.id">
+                                     {{category.name}}
+                                 </option>
+                             </select>-->
                         </div>
                         <div class="form-group">
                             <label for="address">Indirizzo</label>
@@ -97,14 +100,7 @@
     name: "ShopRegistration",
     data() {
       return {
-        categories: [ //TODO - categorie da backend?
-          {id: 1, name: "Enoteca"},
-          {id: 2, name: "Pescheria"},
-          {id: 3, name: "Macelleria"},
-          {id: 4, name: "Panificio"},
-          {id: 5, name: "Pastificio"},
-          {id: 6, name: "Altro"},
-        ],
+        categories: [],
         name: null,
         categories_ids: [],
         address: null,
@@ -113,22 +109,29 @@
         facebook: null,
         error: null,
         registered: true,
-        category: {id: 1, name: "Enoteca"}
+        category: null
       }
     },
     mounted() {
       this.registered = false;
+      this.$api.get('/categories')
+        .then(response => {
+          response.data.map(category => {
+            this.categories.push({
+              id: category.id,
+              name: category.name
+            })
+          });
+        })
+        .catch(error => (console.log(error)));
     },
     methods: {
-      addCategory: function(category){
+      addCategory: function (category) {
         this.categories_ids.push(category.id)
       },
       registerForm: function (e) {
         if (!this.name) {
           this.error = 'Non hai inserito il nome!'
-        }
-        if (!this.categories_id) {
-          this.error = 'Non hai selezionato una categoria!'
         }
         if (!this.address) {
           this.error = 'Non hai inserito il tuo indirizzo!'
@@ -136,37 +139,34 @@
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error = 'Devi inserire almeno un contatto!'
         }
-        if (this.categories_ids.length < 3)
-        {
-          this.error = 'Devi selezionare almeno 3 categorie!'
+        if (this.categories_ids.length >= 3) {
+          this.error = 'Puoi selezionare massimo 3 categorie!'
         }
         e.preventDefault();
       },
       register() {
         let payload = {
           name: this.name,
-          categories_id: this.categories_id,
+          categories_ids: this.category.map(c => {
+            return c.id
+          }),
           address: this.address,
           phone: this.phone,
           telegram: this.telegram,
           facebook: this.facebook
         };
         console.log(payload);
-        this.registered = true;
-        /*this.$api.post('/register', payload)
-          .then(
-            response => {
-              this.res = response.data;
-              localStorage.setItem('user-token', response.data.authentication.access_token);
-              this.$api.token = response.data.authentication.access_token;
-              this.$router.replace({path: "/home/"})
+        this.$api.post('/shops', payload)
+          .then(response => {
+              console.log(response);
+              this.registered = true;
             }
           )
           .catch((e) => {
             if (e.response.status !== 500) {
               this.error = e.response.data.message;
             }
-          });*/
+          });
       }
     }
   }

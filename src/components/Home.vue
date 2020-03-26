@@ -10,31 +10,29 @@
         <!-- MAPPA -->
         <div class="container">
 
-        <form @submit="searchForm"
-              @submit.prevent="search">
-            <div class="row">
-                <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control" id="name" v-model="filter"
-                           placeholder="Cerca per nome o indirizzo">
+            <form @submit="searchForm"
+                  @submit.prevent="search">
+                <div class="row">
+                    <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="name" v-model="filter"
+                               placeholder="Cerca per nome o indirizzo">
+                    </div>
+                    <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                        <select class="form-control" id="categories_id" v-model="categories_id">
+                            <option value="null" disabled>Filtra per categoria</option>
+                            <option :key="category" v-for="category in categories" :value="category.id">
+                                {{category.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <font-awesome-icon :icon="['fa', 'search']"/>
+                            Cerca
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <select class="form-control" id="categories_id" v-model="categories_id">
-                        <option value="null" disabled>Filtra per categoria</option>
-                        <option :key="category" v-for="category in categories" :value="category.id">
-                            {{category.name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <font-awesome-icon :icon="['fa', 'search']"/>
-                        Cerca
-                    </button>
-                </div>
-
-            </div>
-
-        </form>
+            </form>
         </div>
         <div class="row">
             <div class="col-lg-1 col-md-3"></div>
@@ -46,27 +44,28 @@
 
                         </l-tile-layer>
 
-                        <l-marker v-bind:key="marker" v-for="marker in markers"
-                                  v-bind:lat-lng="[marker.lat,marker.lng]">
+                        <l-marker v-bind:key="shop" v-for="shop in shops"
+                                  v-bind:lat-lng="[shop.lat,shop.lng]">
                             <l-popup>
                                 <div>
                                 <span class="text-primary h5">
-                                    {{marker.name}}
+                                    {{shop.name}}
                                 </span><br>
-                                    <span class="h6 font-weight-bold">
-                                    {{marker.category}}
-                                </span>
-                                    <p class="h6" v-show="marker.phone !== null">
+                                    <span v-bind:key="category" v-for="category in shop.categories"
+                                          class="h6 font-weight-bold">
+                                        {{category.name}}
+                                    </span>
+                                    <p class="h6" v-show="shop.phone !== null">
                                         <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                        <a v-bind:href="'tel:' + marker.phone"> {{marker.phone}}</a>
+                                        <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
                                     </p>
-                                    <p class="h6" v-show="marker.telegram !== null">
+                                    <p class="h6" v-show="shop.telegram !== null">
                                         <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                        <a v-bind:href="marker.telegram"> Canale Telegram</a>
+                                        <a v-bind:href="'//' + shop.telegram" target="_blank"> Canale Telegram</a>
                                     </p>
-                                    <p class="h6" v-show="marker.facebook !== null">
+                                    <p class="h6" v-show="shop.facebook !== null">
                                         <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                        <a v-bind:href="marker.facebook"> Pagina Facebook</a>
+                                        <a v-bind:href="'//' + shop.facebook" target="_blank"> Pagina Facebook</a>
                                     </p>
                                 </div>
                             </l-popup>
@@ -108,68 +107,52 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          this.markers.push({
-            id: 1,
-            name: "Test",
-            category: "Pescheria",
-            phone: "3313333",
-            facebook: "www.google.it",
-            telegram: "www.google.it",
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          });
           this.center = [position.coords.latitude, position.coords.longitude];
           this.zoomUpdated(12.5)
         },
         error => {
           console.log(error.message);
         },
-      )
-      /*this.$getLocation({
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: Infinity
-      })
-        .then(coordinates => {
-          if (coordinates.lat && coordinates.lng) {
-            this.user_coordinates = {
-              lat: coordinates.lat,
-              lng: coordinates.lng
-            };
-            console.log(coordinates);
-            //this.centerUpdated([coordinates.lat, coordinates.lng]);
-            //this.zoomUpdated(10.3)
-          }
-        });*/
+      );
+      this.$api.get('/categories')
+        .then(response => {
+          response.data.map(category => {
+            this.categories.push({
+              id: category.id,
+              name: category.name
+            })
+          });
+        })
+        .catch(error => (console.log(error)));
+      this.$api.get('/shops')
+        .then(response => {
+          this.shops = response.data;
+        })
+        .catch(error => (console.log(error)));
     },
     data() {
       return {
         categories_id: null,
-        categories: [
-          {id: 1, name: "Enoteca"},
-          {id: 2, name: "Pescheria"},
-          {id: 3, name: "Macelleria"},
-          {id: 4, name: "Panificio"},
-          {id: 5, name: "Pastificio"},
-          {id: 6, name: "Altro"},
-        ],
+        categories: [],
         filter: null,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         zoom: 5.0,
         user_coordinates: null,
         bounds: 5.3,
-        markers: [
-          {
-            id: 2,
-            name: "Casa mia",
-            category: "Alimentari",
-            phone: "3313333",
-            facebook: "www.google.it",
-            lat: 43.413220,
-            lng: 10.219482
-          }
-        ]
+        shops: [],
       };
+    },
+    computed: {
+      axiosParams() {
+        const params = new URLSearchParams();
+        if (this.filter) {
+          params.append('filter', this.filter);
+        }
+        if (this.categories_id) {
+          params.append('categories_id', this.categories_id);
+        }
+        return params;
+      }
     },
     methods: {
       zoomUpdated(zoom) {
@@ -183,6 +166,16 @@
       },
       getLatLng(marker) {
         return latLng(marker.lat, marker.lng)
+      },
+      searchForm: function (e) {
+        e.preventDefault();
+      },
+      search() {
+        this.$api.get('/shops', {params: this.axiosParams})
+          .then(response => {
+            this.shops = response.data;
+          })
+          .catch(error => (console.log(error)));
       }
     }
   }
