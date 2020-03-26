@@ -22,6 +22,11 @@
                                    placeholder="Inserisci il nome della tua attività" required>
                         </div>
                         <div class="form-group">
+                            <label for="address">Breve descrizione (max 120 caratteri)</label>
+                            <input type="text" class="form-control" id="description" v-model="description"
+                                   placeholder="Inserisci una breve descrizione" maxlength="120">
+                        </div>
+                        <div class="form-group">
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
                                          placeholder="Search or add a tag" label="name" track-by="id"
@@ -102,6 +107,7 @@
       return {
         categories: [],
         name: null,
+        description: null,
         categories_ids: [],
         address: null,
         phone: null,
@@ -126,12 +132,12 @@
         .catch(error => (console.log(error)));
     },
     methods: {
-      addCategory: function (category) {
-        this.categories_ids.push(category.id)
-      },
       registerForm: function (e) {
         if (!this.name) {
           this.error = 'Non hai inserito il nome!'
+        }
+        if (this.description && this.description.length > 120){
+          this.error = 'La descrizione che hai inserito è troppo lunga!'
         }
         if (!this.address) {
           this.error = 'Non hai inserito il tuo indirizzo!'
@@ -139,7 +145,7 @@
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error = 'Devi inserire almeno un contatto!'
         }
-        if (this.categories_ids.length >= 3) {
+        if (this.category.length >= 3) {
           this.error = 'Puoi selezionare massimo 3 categorie!'
         }
         e.preventDefault();
@@ -147,6 +153,7 @@
       register() {
         let payload = {
           name: this.name,
+          description: this.description,
           categories_ids: this.category.map(c => {
             return c.id
           }),
@@ -155,7 +162,6 @@
           telegram: this.telegram,
           facebook: this.facebook
         };
-        console.log(payload);
         this.$api.post('/shops', payload)
           .then(response => {
               console.log(response);

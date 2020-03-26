@@ -56,6 +56,10 @@
                                         {{category.name}}
                                     </span>
                                     <p class="h6" v-show="shop.phone !== null">
+                                        <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
+                                         {{shop.address}}
+                                    </p>
+                                    <p class="h6" v-show="shop.phone !== null">
                                         <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
                                         <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
                                     </p>
@@ -108,7 +112,7 @@
             lng: position.coords.longitude
           };
           this.center = [position.coords.latitude, position.coords.longitude];
-          this.zoomUpdated(12.5)
+          this.zoomUpdated(13.5)
         },
         error => {
           console.log(error.message);

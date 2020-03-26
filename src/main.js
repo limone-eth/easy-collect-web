@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router/index'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faFish, faPhone, faExclamationCircle, faCheckCircle, faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faFish, faPhone, faExclamationCircle, faCheckCircle, faSearch, faMapPin} from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueGeolocation from 'vue-browser-geolocation';
@@ -28,6 +28,7 @@ library.add(faFish);
 library.add(faExclamationCircle);
 library.add(faCheckCircle);
 library.add(faSearch);
+library.add(faMapPin);
 library.add(faPhone);
 library.add(faFacebook);
 library.add(faTelegram);
