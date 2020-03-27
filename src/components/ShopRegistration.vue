@@ -147,6 +147,8 @@
         }
         if (this.category.length >= 3) {
           this.error = 'Puoi selezionare massimo 3 categorie!'
+        } else if (this.category.length === 0){
+          this.error = 'Seleziona almeno una categoria!'
         }
         e.preventDefault();
       },
@@ -158,10 +160,16 @@
             return c.id
           }),
           address: this.address,
-          phone: this.phone,
-          telegram: this.telegram,
-          facebook: this.facebook
         };
+        if (this.phone){
+          payload.phone= this.phone;
+        }
+        if (this.telegram){
+          payload.telegram = this.telegram;
+        }
+        if (this.facebook){
+          payload.facebook = this.facebook;
+        }
         this.$api.post('/shops', payload)
           .then(response => {
               console.log(response);
@@ -170,7 +178,11 @@
           )
           .catch((e) => {
             if (e.response.status !== 500) {
-              this.error = e.response.data.message;
+              if (e.response.data.errors[0].includes('categories')){
+                this.error = 'Seleziona da 1 a massimo 3 categorie!'
+              } else {
+                this.error = e.response.data.message;
+              }
             }
           });
       }
