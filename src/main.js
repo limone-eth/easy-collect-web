@@ -10,6 +10,7 @@ import VueGeolocation from 'vue-browser-geolocation';
 import Multiselect from 'vue-multiselect';
 import axios from 'axios'
 
+
 // register globally
 Vue.component('multiselect', Multiselect);
 
