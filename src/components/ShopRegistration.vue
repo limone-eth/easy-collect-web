@@ -3,7 +3,7 @@
         <div v-if="!registered">
 
             <div class="text-center">
-                <h2>Benvenuto su EasyCollect</h2>
+                <h2>Benvenuto su ColliGo</h2>
                 <h4>Registrati per essere visibile sulla mappa</h4>
             </div>
             <br>
@@ -16,33 +16,51 @@
                             <h5>Informazioni generali</h5>
                         </div>
                         <div class="form-group">
-
+                            <font-awesome-icon :icon="['fa', 'store-alt']"/>&nbsp;
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" v-model="name"
                                    placeholder="Inserisci il nome della tua attività" required>
                         </div>
                         <div class="form-group">
+                            <font-awesome-icon :icon="['fa', 'font']"/>&nbsp;
                             <label for="address">Breve descrizione (max 120 caratteri)</label>
                             <input type="text" class="form-control" id="description" v-model="description"
                                    placeholder="Descrivi brevemente la tua attività" maxlength="120">
                         </div>
                         <div class="form-group">
+                            <font-awesome-icon :icon="['fa', 'tags']"/>&nbsp;
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
                                          placeholder="Search or add a tag" label="name" track-by="id"
                                          :options="categories" :multiple="true" :taggable="true"
                                          @tag="addCategory"></multiselect>
-                            <!-- <select class="form-control" id="categories_id" v-model="categories_id" required>
-                                 <option value="null" disabled>Scegli categoria</option>
-                                 <option :key="category" v-for="category in categories" :value="category.id">
-                                     {{category.name}}
-                                 </option>
-                             </select>-->
                         </div>
                         <div class="form-group">
-                            <label for="address">Indirizzo</label>
+                            <font-awesome-icon :icon="['fa', 'map-marker-alt']"/>&nbsp;
+                            <label for="address"> Indirizzo</label>
                             <input type="text" class="form-control" id="address" v-model="address"
                                    placeholder="Inserisci il tuo indirizzo" required>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <font-awesome-icon :icon="['fa', 'city']"/>&nbsp;
+                                <label for="address"> Città</label>
+                                <input type="text" class="form-control" id="city" v-model="city"
+                                       placeholder="Inserisci la città" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <font-awesome-icon :icon="['fa', 'envelope']"/>&nbsp;
+                                <label for="address"> CAP</label>
+                                <input type="number" class="form-control" id="cap" v-model="cap"
+                                       placeholder="Inserisci il cap" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">
+                                <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                Sito Web</label>
+                            <input type="text" class="form-control" id="website" v-model="website"
+                                   placeholder="Inserisci il tuo sito web">
                         </div>
                         <hr>
                         <div class="form-group">
@@ -110,6 +128,9 @@
         description: null,
         categories_ids: [],
         address: null,
+        city: null,
+        cap: null,
+        website: null,
         phone: null,
         telegram: null,
         facebook: null,
@@ -142,6 +163,12 @@
         if (!this.address) {
           this.error = 'Non hai inserito il tuo indirizzo!'
         }
+        if (!this.city) {
+          this.error = 'Non hai la tua città!'
+        }
+        if (!this.cap) {
+          this.error = 'Non hai inserito il tuo CAP!'
+        }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error = 'Devi inserire almeno un contatto!'
         }
@@ -160,7 +187,12 @@
             return c.id
           }),
           address: this.address,
+          city: this.city,
+          cap: this.cap
         };
+        if (this.website){
+          payload.website = this.website;
+        }
         if (this.phone){
           payload.phone= this.phone;
         }
