@@ -1,7 +1,7 @@
 <template>
     <div id="home" class="container-fluid text-center">
         <h2>Benvenuto su ColliGo</h2>
-        <h4>Cosa stai cercando?</h4>
+        <h4>Ordina e ritira la spesa in sicurezza</h4>
 
         <h6>Hai un negozio?
             <router-link to="/register" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
@@ -31,9 +31,13 @@
                         </select>
                     </div>
                     <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button v-if="!isLoading" type="submit" class="btn btn-primary btn-block">
                             <font-awesome-icon :icon="['fa', 'search']"/>
                             Cerca
+                        </button>
+                        <button v-else type="submit" class="btn btn-primary btn-block" disabled>
+                            <b-spinner small></b-spinner>
+                            Cercando...
                         </button>
                     </div>
                 </div>
@@ -124,22 +128,18 @@
       LTileLayer,
       LMarker,
       LPopup,
-      LCircleMarker
+      LCircleMarker,
     },
     mounted() {
-      console.log("getCurrentPosition");
       this.mapRef = this.$refs.map.mapObject;
-      console.log(this.mapRefs);
       this.$getLocation({    
         enableHighAccuracy: true, 
         timeout: Infinity, 
         maximumAge: 0
       }) 
       .then(coordinates => {
-        console.log(this.center);
         this.center = coordinates;
         this.personalPosition = coordinates;
-        console.log(this.center);
         this.zoomUpdated(16)
       });
 
@@ -177,7 +177,8 @@
         errorMessage: null,
         geosearchOptions: {
           provider: new OpenStreetMapProvider(),
-        }
+        },
+        isLoading: false
       };
     },
     computed: {
@@ -215,13 +216,12 @@
         e.preventDefault();
       },
       search() {
+        this.isLoading = true;
         this.errorMessage = null;
         this.$api.get('/shops', {params: this.axiosParams})
           .then(response => {
             this.shops = response.data.shops;
-            
-            const lat = new LatLng(response.data.lat,response.data.lng); 
-            console.log(lat);
+            const lat = new LatLng(response.data.lat,response.data.lng);
             if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
               this.mapRef.panTo(lat);
               this.zoomUpdated(20)
@@ -234,6 +234,7 @@
                 onClose: this.clearAddress()
               });
             }
+            this.isLoading = false;
           })
           .catch(error => (console.log(error)));
       }

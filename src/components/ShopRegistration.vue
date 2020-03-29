@@ -223,11 +223,14 @@
             }
           )
           .catch((e) => {
+            this.isLoading = false;
             if (e.response.status !== 500) {
-              if (e.response.data.errors[0].includes('categories')){
+              if (e.response.data.error.code === 2){
+                this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
+              } else if (e.response.data.errors[0].includes('categories')){
                 this.error = 'Seleziona da 1 a massimo 3 categorie!'
               } else {
-                this.error = e.response.data.message;
+                this.error = "Ops, c'è stato un errore!"
               }
             }
           });
