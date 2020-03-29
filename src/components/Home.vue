@@ -236,7 +236,11 @@
             }
             this.isLoading = false;
           })
-          .catch(error => (console.log(error)));
+          .catch(error => {
+            console.log(error);
+            this.isLoading = true;
+            this.errorMessage = "Ops, c'è stato un errore!";
+          });
       }
     }
   }
