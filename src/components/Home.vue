@@ -240,6 +240,12 @@
             console.log(error);
             this.isLoading = true;
             this.errorMessage = "Ops, c'è stato un errore!";
+            Vue.$toast.open({
+              message: "Ops, c'è stato un errore. :(",
+              type: "danger",
+              position: "top-right",
+              onClose: this.clearAddress()
+            });
           });
       }
     }
