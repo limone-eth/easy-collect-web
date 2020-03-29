@@ -156,8 +156,12 @@
       this.$api.get('/shops')
         .then(response => {
           this.shops = response.data.shops;
+          throw Error('test')
         })
-        .catch(error => (console.log(error)));
+        .catch(error => {
+          console.log(error);
+          throw Error(error.message)
+        });
     },
     data() {
       return {

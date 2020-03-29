@@ -1,15 +1,21 @@
 <template>
   <div id="app" class="mb-5">
-    
-  <router-view></router-view>
+    <error-boundary>
+      <router-view></router-view>
+    </error-boundary>
   </div>
 </template>
 
 <script>
 
 
+import ErrorBoundary from "./components/ErrorBoundary";
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    ErrorBoundary
+  }
 }
 </script>
 

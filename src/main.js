@@ -14,6 +14,14 @@ import VueGeolocation from 'vue-browser-geolocation';
 import Multiselect from 'vue-multiselect';
 import VueToast from 'vue-toast-notification';
 
+import * as Sentry from '@sentry/browser';
+import * as Integrations from '@sentry/integrations';
+
+Sentry.init({
+  dsn: 'https://67f1654682a245c5be0a2d589eb0ae1e@sentry.io/5179083',
+  integrations: [new Integrations.Vue({Vue, attachProps: true})],
+});
+
 import axios from 'axios'
 
 
