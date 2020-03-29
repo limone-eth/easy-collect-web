@@ -13,11 +13,16 @@
             <form @submit="searchForm"
                   @submit.prevent="search">
                 <div class="row">
-                    <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" id="name" v-model="filter"
-                               placeholder="Cerca per nome o indirizzo">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="name" v-model="address"
+                               placeholder="Cerca indirizzo">
+                        <p v-if="this.errorMessage" style="color:red;"> {{this.errorMessage}} </p> 
                     </div>
-                    <div class="form-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="name" v-model="filter"
+                               placeholder="Cerca per nome">
+                    </div>
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <select class="form-control" id="categories_id" v-model="categories_id">
                             <option value="null" disabled>Filtra per categoria</option>
                             <option :key="category" v-for="category in categories" :value="category.id">
@@ -25,7 +30,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <button type="submit" class="btn btn-primary btn-block">
                             <font-awesome-icon :icon="['fa', 'search']"/>
                             Cerca
@@ -38,46 +43,52 @@
             <div class="col-lg-1 col-md-3"></div>
             <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                 <div style="height: 700px; width: 100%;">
-                    <l-map :zoom="zoom" :center="center" @update:zoom="zoomUpdated"
+                    <l-map ref="map" :zoom="zoom" :center="this.center" @update:zoom="zoomUpdated"
                            @update:center="centerUpdated" @update:bounds="boundsUpdated">
                         <l-tile-layer :url="url">
 
                         </l-tile-layer>
-
-                        <l-marker v-bind:key="shop" v-for="shop in shops"
+                        <l-marker v-bind:key="shop.id" v-for="shop in shops"
                                   v-bind:lat-lng="[shop.lat,shop.lng]">
-                            <l-popup>
-                                <div>
-                                <span class="text-primary h5">
-                                    {{shop.name}}
-                                </span><br>
-                                    <span v-bind:key="category" v-for="category in shop.categories"
-                                          class="h6 font-weight-bold">
-                                        <span class="badge badge-success mr-1">{{category.name}}</span>
-                                    </span>
-                                    <br>
-                                    <span class="h6">
-                                        {{shop.description}}
-                                    </span>
-                                    <p class="h6" v-show="shop.phone !== null">
-                                        <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
-                                         {{shop.address}}
-                                    </p>
-                                    <p class="h6" v-show="shop.phone !== null">
-                                        <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                        <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
-                                    </p>
-                                    <p class="h6" v-show="shop.telegram !== null">
-                                        <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                        <a v-bind:href="'//' + shop.telegram" target="_blank"> Canale Telegram</a>
-                                    </p>
-                                    <p class="h6" v-show="shop.facebook !== null">
-                                        <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                        <a v-bind:href="'//' + shop.facebook" target="_blank"> Pagina Facebook</a>
-                                    </p>
-                                </div>
-                            </l-popup>
-                        </l-marker>
+                          <l-popup>
+                              <div>
+                              <span class="text-primary h5">
+                                  {{shop.name}}
+                              </span><br>
+                                  <span v-bind:key="category" v-for="category in shop.categories"
+                                        class="h6 font-weight-bold">
+                                      <span class="badge badge-success mr-1">{{category.name}}</span>
+                                  </span>
+                                  <br>
+                                  <span class="h6">
+                                      {{shop.description}}
+                                  </span>
+                                  <p class="h6" v-show="shop.phone !== null">
+                                      <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
+                                        {{shop.address}}
+                                  </p>
+                                  <p class="h6" v-show="shop.phone !== null">
+                                      <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
+                                      <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
+                                  </p>
+                                  <p class="h6" v-show="shop.telegram !== null">
+                                      <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
+                                      <a v-bind:href="'//' + shop.telegram" target="_blank"> Canale Telegram</a>
+                                  </p>
+                                  <p class="h6" v-show="shop.facebook !== null">
+                                      <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
+                                      <a v-bind:href="'//' + shop.facebook" target="_blank"> Pagina Facebook</a>
+                                  </p>
+                              </div>
+                          </l-popup>
+                      </l-marker>
+
+                      <l-circle-marker
+                        v-if="personalPosition"
+                        v-bind:lat-lng="[personalPosition.lat,personalPosition.lng]"
+                        :radius="10"
+                        :color="'#3388ff'"
+                      />
                     </l-map>
 
                 </div>
@@ -91,8 +102,10 @@
 
 
 <script>
-  import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
-  import {latLng, Icon} from "leaflet";
+  import Vue from 'vue';
+  import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
+  import {latLng, Icon, LatLng} from "leaflet";
+  import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
   delete Icon.Default.prototype._getIconUrl;
   Icon.Default.mergeOptions({
@@ -107,21 +120,25 @@
       LTileLayer,
       LMarker,
       LPopup,
+      LCircleMarker
     },
     mounted() {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.user_coordinates = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          this.center = [position.coords.latitude, position.coords.longitude];
-          this.zoomUpdated(13.5)
-        },
-        error => {
-          console.log(error.message);
-        },
-      );
+      console.log("getCurrentPosition");
+      this.mapRef = this.$refs.map.mapObject;
+      console.log(this.mapRefs);
+      this.$getLocation({    
+        enableHighAccuracy: true, 
+        timeout: Infinity, 
+        maximumAge: 0
+      }) 
+      .then(coordinates => {
+        console.log(this.center);
+        this.center = coordinates;
+        this.personalPosition = coordinates;
+        console.log(this.center);
+        this.zoomUpdated(16)
+      });
+
       this.$api.get('/categories')
         .then(response => {
           response.data.map(category => {
@@ -134,25 +151,37 @@
         .catch(error => (console.log(error)));
       this.$api.get('/shops')
         .then(response => {
-          this.shops = response.data;
+          this.shops = response.data.shops;
         })
         .catch(error => (console.log(error)));
     },
     data() {
       return {
         categories_id: null,
+        mapRef: null,
         categories: [],
         filter: null,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         zoom: 5.0,
         user_coordinates: null,
         bounds: 5.3,
+        personalPosition: null,
         shops: [],
+        center: [41.904176199999995,12.454258099999999],
+        icon:null,
+        address:null,
+        errorMessage: null,
+        geosearchOptions: {
+          provider: new OpenStreetMapProvider(),
+        }
       };
     },
     computed: {
       axiosParams() {
         const params = new URLSearchParams();
+        if(this.address){
+          params.append('address', this.address);
+        }
         if (this.filter) {
           params.append('filter', this.filter);
         }
@@ -163,6 +192,9 @@
       }
     },
     methods: {
+      clearAddress(){
+        this.address = "";
+      },
       zoomUpdated(zoom) {
         this.zoom = zoom;
       },
@@ -179,9 +211,25 @@
         e.preventDefault();
       },
       search() {
+        this.errorMessage = null;
         this.$api.get('/shops', {params: this.axiosParams})
           .then(response => {
-            this.shops = response.data;
+            this.shops = response.data.shops;
+            
+            const lat = new LatLng(response.data.lat,response.data.lng); 
+            console.log(lat);
+            if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
+              this.mapRef.panTo(lat);
+              this.zoomUpdated(20)
+            }
+            else if(response.data.lat == -1){
+              Vue.$toast.open({
+                message: "Indirizzo non trovato! :(",
+                type: "warning",
+                position: "top-right",
+                onClose: this.clearAddress()
+              });
+            }
           })
           .catch(error => (console.log(error)));
       }

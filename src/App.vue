@@ -14,6 +14,7 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@2.6.0/assets/css/leaflet.css">
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
