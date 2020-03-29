@@ -28,7 +28,7 @@
       this.err = err;
       this.vm = vm;
       this.info = info;
-      return !this.stopPropagation;
+     throw Error(err.message);
     }
   };
 </script>
