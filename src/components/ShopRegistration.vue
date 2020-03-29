@@ -1,5 +1,9 @@
 <template>
     <div id="register-container" class="container">
+        <loading :active.sync="isLoading"
+                 :can-cancel="true"
+                 :on-cancel="onCancel"
+                 :is-full-page="fullPage"></loading>
         <div v-if="!registered">
 
             <div class="text-center">
@@ -31,7 +35,7 @@
                             <font-awesome-icon :icon="['fa', 'tags']"/>&nbsp;
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
-                                         placeholder="Search or add a tag" label="name" track-by="id"
+                                         placeholder="Seleziona categoria" label="name" track-by="id"
                                          :options="categories" :multiple="true" :taggable="true"
                                          @tag="addCategory"></multiselect>
                         </div>
@@ -118,9 +122,15 @@
 </template>
 
 <script>
-
+  // Import component
+  import Loading from 'vue-loading-overlay';
+  // Import stylesheet
+  import 'vue-loading-overlay/dist/vue-loading.css';
   export default {
     name: "ShopRegistration",
+    components: {
+      Loading
+    },
     data() {
       return {
         categories: [],
@@ -136,7 +146,9 @@
         facebook: null,
         error: null,
         registered: true,
-        category: null
+        category: null,
+        isLoading: false,
+        fullPage: true
       }
     },
     mounted() {
@@ -180,6 +192,7 @@
         e.preventDefault();
       },
       register() {
+        this.isLoading = true;
         let payload = {
           name: this.name,
           description: this.description,
@@ -206,6 +219,7 @@
           .then(response => {
               console.log(response);
               this.registered = true;
+              this.isLoading = false;
             }
           )
           .catch((e) => {
@@ -217,6 +231,9 @@
               }
             }
           });
+      },
+      onCancel() {
+        console.log('User cancelled the loader.')
       }
     }
   }

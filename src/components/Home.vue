@@ -1,6 +1,6 @@
 <template>
     <div id="home" class="container-fluid text-center">
-        <h2>Benvenuto su EasyCollect</h2>
+        <h2>Benvenuto su ColliGo</h2>
         <h4>Cosa stai cercando?</h4>
 
         <h6>Hai un negozio?
@@ -66,6 +66,10 @@
                                   <p class="h6" v-show="shop.phone !== null">
                                       <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
                                         {{shop.address}}
+                                  </p>
+                                  <p class="h6" v-show="shop.website !== null">
+                                      <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                      <a v-bind:href="'//' + shop.website"> {{shop.website}}</a>
                                   </p>
                                   <p class="h6" v-show="shop.phone !== null">
                                       <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
