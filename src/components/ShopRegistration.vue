@@ -65,6 +65,7 @@
                                 Sito Web</label>
                             <input type="text" class="form-control" id="website" v-model="website"
                                    placeholder="Inserisci il tuo sito web">
+
                         </div>
                         <hr>
                         <div class="form-group">
@@ -126,6 +127,7 @@
   import Loading from 'vue-loading-overlay';
   // Import stylesheet
   import 'vue-loading-overlay/dist/vue-loading.css';
+
   export default {
     name: "ShopRegistration",
     components: {
@@ -169,7 +171,7 @@
         if (!this.name) {
           this.error = 'Non hai inserito il nome!'
         }
-        if (this.description && this.description.length > 120){
+        if (this.description && this.description.length > 120) {
           this.error = 'La descrizione che hai inserito è troppo lunga!'
         }
         if (!this.address) {
@@ -186,7 +188,7 @@
         }
         if (this.category.length >= 3) {
           this.error = 'Puoi selezionare massimo 3 categorie!'
-        } else if (this.category.length === 0){
+        } else if (this.category.length === 0) {
           this.error = 'Seleziona almeno una categoria!'
         }
         e.preventDefault();
@@ -203,16 +205,16 @@
           city: this.city,
           cap: this.cap
         };
-        if (this.website){
+        if (this.website) {
           payload.website = this.website;
         }
-        if (this.phone){
-          payload.phone= this.phone;
+        if (this.phone) {
+          payload.phone = this.phone;
         }
-        if (this.telegram){
+        if (this.telegram) {
           payload.telegram = this.telegram;
         }
-        if (this.facebook){
+        if (this.facebook) {
           payload.facebook = this.facebook;
         }
         this.$api.post('/shops', payload)
@@ -225,9 +227,9 @@
           .catch((e) => {
             this.isLoading = false;
             if (e.response.status !== 500) {
-              if (e.response.data.error.code === 2){
+              if (e.response.data.error.code === 2) {
                 this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
-              } else if (e.response.data.errors[0].includes('categories')){
+              } else if (e.response.data.errors[0].includes('categories')) {
                 this.error = 'Seleziona da 1 a massimo 3 categorie!'
               } else {
                 this.error = "Ops, c'è stato un errore!"

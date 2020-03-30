@@ -73,7 +73,7 @@
                                   </p>
                                   <p class="h6" v-show="shop.website !== null">
                                       <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
-                                      <a v-bind:href="'//' + shop.website"> {{shop.website}}</a>
+                                      <a v-bind:href="shop.website" target="_blank">Sito Web</a>
                                   </p>
                                   <p class="h6" v-show="shop.phone !== null">
                                       <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
@@ -81,11 +81,11 @@
                                   </p>
                                   <p class="h6" v-show="shop.telegram !== null">
                                       <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                      <a v-bind:href="'//' + shop.telegram" target="_blank"> Canale Telegram</a>
+                                      <a v-bind:href="shop.telegram" target="_blank"> Canale Telegram</a>
                                   </p>
                                   <p class="h6" v-show="shop.facebook !== null">
                                       <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                      <a v-bind:href="'//' + shop.facebook" target="_blank"> Pagina Facebook</a>
+                                      <a v-bind:href="shop.facebook" target="_blank"> Pagina Facebook</a>
                                   </p>
                               </div>
                           </l-popup>
