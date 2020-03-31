@@ -89,7 +89,7 @@
                         <div class="form-group">
                             <label for="facebook">
                                 <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                Facebook Messenger</label>
+                                Facebook</label>
                             <input type="text" class="form-control" id="facebook" v-model="facebook"
                                    placeholder="Inserisci il link alla tua pagina Facebook">
                         </div>
