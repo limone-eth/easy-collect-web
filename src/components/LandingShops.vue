@@ -6,7 +6,7 @@
             <div class="row pt-5 pb-5">
                 <div class="col-6 text-left align-self-center">
                     <div class="h1 font-weight-bolder">Registrati <span class="text-success">gratuitamente</span> per essere visibile sulla mappa</div>
-                    <h5 class="font-weight-bold">Ricevi gli ordini dai clienti direttamente sul tuo cellulare</h5>
+                    <h5 class="font-weight-bold">Ricevi gli ordini dai clienti direttamente sul tuo smartphone</h5>
                     <b-button variant="success" to="/registrati">Registrati gratuitamente</b-button>
                 </div>
                 <div class="col-6">
@@ -18,7 +18,7 @@
             <div class="row pt-5 pb-5">
                 <div class="col-12 text-center align-self-center">
                     <div class="h1 font-weight-bolder">Registrati <span class="text-success">gratuitamente</span> per essere visibile sulla mappa</div>
-                    <h5 class="font-weight-bold">Ricevi gli ordini dai clienti direttamente sul tuo cellulare</h5>
+                    <h5 class="font-weight-bold">Ricevi gli ordini dai clienti direttamente sul tuo smartphone</h5>
                     <b-button variant="success" to="/registrati">Registrati gratuitamente</b-button>
                 </div>
                 <div class="col-12 pt-2">
