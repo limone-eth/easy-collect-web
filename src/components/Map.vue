@@ -1,11 +1,12 @@
 <template>
     <div id="home" class="container-fluid text-center">
-        <h2>Benvenuto su ColliGo</h2>
-        <h4>Ordina e ritira la spesa in sicurezza</h4>
 
-        <h6>Hai un negozio?
-            <router-link to="/register" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
-        </h6>
+        <h2>Cerca i negozi disponibili sulla mappa</h2>
+        <h4>Ordina e ritira la tua spesa in sicurezza</h4>
+
+        <!--<h6>Hai un negozio?
+            <router-link to="/registrati" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
+        </h6>-->
 
         <!-- MAPPA -->
         <div class="container">
@@ -75,6 +76,7 @@
                                       <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
                                       <a v-bind:href="shop.website" target="_blank">Sito Web</a>
                                   </p>
+
                                   <p class="h6" v-show="shop.phone !== null">
                                       <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
                                       <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>

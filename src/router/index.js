@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeComponent from "../components/Home"
+import MapComponent from "../components/Map"
 import ShopRegistrationComponent from "../components/ShopRegistration";
+import LandingUsersComponent from "../components/LandingUsers";
+import LandingShopsComponent from "../components/LandingShops";
 
 Vue.use(Router);
 
@@ -10,16 +12,26 @@ export default new Router({
     {
       path: "/",
       redirect: {
-        name: "home"
+        name: "map"
       }
     },
     {
-      path: "/home",
-      name: "home",
-      component: HomeComponent
+      path: "/mappa",
+      name: "map",
+      component: MapComponent
     },
     {
-      path: "/register",
+      path: "/utenti",
+      name: "utenti",
+      component: LandingUsersComponent
+    },
+    {
+      path: "/esercenti",
+      name: "esercenti",
+      component: LandingShopsComponent
+    },
+    {
+      path: "/registrati",
       name: "register",
       component: ShopRegistrationComponent
     }

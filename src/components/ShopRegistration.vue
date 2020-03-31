@@ -7,7 +7,6 @@
         <div v-if="!registered">
 
             <div class="text-center">
-                <h2>Benvenuto su ColliGo</h2>
                 <h4>Registrati per essere visibile sulla mappa</h4>
             </div>
             <br>
@@ -113,10 +112,10 @@
                 <h4> La registrazione è avvenuta con successo.</h4>
                 <br>
                 <h5>
-                    <router-link to="/home">Vai alla mappa</router-link>
+                    <router-link to="/mappa">Vai alla mappa</router-link>
                 </h5>
                 <br>
-                <router-link to="/home"><img src="../assets/map.png" alt="Fireworks" class="w-25"></router-link>
+                <router-link to="/mappa"><img src="../assets/map.png" alt="Fireworks" class="w-25"></router-link>
             </div>
         </div>
     </div>
