@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <select class="form-control" id="categories_id" v-model="categories_id">
-                            <option value="null" disabled>Filtra per categoria</option>
+                            <option value="null" >Filtra per categoria</option>
                             <option :key="category" v-for="category in categories" :value="category.id">
                                 {{category.name}}
                             </option>
@@ -195,7 +195,7 @@
         if (this.filter) {
           params.append('filter', this.filter);
         }
-        if (this.categories_id) {
+        if (this.categories_id && this.categories_id !== 'null') {
           params.append('categories_id', this.categories_id);
         }
         return params;
