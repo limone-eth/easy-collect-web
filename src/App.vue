@@ -16,7 +16,7 @@
             <b-navbar-nav class="ml-auto">
               <b-nav-item><router-link to="/mappa" class="text-dark">Mappa</router-link></b-nav-item>
               <b-nav-item><router-link to="/utenti" class="text-dark">Come funziona</router-link></b-nav-item>
-              <b-nav-item>Chi siamo</b-nav-item>
+              <b-nav-item><router-link to="/chi-siamo" class="text-dark">Chi siamo</router-link></b-nav-item>
               <b-nav-item>Domande frequenti</b-nav-item>
               <b-nav-item><router-link to="/esercenti" class="text-success">Hai un negozio?</router-link></b-nav-item>
             </b-navbar-nav>

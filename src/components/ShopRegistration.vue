@@ -35,8 +35,7 @@
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
                                          placeholder="Seleziona categoria" label="name" track-by="id"
-                                         :options="categories" :multiple="true" :taggable="true"
-                                         @tag="addCategory"></multiselect>
+                                         :options="categories" :multiple="true" :taggable="true"></multiselect>
                         </div>
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'map-marker-alt']"/>&nbsp;
