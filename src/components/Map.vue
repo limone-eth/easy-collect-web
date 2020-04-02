@@ -32,11 +32,11 @@
                         </select>
                     </div>
                     <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <button v-if="!isLoading" type="submit" class="btn btn-primary btn-block">
+                        <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
                             <font-awesome-icon :icon="['fa', 'search']"/>
                             Cerca
                         </button>
-                        <button v-else type="submit" class="btn btn-primary btn-block" disabled>
+                        <button v-else type="submit" class="btn btn-success btn-block" disabled>
                             <b-spinner small></b-spinner>
                             Cercando...
                         </button>
