@@ -5,6 +5,7 @@ import ShopRegistrationComponent from "../components/ShopRegistration";
 import LandingUsersComponent from "../components/LandingUsers";
 import LandingShopsComponent from "../components/LandingShops";
 import FaqComponent from "../components/Faq";
+import HowToComponent from "../components/HowTo";
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: "/domande-frequenti",
       name: "faq",
       component: FaqComponent
+    },
+    {
+      path: "/howto",
+      name: "howto",
+      component: HowToComponent
     }
   ],
   scrollBehavior() {
