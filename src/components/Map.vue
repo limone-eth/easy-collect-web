@@ -9,7 +9,7 @@
         </h6>-->
 
         <!-- MAPPA -->
-        <div class="container">
+        <div class="container mb-3">
 
             <form @submit="searchForm"
                   @submit.prevent="search">

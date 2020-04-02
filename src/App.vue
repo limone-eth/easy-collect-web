@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="mb-5">
+    <div id="app">
         <error-boundary>
             <div class="container">
                 <b-navbar toggleable="lg" type="light">

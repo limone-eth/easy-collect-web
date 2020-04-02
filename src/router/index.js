@@ -41,5 +41,8 @@ export default new Router({
       name: "faq",
       component: FaqComponent
     }
-  ]
+  ],
+  scrollBehavior() {
+    return {x: 0, y: 0}
+  }
 })
