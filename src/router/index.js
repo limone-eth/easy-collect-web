@@ -4,6 +4,7 @@ import MapComponent from "../components/Map"
 import ShopRegistrationComponent from "../components/ShopRegistration";
 import LandingUsersComponent from "../components/LandingUsers";
 import LandingShopsComponent from "../components/LandingShops";
+import FaqComponent from "../components/Faq";
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: "/registrati",
       name: "register",
       component: ShopRegistrationComponent
+    },
+    {
+      path: "/domande-frequenti",
+      name: "faq",
+      component: FaqComponent
     }
   ]
 })
