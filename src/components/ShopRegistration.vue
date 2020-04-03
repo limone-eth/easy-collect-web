@@ -116,6 +116,7 @@
                             </span>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">Registrati</button>
+                        <br>
                         <h5 v-if="error.general" class="text-danger">
                             <font-awesome-icon :icon="['fa', 'exclamation-circle']"/>
                             {{ error.general }}
@@ -148,7 +149,7 @@
   import Loading from 'vue-loading-overlay'
   // Import stylesheet
   import 'vue-loading-overlay/dist/vue-loading.css'
-  const _ = require('lodash')
+  import * as _ from "lodash";
 
   var expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
   var regex = new RegExp(expression)
@@ -203,7 +204,7 @@
     },
     methods: {
       registerForm: function (e) {
-        this.error = _.mapValues(this.error, () => false)
+        this.error = _.mapValues(this.error, () => false);
         if (!this.name) {
           this.error.name = 'Non hai inserito il nome!'
         }
@@ -214,7 +215,7 @@
           this.error.address = 'Non hai inserito il tuo indirizzo!'
         }
         if (!this.city) {
-          this.error.city = 'Non hai la tua città!'
+          this.error.city = 'Non hai inserito la tua città!'
         }
         if (!this.cap) {
           this.error.cap = 'Non hai inserito il tuo CAP!'
@@ -234,10 +235,10 @@
           this.error.category = 'Seleziona almeno una categoria!'
         }
         if(_.some(this.error)) {
-          this.error.general = 'Dati non validi, controlla!'
+          this.error.general = 'Dati non validi, controlla!';
           return
         }
-        e.preventDefault()
+        e.preventDefault();
         this.register()
       },
       register() {
