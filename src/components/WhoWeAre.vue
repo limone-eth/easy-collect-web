@@ -1,67 +1,40 @@
 <template>
     <div class="container mt-3">
         <div class="display-4 text-center">
-            Manifesto
+            Chi Siamo
         </div>
         <div class="container">
-            Le botteghe di quartiere sono una ricchezza, naturali presidi di ascolto sul territorio e motore della vita
-            dei quartieri. Ti conoscono personalmente, ti consigliano e ti possono offrire i prodotti più buoni e
-            genuini.
-            <br>
-            <br>
-            Questa ricchezza si sta depauperando soggetta ormai da anni al cambiamento frenetico delle nostre abitudini
-            e alla competizione del commercio on-line e della grande distribuzione organizzata (GDO).
-            <br>
-            <br>
-            L’impoverimento, ha come ulteriore conseguenza la sofferenza dei piccoli produttori di qualità, i custodi
-            della nostra ricchissima biodiversità alimentare, che a causa dei ridotti volumi non sono in grado di
-            ottemperare alle richieste della GDO, ma possono trovare il giusto spazio nelle botteghe.
-            <br>
-            <br>
-            In questo momento di crisi dovuto al COVID-19, le botteghe, ulteriormente sotto pressione, rappresentano per
-            noi una risorsa capace non solo di offrire un servizio di alta qualità, ma anche in massima sicurezza,
-            limitando gli inevitabili assembramenti nei supermercati grazie ad una distribuzione capillare sul
-            territorio.
-            <br>
-            <br>
-            <b>ColliGo</b> vuole ristabilire e rafforzare il contatto tra le botteghe e i suoi clienti attraverso un
-            servizio
-            ispirato ai seguenti principi:
-            <ul>
-                <li><b>Gratuità</b>: ColliGo è e sempre sarà gratuito per i commercianti e per i clienti</li>
-                <li><b>Trasparenza</b>: ColliGo è un servizio aperto sviluppato secondo i principi dell’open-source, il
-                    che
-                    significa che chiunque può vedere come funziona al suo interno e può proporre il suo contributo
-                </li>
-                <li><b>Libertà</b>: ColliGo mette in contatto clienti e negozianti, ma poi li lascia liberi di portare
-                    avanti
-                    il colloquio in piena autonomia, su qualunque mezzo, senza interferire in alcun modo
-                </li>
-                <li><b>Eticità</b>: ColliGo promuove un commercio dove produttori ed esercenti hanno un potere
-                    contrattuale
-                    simile, in cui ognuno ha la giusta remunerazione per il proprio lavoro
-                </li>
-                <li><b>Privatezza</b>: Le uniche informazioni che fornite a ColliGo sono quelle che vi vengono
-                    esplicitamente
-                    richieste e poiché, in forza del principio di libertà, non interferiamo sulla comunicazione tra
-                    cliente e negoziante, se anche volessimo, non avremmo accesso a nessun’altra informazione.
-                </li>
-                <li>
-                    <b>Minimale</b>: L’unico requisito per accedere a ColliGo è la disponibilità di un cellulare, sia da
-                    parte
-                    dell’esercente che del cliente
-                </li>
-            </ul>
-            ColliGo è anche una comunità che sta sviluppando il servizio e che condivide gli intenti ed i principi di
-            questo manifesto. Se li condividi anche tu faccelo sapere scrivendo a <b>colligo@colligo.shop</b>.
-            <br>
-            <br>
-            ColliGo è un termine latino che significa parecchie cose tra cui alcuni pertinenti ai principi che ci
-            guidano: riunire, ricondurre, guadagnare, richiamare alla memoria, raccogliere.
+            In un periodo quanto mai difficile per la nostra società, abbiamo sentito l’esigenza di dare il nostro
+            contributo mettendo in piedi ColliGo, un’iniziativa open-source e senza fini di lucro che ha lo scopo di
+            fornire un sostegno alle piccole-medie botteghe alimentari del nostro Paese e al tempo stesso consentire ai
+            cittadini di fare spesa in modo sicuro e rapido. <br> <br>
+            La scintilla è stata un post su LinkedIn di Andrea Vitaletti, Professore Associato della Facoltà di
+            Ingegneria alla “Sapienza” di Roma, che ha raccolto subito tante adesioni e spunti interessanti. In tempi
+            record abbiamo formato un team cresciuto velocemente aggregando persone con competenze ed esperienze
+            diverse, accomunate da valori condivisi, riassunti nel Manifesto (<a href="./../../public/Manifesto.pdf" target="_blank">Manifesto di ColliGo</a>). Al progetto ha aderito con entusiasmo La Pecora Nera Editore, casa editrice enogastronomica già
+            attiva con la campagna social <b>#facciospesainbottega</b> e via via altre professionalità ed aziende, quali
+            Passion Fruit Hub che cura l’ufficio stampa e Hosting Solutions (Genesys Informatica srl) che ha messo a
+            disposizione il servizio di hosting. Il gruppo sta crescendo ulteriormente con il coinvolgimento delle
+            associazioni di categoria che informeranno i loro iscritti sulle opportunità offerte da ColliGo.
+            <br> <br>
+            Se sei interessato a collaborare con noi, scrivici a info@colligo.shop illustrandoci il contributo che pensi
+            di poter dare.
+
         </div>
         <br>
         <div class="h2 text-center">
-            Il team
+            Gruppo di lavoro
+        </div>
+        <div>
+            Alessio Cesaretti, Andrea Aurizi, Andrea
+            Misuraca, Andrea Vitaletti (coordinatore), Angelo Catalani, Arianna Fusilli, Arianna Mauro, Daniele
+            Iacomini, Danilo Lato, Davide Gimondo, Francesco Colasante, Lorenzo Scollo, Luca Ferrera, Luca Tomei, Marco
+            Zecchini, Mariolina Pepe, Matteo Brandi, Mattia Righetti, Michela Ciommo, Michele Anselmi, Riccardo
+            Bianchini, Simone Cargiani, Simone Silvestri, Simone Staffa, Stefano Latini, Valerio Coretti, Valerio
+            Ferrari
+            <br>
+            <br>
+            Aggiornato al {{today}}
         </div>
         <br>
         <div class="h2 text-center">
@@ -73,11 +46,16 @@
 
 <script>
   import Partners from "./Partners";
-
+  import moment from 'moment'
   export default {
     name: "WhoWeAre",
     components: {
-      Partners
+      Partners,
+    },
+    data() {
+      return {
+        today: moment().format('MM/DD/YYYY')
+      }
     }
   }
 </script>
