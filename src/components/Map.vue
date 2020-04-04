@@ -15,12 +15,7 @@
                   @submit.prevent="search">
                 <div class="row">
                     <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" id="name" v-model="address"
-                               placeholder="Cerca indirizzo">
-                        <p v-if="this.errorMessage" style="color:red;"> {{this.errorMessage}} </p> 
-                    </div>
-                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" id="name" v-model="filter"
+                        <input type="text" class="form-control" id="name" v-model="name"
                                placeholder="Cerca per nome">
                     </div>
                     <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -54,7 +49,8 @@
 
                         </l-tile-layer>
                         <l-marker v-bind:key="shop.id" v-for="shop in shops"
-                                  v-bind:lat-lng="[shop.lat,shop.lng]">
+                                  v-bind:lat-lng="[shop.lat,shop.lng]"
+                                  :icon="shop.icon">
                           <l-popup>
                               <div>
                               <span class="text-primary h5">
@@ -112,17 +108,19 @@
 
 
 <script>
-  import Vue from 'vue';
+  // import Vue from 'vue';
   import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
-  import {latLng, Icon, LatLng} from "leaflet";
+  import L from 'leaflet'
+  import {latLng} from "leaflet"; //LatLng, Icon
   import { OpenStreetMapProvider } from 'leaflet-geosearch';
+  import * as _ from "lodash";
 
-  delete Icon.Default.prototype._getIconUrl;
-  Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-  });
+  // delete Icon.Default.prototype._getIconUrl;
+  // Icon.Default.mergeOptions({
+  //   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  //   iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  //   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+  // });
 
   export default {
     components: {
@@ -158,6 +156,7 @@
       this.$api.get('/shops')
         .then(response => {
           this.shops = response.data.shops;
+          _.map(this.shops, (shop) => shop['icon'] = this.defaultIcon)
         })
         .catch(error => {
           console.log(error);
@@ -169,7 +168,7 @@
         categories_id: null,
         mapRef: null,
         categories: [],
-        filter: null,
+        name: null,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         zoom: 5.0,
         user_coordinates: null,
@@ -183,23 +182,18 @@
         geosearchOptions: {
           provider: new OpenStreetMapProvider(),
         },
-        isLoading: false
+        isLoading: false,
+        defaultIcon: L.icon({
+            iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+            iconUrl: require('leaflet/dist/images/marker-icon.png'),
+            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        }),
+        selectedIcon: L.icon({
+            iconRetinaUrl: 'src/assets/marker_colors/marker-icon-2x-green.png',
+            iconUrl: 'src/assets/marker_colors/marker-icon-green.png',
+            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+        }),
       };
-    },
-    computed: {
-      axiosParams() {
-        const params = new URLSearchParams();
-        if(this.address){
-          params.append('address', this.address);
-        }
-        if (this.filter) {
-          params.append('filter', this.filter);
-        }
-        if (this.categories_id && this.categories_id !== 'null') {
-          params.append('categories_id', this.categories_id);
-        }
-        return params;
-      }
     },
     methods: {
       clearAddress(){
@@ -220,38 +214,104 @@
       searchForm: function (e) {
         e.preventDefault();
       },
+      searchFilter() {
+        const params = {}
+        if (this.name) {
+          console.log('name', this.name)
+          params['name'] = this.name
+        }
+        if (this.categories_id && this.categories_id !== 'null') {
+          console.log('categories_id', this.categories_id)
+          params['categories_id'] = this.categories_id
+        }
+        return params
+      },
+      filtering(params) {
+        if(params.name){
+          const namesFiltered = _.filter(this.shops, (item) => item.name.includes(params.name))
+          if(params.categories_id){
+            const categoriesFiltered = _.filter(
+                  namesFiltered, 
+                  (item) => item.categories
+                      .find(elem => elem.id === params.categories_id)
+              )
+            console.log('categoriesFiltered',categoriesFiltered)
+            return categoriesFiltered
+          }
+          console.log('namesFiltered',namesFiltered)
+          return namesFiltered
+        } else if(params.categories_id){
+          const categoriesFiltered = _
+              .filter(
+                  this.shops, 
+                  (item) => item.categories
+                      .find(elem => elem.id === params.categories_id)
+              )
+          console.log('categoriesFiltered',categoriesFiltered)
+          return categoriesFiltered
+        }
+        return []
+      },
       search() {
-        this.isLoading = true;
-        this.errorMessage = null;
-        this.$api.get('/shops', {params: this.axiosParams})
-          .then(response => {
-            this.shops = response.data.shops;
-            const lat = new LatLng(response.data.lat,response.data.lng);
-            if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
-              this.mapRef.panTo(lat);
-              this.zoomUpdated(20)
-            }
-            else if(response.data.lat == -1){
-              Vue.$toast.open({
-                message: "Indirizzo non trovato! :(",
-                type: "warning",
-                position: "top-right",
-                onClose: this.clearAddress()
-              });
-            }
-            this.isLoading = false;
-          })
-          .catch(error => {
-            console.log(error);
-            this.isLoading = true;
-            this.errorMessage = "Ops, c'è stato un errore!";
-            Vue.$toast.open({
-              message: "Ops, c'è stato un errore. :(",
-              type: "danger",
-              position: "top-right",
-              onClose: this.clearAddress()
-            });
-          });
+        const params = this.searchFilter()
+        console.log('params', params)
+        const shopsFiltered = this.filtering(params)
+        console.log('shopsFiltered',shopsFiltered)
+
+        // qua finisce la ricerca vera e propria
+
+        _.map(shopsFiltered, (shop) => {
+          console.log(shop)
+          // cambio icona agli shops filtrati
+          shop.icon = this.selectedIcon
+        })
+        // const lat = new LatLng(this.shops.lat,response.data.lng);
+        // if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
+        //   this.mapRef.panTo(lat);
+        //   this.zoomUpdated(20)
+        // }
+        // else if(response.data.lat == -1){
+        //   Vue.$toast.open({
+        //     message: "Indirizzo non trovato! :(",
+        //     type: "warning",
+        //     position: "top-right",
+        //     onClose: this.clearAddress()
+        //   });
+        // }
+        // this.isLoading = false;
+
+        
+        // this.isLoading = true;
+        // this.errorMessage = null;
+        // this.$api.get('/shops', {params: this.axiosParams})
+        //   .then(response => {
+        //     this.shops = response.data.shops;
+        //     const lat = new LatLng(response.data.lat,response.data.lng);
+        //     if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
+        //       this.mapRef.panTo(lat);
+        //       this.zoomUpdated(20)
+        //     }
+        //     else if(response.data.lat == -1){
+        //       Vue.$toast.open({
+        //         message: "Indirizzo non trovato! :(",
+        //         type: "warning",
+        //         position: "top-right",
+        //         onClose: this.clearAddress()
+        //       });
+        //     }
+        //     this.isLoading = false;
+        //   })
+        //   .catch(error => {
+        //     console.log(error);
+        //     this.isLoading = true;
+        //     this.errorMessage = "Ops, c'è stato un errore!";
+        //     Vue.$toast.open({
+        //       message: "Ops, c'è stato un errore. :(",
+        //       type: "danger",
+        //       position: "top-right",
+        //       onClose: this.clearAddress()
+        //     });
+        //   });
       }
     }
   }
