@@ -21,6 +21,7 @@
     "jquery": "^3.4.0",
     "leaflet": "^1.6.0",
     "leaflet-geosearch": "^2.7.0",
+    "moment": "^2.24.0",
     "vue": "^2.6.11",
     "vue-browser-geolocation": "^1.8.0",
     "vue-loading-overlay": "^3.3.2",
