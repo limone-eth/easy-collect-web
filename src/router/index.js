@@ -7,6 +7,7 @@ import LandingShopsComponent from "../components/LandingShops";
 import FaqComponent from "../components/Faq";
 import HowToComponent from "../components/HowTo";
 import WhoWeAreComponent from "../components/WhoWeAre";
+import NotFoundComponent from "../components/NotFound";
 
 Vue.use(Router);
 
@@ -53,7 +54,8 @@ export default new Router({
       path: "/chi-siamo",
       name: "chi-siamo",
       component: WhoWeAreComponent
-    }
+    },
+    { path: '*', component: NotFoundComponent, meta: { layout: 'none' } }
   ],
   scrollBehavior() {
     return {x: 0, y: 0}
