@@ -5,6 +5,8 @@ import ShopRegistrationComponent from "../components/ShopRegistration";
 import LandingUsersComponent from "../components/LandingUsers";
 import LandingShopsComponent from "../components/LandingShops";
 import WhoWeAreComponent from "../components/WhoWeAre";
+import FaqComponent from "../components/Faq";
+import HowToComponent from "../components/HowTo";
 
 Vue.use(Router);
 
@@ -40,6 +42,19 @@ export default new Router({
       path: "/chi-siamo",
       name: "chi-siamo",
       component: WhoWeAreComponent
+    },
+    {
+      path: "/domande-frequenti",
+      name: "faq",
+      component: FaqComponent
+    },
+    {
+      path: "/howto",
+      name: "howto",
+      component: HowToComponent
     }
-  ]
+  ],
+  scrollBehavior() {
+    return {x: 0, y: 0}
+  }
 })

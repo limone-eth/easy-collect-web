@@ -13,8 +13,7 @@
             <div class="row">
                 <div class="col-md-3 col-xs-2"></div>
                 <div class="col-md-6 col-xs-8">
-                    <form @submit="registerForm"
-                          @submit.prevent="register">
+                    <form @submit="registerForm">
                         <div class="form-group">
                             <h5>Informazioni generali</h5>
                         </div>
@@ -22,39 +21,58 @@
                             <font-awesome-icon :icon="['fa', 'store-alt']"/>&nbsp;
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" v-model="name"
-                                   placeholder="Inserisci il nome della tua attività" required>
+                                   placeholder="Inserisci il nome della tua attività" >
+                            <span v-if="error.name" class="text-danger">
+                                {{ error.name }}
+                            </span>
                         </div>
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'font']"/>&nbsp;
                             <label for="address">Breve descrizione (max 120 caratteri)</label>
                             <input type="text" class="form-control" id="description" v-model="description"
                                    placeholder="Descrivi brevemente la tua attività" maxlength="120">
+                            <span v-if="error.description" class="text-danger">
+                                {{ error.description }}
+                            </span>
                         </div>
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'tags']"/>&nbsp;
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
                                          placeholder="Seleziona categoria" label="name" track-by="id"
-                                         :options="categories" :multiple="true" :taggable="true"></multiselect>
+                                         :options="categories" :multiple="true" :taggable="true"
+                                         ></multiselect>
+                            <span v-if="error.category" class="text-danger">
+                                {{ error.category }}
+                            </span>
                         </div>
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'map-marker-alt']"/>&nbsp;
                             <label for="address"> Indirizzo</label>
                             <input type="text" class="form-control" id="address" v-model="address"
-                                   placeholder="Inserisci il tuo indirizzo" required>
+                                   placeholder="Inserisci il tuo indirizzo" >
+                            <span v-if="error.address" class="text-danger">
+                                {{ error.address }}
+                            </span>
                         </div>
                         <div class="row">
                             <div class="form-group col-6">
                                 <font-awesome-icon :icon="['fa', 'city']"/>&nbsp;
                                 <label for="address"> Città</label>
                                 <input type="text" class="form-control" id="city" v-model="city"
-                                       placeholder="Inserisci la città" required>
+                                       placeholder="Inserisci la città" >
+                                <span v-if="error.city" class="text-danger">
+                                    {{ error.city }}
+                                </span>
                             </div>
                             <div class="form-group col-6">
                                 <font-awesome-icon :icon="['fa', 'envelope']"/>&nbsp;
                                 <label for="address"> CAP</label>
                                 <input type="number" class="form-control" id="cap" v-model="cap"
-                                       placeholder="Inserisci il cap" required>
+                                       placeholder="Inserisci il cap" >
+                                <span v-if="error.cap" class="text-danger">
+                                    {{ error.cap }}
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,7 +81,9 @@
                                 Sito Web</label>
                             <input type="text" class="form-control" id="website" v-model="website"
                                    placeholder="Inserisci il tuo sito web">
-
+                            <span v-if="error.website" class="text-danger">
+                                {{ error.website }}
+                            </span>
                         </div>
                         <hr>
                         <div class="form-group">
@@ -91,12 +111,16 @@
                                 Facebook</label>
                             <input type="text" class="form-control" id="facebook" v-model="facebook"
                                    placeholder="Inserisci il link alla tua pagina Facebook">
+                            <span v-if="error.phone" class="text-danger">
+                                {{ error.phone }}
+                            </span>
                         </div>
-                        <h5 v-if="error" class="text-danger">
-                            <font-awesome-icon :icon="['fa', 'exclamation-circle']"/>
-                            {{ error }}
-                        </h5>
                         <button type="submit" class="btn btn-success btn-block">Registrati</button>
+                        <br>
+                        <h5 v-if="error.general" class="text-danger">
+                            <font-awesome-icon :icon="['fa', 'exclamation-circle']"/>
+                            {{ error.general }}
+                        </h5>
                     </form>
                 </div>
                 <div class="col-md-3 col-xs-2"></div>
@@ -122,9 +146,13 @@
 
 <script>
   // Import component
-  import Loading from 'vue-loading-overlay';
+  import Loading from 'vue-loading-overlay'
   // Import stylesheet
-  import 'vue-loading-overlay/dist/vue-loading.css';
+  import 'vue-loading-overlay/dist/vue-loading.css'
+  import * as _ from "lodash";
+
+  var expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
+  var regex = new RegExp(expression)
 
   export default {
     name: "ShopRegistration",
@@ -140,15 +168,25 @@
         address: null,
         city: null,
         cap: null,
-        website: null,
+        website: '',
         phone: null,
         telegram: null,
         facebook: null,
-        error: null,
         registered: true,
         category: null,
         isLoading: false,
-        fullPage: true
+        fullPage: true,
+        error: {
+          general: false,
+          name: false,
+          description: false,
+          address: false,
+          city: false,
+          cap: false,
+          website: false,
+          phone: false,
+          category: false
+        }
       }
     },
     mounted() {
@@ -166,30 +204,42 @@
     },
     methods: {
       registerForm: function (e) {
+        this.error = _.mapValues(this.error, () => false);
         if (!this.name) {
-          this.error = 'Non hai inserito il nome!'
+          this.error.name = 'Non hai inserito il nome!'
         }
         if (this.description && this.description.length > 120) {
-          this.error = 'La descrizione che hai inserito è troppo lunga!'
+          this.error.description = 'La descrizione che hai inserito è troppo lunga!'
         }
         if (!this.address) {
-          this.error = 'Non hai inserito il tuo indirizzo!'
+          this.error.address = 'Non hai inserito il tuo indirizzo!'
         }
         if (!this.city) {
-          this.error = 'Non hai la tua città!'
+          this.error.city = 'Non hai inserito la tua città!'
         }
         if (!this.cap) {
-          this.error = 'Non hai inserito il tuo CAP!'
+          this.error.cap = 'Non hai inserito il tuo CAP!'
+        }
+        if (this.cap && this.cap.length !== 5 ) {
+          this.error.cap = 'Non hai inserito un CAP valido'
+        }
+        if (!this.website.match(regex)) {
+          this.error.website = 'Inserire un sito web valido'
         }
         if (!this.phone && !this.facebook && !this.telegram) {
-          this.error = 'Devi inserire almeno un contatto!'
+          this.error.phone = 'Devi inserire almeno un contatto!'
         }
-        if (this.category.length >= 3) {
-          this.error = 'Puoi selezionare massimo 3 categorie!'
-        } else if (this.category.length === 0) {
-          this.error = 'Seleziona almeno una categoria!'
+        if (this.category && this.category.length >= 3) {
+          this.error.category = 'Puoi selezionare massimo 3 categorie!'
+        } else if (!this.category) {
+          this.error.category = 'Seleziona almeno una categoria!'
+        }
+        if(_.some(this.error)) {
+          this.error.general = 'Dati non validi, controlla!';
+          return
         }
         e.preventDefault();
+        this.register()
       },
       register() {
         this.isLoading = true;
@@ -245,5 +295,18 @@
 <style scoped>
     #register-container {
         padding-bottom: 80px;
+    }
+    /*
+    *  Remove arrows in input number 
+    *  Chrome, Safari, Edge, Opera 
+    */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
     }
 </style>

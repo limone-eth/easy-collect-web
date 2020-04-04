@@ -8,6 +8,7 @@
                     <div class="h1 font-weight-bolder">Registrati <span class="text-success">gratuitamente</span> per essere visibile sulla mappa</div>
                     <h5 class="font-weight-bold">Ricevi gli ordini dai clienti direttamente sul tuo smartphone</h5>
                     <b-button variant="success" to="/registrati">Registrati gratuitamente</b-button>
+                    <b-button style="margin-left:5px" variant="outline-success" to="/howto">Tutorial</b-button>
                 </div>
                 <div class="col-6">
                     <img src="../assets/cover_3.jpg" height="450">
@@ -126,6 +127,5 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
-        margin-bottom: 80px;
     }
 </style>
