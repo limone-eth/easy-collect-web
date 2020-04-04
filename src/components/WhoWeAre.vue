@@ -11,7 +11,7 @@
             La scintilla è stata un post su LinkedIn di Andrea Vitaletti, Professore Associato della Facoltà di
             Ingegneria alla “Sapienza” di Roma, che ha raccolto subito tante adesioni e spunti interessanti. In tempi
             record abbiamo formato un team cresciuto velocemente aggregando persone con competenze ed esperienze
-            diverse, accomunate da valori condivisi, riassunti nel Manifesto (<a href="./../../public/Manifesto.pdf" target="_blank">Manifesto di ColliGo</a>). Al progetto ha aderito con entusiasmo La Pecora Nera Editore, casa editrice enogastronomica già
+            diverse, accomunate da valori condivisi, riassunti nel Manifesto (<a href="./Manifesto.pdf" target="_blank">Manifesto di ColliGo</a>). Al progetto ha aderito con entusiasmo La Pecora Nera Editore, casa editrice enogastronomica già
             attiva con la campagna social <b>#facciospesainbottega</b> e via via altre professionalità ed aziende, quali
             Passion Fruit Hub che cura l’ufficio stampa e Hosting Solutions (Genesys Informatica srl) che ha messo a
             disposizione il servizio di hosting. Il gruppo sta crescendo ulteriormente con il coinvolgimento delle
@@ -54,7 +54,7 @@
     },
     data() {
       return {
-        today: moment().format('MM/DD/YYYY')
+        today: moment().format('MM/DD/YYYY'),
       }
     }
   }
