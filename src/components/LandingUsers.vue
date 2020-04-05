@@ -89,7 +89,7 @@
                         <img src="../assets/undraw_successful_purchase_uyin.svg" height="350" alt="illustration">
                     </div>
                     <div class="col-6 text-left align-self-center">
-                        <div class="h1 font-weight-bolder">Ordina la spesa e accordati per l'orario di ritiro</div>
+                        <div class="h1 font-weight-bolder">Ordina la spesa e accordati per le modalità di ritiro</div>
                         <h5 class="font-weight-bold">Preserva la tua sicurezza e evita perdite tempo in fila</h5>
                         <b-button variant="outline-light" to="/mappa">Vai alla mappa</b-button>
                     </div>
@@ -100,7 +100,7 @@
                 <div class="row pt-5 pb-5">
 
                     <div class="col-12 text-center align-self-center">
-                        <div class="h1 font-weight-bolder">Ordina la spesa e accordati per l'orario di ritiro</div>
+                        <div class="h1 font-weight-bolder">Ordina la spesa e accordati per le modalità di ritiro</div>
                         <h5 class="font-weight-bold">Preserva la tua sicurezza e evita perdite tempo in fila</h5>
                         <b-button variant="outline-light" to="/mappa">Vai alla mappa</b-button>
                     </div>
