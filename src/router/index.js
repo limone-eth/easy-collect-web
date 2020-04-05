@@ -8,6 +8,7 @@ import FaqComponent from "../components/Faq";
 import HowToComponent from "../components/HowTo";
 import WhoWeAreComponent from "../components/WhoWeAre";
 import NotFoundComponent from "../components/NotFound";
+import ManifestoComponent from "../components/Manifesto";
 
 Vue.use(Router);
 
@@ -54,6 +55,11 @@ export default new Router({
       path: "/chi-siamo",
       name: "chi-siamo",
       component: WhoWeAreComponent
+    },
+    {
+      path: "/manifesto",
+      name: "manifesto",
+      component: ManifestoComponent
     },
     { path: '*', component: NotFoundComponent, meta: { layout: 'none' } }
   ],

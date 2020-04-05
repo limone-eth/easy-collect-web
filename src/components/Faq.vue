@@ -9,17 +9,9 @@
                     Cosa significa ColliGo?
                 </div>
                 <div>
-                    ColliGo è un termine latino dai molteplici significati, tra cui alcuni pertinenti ai principi che ci
-                    guidano: riunire, ricondurre, guadagnare, richiamare alla memoria, raccogliere.
-                </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Su quali piattaforme posso trovare ColliGo?
-                </div>
-                <div>
-                    ColliGo sarà disponibile gratuitamente su Telegram e Facebook Messenger tramite l’uso di un bot,
-                    l’app sarà possibile scaricarla gratuitamente su Apple Store e Google Play Store.
+                    ColliGo è un servizio per mettere in comunicazione clienti e botteghe alimentari di quartiere
+                    ispirato e guidato dai principi del Manifesto (<a href="./Manifesto.pdf" target="_blank">Manifesto
+                    di ColliGo</a>).
                 </div>
             </li>
             <li>
@@ -29,6 +21,28 @@
                 <div>
                     ColliGo è e sarà sempre un servizio gratuito per tutti i commercianti e clienti che ne
                     vorranno fare uso.
+                </div>
+            </li>
+            <li>
+                <div class="h4 mt-5">
+                    Nello specifico che servizi offre?
+                </div>
+                <div>
+                    ColliGo offre 2 servizi: per i negozianti la
+                    <router-link to="/registrati">registrazione</router-link>
+                    del proprio negozio,
+                    per il cliente la
+                    <router-link to="/mappa">ricerca di un negozio</router-link>
+                    .
+                </div>
+            </li>
+            <li>
+                <div class="h4 mt-5">
+                    Su quali piattaforme posso trovare ColliGo?
+                </div>
+                <div>
+                    ColliGo sarà disponibile gratuitamente su Telegram e Facebook Messenger tramite l’uso di un bot,
+                    l’app sarà possibile scaricarla gratuitamente su Apple Store e Google Play Store.
                 </div>
             </li>
             <li>

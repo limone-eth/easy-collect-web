@@ -23,7 +23,7 @@
                                 Come funziona
                             </b-nav-item>
                             <b-nav-item to="/chi-siamo">Chi siamo</b-nav-item>
-                            <b-nav-item href="./Manifesto.pdf">Manifesto</b-nav-item>
+                            <b-nav-item to="/manifesto">Manifesto</b-nav-item>
                             <b-nav-item to="/domande-frequenti">Domande frequenti</b-nav-item>
                             <b-nav-item>
                                 <router-link to="/esercenti" class="text-success">Hai un negozio?</router-link>
