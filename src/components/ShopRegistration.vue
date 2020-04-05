@@ -21,7 +21,7 @@
                             <font-awesome-icon :icon="['fa', 'store-alt']"/>&nbsp;
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" v-model="name"
-                                   placeholder="Inserisci il nome della tua attività" >
+                                   placeholder="Inserisci il nome della tua attività">
                             <span v-if="error.name" class="text-danger">
                                 {{ error.name }}
                             </span>
@@ -41,7 +41,7 @@
                             <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
                                          placeholder="Seleziona categoria" label="name" track-by="id"
                                          :options="categories" :multiple="true" :taggable="true"
-                                         ></multiselect>
+                            ></multiselect>
                             <span v-if="error.category" class="text-danger">
                                 {{ error.category }}
                             </span>
@@ -50,7 +50,7 @@
                             <font-awesome-icon :icon="['fa', 'map-marker-alt']"/>&nbsp;
                             <label for="address"> Indirizzo</label>
                             <input type="text" class="form-control" id="address" v-model="address"
-                                   placeholder="Inserisci il tuo indirizzo" >
+                                   placeholder="Inserisci il tuo indirizzo">
                             <span v-if="error.address" class="text-danger">
                                 {{ error.address }}
                             </span>
@@ -60,7 +60,7 @@
                                 <font-awesome-icon :icon="['fa', 'city']"/>&nbsp;
                                 <label for="address"> Città</label>
                                 <input type="text" class="form-control" id="city" v-model="city"
-                                       placeholder="Inserisci la città" >
+                                       placeholder="Inserisci la città">
                                 <span v-if="error.city" class="text-danger">
                                     {{ error.city }}
                                 </span>
@@ -69,7 +69,7 @@
                                 <font-awesome-icon :icon="['fa', 'envelope']"/>&nbsp;
                                 <label for="address"> CAP</label>
                                 <input type="number" class="form-control" id="cap" v-model="cap"
-                                       placeholder="Inserisci il cap" >
+                                       placeholder="Inserisci il cap">
                                 <span v-if="error.cap" class="text-danger">
                                     {{ error.cap }}
                                 </span>
@@ -115,6 +115,14 @@
                                 {{ error.phone }}
                             </span>
                         </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                   v-model="accepts_terms_and_conditions" required>
+                            <label class="form-check-label" for="exampleCheck1">Registrando il mio negozio do il
+                                consenso a utilizzare le immagini del profilo Facebook e Instagram dello stesso per post
+                                che hanno il fine di promuovere l’utilizzo di ColliGo</label>
+                        </div>
+                        <br>
                         <button type="submit" class="btn btn-success btn-block">Registrati</button>
                         <br>
                         <h5 v-if="error.general" class="text-danger">
@@ -174,6 +182,7 @@
         facebook: null,
         registered: true,
         category: null,
+        accepts_terms_and_conditions: false,
         isLoading: false,
         fullPage: true,
         error: {
@@ -220,7 +229,7 @@
         if (!this.cap) {
           this.error.cap = 'Non hai inserito il tuo CAP!'
         }
-        if (this.cap && this.cap.length !== 5 ) {
+        if (this.cap && this.cap.length !== 5) {
           this.error.cap = 'Non hai inserito un CAP valido'
         }
         if (!this.website.match(regex)) {
@@ -229,12 +238,15 @@
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.phone = 'Devi inserire almeno un contatto!'
         }
+        if (!this.phone && !this.facebook && !this.telegram) {
+          this.error.general = 'Per registrarti devi accettare le condizioni!'
+        }
         if (this.category && this.category.length >= 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
           this.error.category = 'Seleziona almeno una categoria!'
         }
-        if(_.some(this.error)) {
+        if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
           return
         }
@@ -251,7 +263,8 @@
           }),
           address: this.address,
           city: this.city,
-          cap: this.cap
+          cap: this.cap,
+          accepts_terms_and_conditions: this.accepts_terms_and_conditions
         };
         if (this.website) {
           payload.website = this.website;
@@ -296,17 +309,19 @@
     #register-container {
         padding-bottom: 80px;
     }
+
     /*
-    *  Remove arrows in input number 
-    *  Chrome, Safari, Edge, Opera 
+    *  Remove arrows in input number
+    *  Chrome, Safari, Edge, Opera
     */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
+
     /* Firefox */
     input[type=number] {
-      -moz-appearance: textfield;
+        -moz-appearance: textfield;
     }
 </style>
