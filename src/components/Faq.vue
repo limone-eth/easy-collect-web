@@ -10,8 +10,8 @@
                 </div>
                 <div>
                     ColliGo è un servizio per mettere in comunicazione clienti e botteghe alimentari di quartiere
-                    ispirato e guidato dai principi del Manifesto (<a href="./Manifesto.pdf" target="_blank">Manifesto
-                    di ColliGo</a>).
+                    ispirato e guidato dai principi del <a href="./Manifesto.pdf" target="_blank">Manifesto
+                </a>.
                 </div>
             </li>
             <li>
