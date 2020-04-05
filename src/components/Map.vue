@@ -65,12 +65,12 @@
                                       <span class="badge badge-success mr-1">{{category.name}}</span>
                                   </span>
                                   <br>
-                                  <span class="h6">
+                                  <span class="h6 mt-2">
                                       {{shop.description}}
                                   </span>
                                   <p class="h6" v-show="shop.phone !== null">
                                       <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
-                                        {{shop.address}}
+                                        {{shop.address}} - {{shop.city}}, {{shop.cap}}
                                   </p>
                                   <p class="h6" v-show="shop.website !== null">
                                       <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
