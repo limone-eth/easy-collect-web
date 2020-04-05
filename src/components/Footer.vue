@@ -6,7 +6,7 @@
                 <div class="col-2">
                     <a href="https://fb.me/ColliGo.Italia"><img src="../assets/facebook.svg" width="60"></a>
                 </div>
-                <div class="col-2">
+                <div class="col-2 d-none">
                     <a href=""><img src="../assets/instagram.svg" width="60"></a>
                 </div>
                 <div class="col-4"></div>
