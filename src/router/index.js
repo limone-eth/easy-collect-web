@@ -6,10 +6,13 @@ import LandingUsersComponent from "../components/LandingUsers";
 import LandingShopsComponent from "../components/LandingShops";
 import FaqComponent from "../components/Faq";
 import HowToComponent from "../components/HowTo";
+import WhoWeAreComponent from "../components/WhoWeAre";
+import NotFoundComponent from "../components/NotFound";
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: "/",
@@ -46,7 +49,13 @@ export default new Router({
       path: "/howto",
       name: "howto",
       component: HowToComponent
-    }
+    },
+    {
+      path: "/chi-siamo",
+      name: "chi-siamo",
+      component: WhoWeAreComponent
+    },
+    { path: '*', component: NotFoundComponent, meta: { layout: 'none' } }
   ],
   scrollBehavior() {
     return {x: 0, y: 0}

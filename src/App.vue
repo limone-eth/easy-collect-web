@@ -9,8 +9,6 @@
                                                       style="height: 40px; width: 130px;"></router-link>
                     </b-navbar-brand>
 
-                    <b-navbar-brand></b-navbar-brand>
-
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                     <b-collapse id="nav-collapse" is-nav>
@@ -22,7 +20,8 @@
                             <b-nav-item to="/utenti" class="text-dark">
                                 Come funziona
                             </b-nav-item>
-                            <b-nav-item>Chi siamo</b-nav-item>
+                            <b-nav-item to="/chi-siamo">Chi siamo</b-nav-item>
+                            <b-nav-item href="./Manifesto.pdf">Manifesto</b-nav-item>
                             <b-nav-item to="/domande-frequenti">Domande frequenti</b-nav-item>
                             <b-nav-item>
                                 <router-link to="/esercenti" class="text-success">Hai un negozio?</router-link>

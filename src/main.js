@@ -14,6 +14,23 @@ import VueGeolocation from 'vue-browser-geolocation';
 import Multiselect from 'vue-multiselect';
 import VueToast from 'vue-toast-notification';
 
+import VueScrollTo from 'vue-scrollto';
+
+Vue.use(VueScrollTo,{
+  container: "body",
+  duration: 500,
+  easing: "ease",
+  offset: 0,
+  force: true,
+  cancelable: true,
+  onStart: false,
+  onDone: false,
+  onCancel: false,
+  x: false,
+  y: true
+});
+
+
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 

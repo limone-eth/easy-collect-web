@@ -1,51 +1,93 @@
 <template>
-    <div id="home" class="container-fluid text-center">
-
-        <h2>Cerca i negozi disponibili sulla mappa</h2>
-        <h4>Ordina e ritira la tua spesa in sicurezza</h4>
-
-        <!--<h6>Hai un negozio?
-            <router-link to="/registrati" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
-        </h6>-->
-
-        <!-- MAPPA -->
-        <div class="container mb-3">
-
-            <form @submit="searchForm"
-                  @submit.prevent="search">
-                <div class="row">
-                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <input type="text" class="form-control" id="name" v-model="name"
-                               placeholder="Cerca per nome">
-                    </div>
-                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <select class="form-control" id="categories_id" v-model="categories_id">
-                            <option value="null" >Filtra per categoria</option>
-                            <option :key="category.id" v-for="category in categories" :value="category.id">
-                                {{category.name}}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
-                            <font-awesome-icon :icon="['fa', 'search']"/>
-                            Cerca
-                        </button>
-                        <button v-else type="submit" class="btn btn-success btn-block" disabled>
-                            <b-spinner small></b-spinner>
-                            Cercando...
-                        </button>
+    <div id="home" class="text-center">
+        <div id="cover">
+            <div id="location-form" class="row">
+                <div class="col-2">
+                </div>
+                <div class="col-8">
+                    <div class="card" id="main-card">
+                        <div class="card-body">
+                            <h2 class="card-title text-success font-weight-bold">Ordina e ritira la spesa in
+                                sicurezza</h2>
+                            <h5 class="card-subtitle mb-2 text-muted font-weight-normal">Inserisci il tuo indirizzo e
+                                trova i negozi più vicini a te</h5>
+                            <br>
+                            <div v-if="positionErrorMessage" class="h6 form-text text-danger">
+                                <font-awesome-icon :icon="['fa', 'exclamation-circle']"/>
+                                {{positionErrorMessage}}
+                            </div>
+                            <form @submit="positionForm"
+                                  @submit.prevent="position">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+                                        <input type="text" class="form-control" id="user_address" v-model="user_address"
+                                               placeholder="Indirizzo">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-2">
+                                        <input type="text" class="form-control" id="user_city" v-model="user_city"
+                                               placeholder="Città">
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 mt-2">
+                                        <input type="number" class="form-control" id="user_cap" v-model="user_cap"
+                                               placeholder="CAP">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-2">
+                                        <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
+                                            <font-awesome-icon :icon="['fa', 'search']"/>
+                                            Trova i negozi!
+                                        </button>
+                                        <button v-else type="submit" class="btn btn-success btn-block" disabled>
+                                            <b-spinner small></b-spinner>
+                                            Cercando...
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </form>
+                <div class="col-2">
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-1 col-md-3"></div>
-            <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                <div style="height: 700px; width: 100%;">
-                    <l-map ref="map" :zoom="zoom" :center="this.center" @update:zoom="zoomUpdated"
-                           @update:center="centerUpdated" @update:bounds="boundsUpdated">
-                        <l-tile-layer :url="url">
+        <!-- MAPPA -->
+        <div v-show="personalPosition" class="mt-5 container"  id="leaflet-map">
+            <div class="container mb-3" >
+                <form @submit="searchForm"
+                      @submit.prevent="search" id="search-form">
+                    <div class="row">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <input type="text" class="form-control" id="name" v-model="name"
+                                   placeholder="Cerca per nome">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <select class="form-control" id="categories_id" v-model="categories_id">
+                                <option value="null">Filtra per categoria</option>
+                                <option :key="category.id" v-for="category in categories" :value="category.id">
+                                    {{category.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
+                                <font-awesome-icon :icon="['fa', 'search']"/>
+                                Cerca
+                            </button>
+                            <button v-else type="submit" class="btn btn-success btn-block" disabled>
+                                <b-spinner small></b-spinner>
+                                Cercando...
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 col-md-3"></div>
+                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                    <div style="height: 700px; width: 100%;">
+                        <l-map ref="map" :zoom="zoom" :center="this.center" @update:zoom="zoomUpdated"
+                               @update:center="centerUpdated" @update:bounds="boundsUpdated">
+                            <l-tile-layer :url="url">
 
                         </l-tile-layer>
                         <l-marker v-bind:key="shop.id" v-for="shop in shops"
@@ -60,48 +102,50 @@
                                         class="h6 font-weight-bold">
                                       <span class="badge badge-success mr-1">{{category.name}}</span>
                                   </span>
-                                  <br>
-                                  <span class="h6">
+                                        <br>
+                                        <span class="h6">
                                       {{shop.description}}
                                   </span>
-                                  <p class="h6" v-show="shop.phone !== null">
-                                      <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
-                                        {{shop.address}}
-                                  </p>
-                                  <p class="h6" v-show="shop.website !== null">
-                                      <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
-                                      <a v-bind:href="shop.website" target="_blank">Sito Web</a>
-                                  </p>
+                                        <p class="h6" v-show="shop.phone !== null">
+                                            <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
+                                            {{shop.address}}
+                                        </p>
+                                        <p class="h6" v-show="shop.website !== null">
+                                            <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                            <a v-bind:href="shop.website" target="_blank">Sito Web</a>
+                                        </p>
 
-                                  <p class="h6" v-show="shop.phone !== null">
-                                      <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                      <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
-                                  </p>
-                                  <p class="h6" v-show="shop.telegram !== null">
-                                      <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                      <a v-bind:href="shop.telegram" target="_blank"> Canale Telegram</a>
-                                  </p>
-                                  <p class="h6" v-show="shop.facebook !== null">
-                                      <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                      <a v-bind:href="shop.facebook" target="_blank"> Pagina Facebook</a>
-                                  </p>
-                              </div>
-                          </l-popup>
-                      </l-marker>
+                                        <p class="h6" v-show="shop.phone !== null">
+                                            <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
+                                            <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
+                                        </p>
+                                        <p class="h6" v-show="shop.telegram !== null">
+                                            <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
+                                            <a v-bind:href="shop.telegram" target="_blank"> Canale Telegram</a>
+                                        </p>
+                                        <p class="h6" v-show="shop.facebook !== null">
+                                            <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
+                                            <a v-bind:href="shop.facebook" target="_blank"> Pagina Facebook</a>
+                                        </p>
+                                    </div>
+                                </l-popup>
+                            </l-marker>
 
-                      <l-circle-marker
-                        v-if="personalPosition"
-                        v-bind:lat-lng="[personalPosition.lat,personalPosition.lng]"
-                        :radius="10"
-                        :color="'#3388ff'"
-                      />
-                    </l-map>
+                            <l-circle-marker
+                                    v-if="personalPosition"
+                                    v-bind:lat-lng="[personalPosition.lat,personalPosition.lng]"
+                                    :radius="10"
+                                    :color="'#3388ff'"
+                            />
+                        </l-map>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-1 col-md3"></div>
+                <div class="col-lg-1 col-md3"></div>
+            </div>
         </div>
+
 
     </div>
 </template>
@@ -110,7 +154,6 @@
 <script>
   import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
   import L from 'leaflet'
-  import {latLng} from "leaflet";
   import { OpenStreetMapProvider } from 'leaflet-geosearch';
   import * as _ from "lodash";
 
@@ -125,16 +168,20 @@
     },
     mounted() {
       this.mapRef = this.$refs.map.mapObject;
-      this.$getLocation({    
-        enableHighAccuracy: true, 
-        timeout: Infinity, 
+      if (localStorage.user_lat && localStorage.user_lng) {
+        this.setPosition(localStorage.user_lat, localStorage.user_lng,
+          localStorage.user_address, localStorage.user_city, localStorage.user_cap)
+      }
+      /*this.$getLocation({
+        enableHighAccuracy: true,
+        timeout: Infinity,
         maximumAge: 0
-      }) 
-      .then(coordinates => {
-        this.center = coordinates;
-        this.personalPosition = coordinates;
-        this.zoomUpdated(16)
-      });
+      })
+        .then(coordinates => {
+          this.center = coordinates;
+          this.personalPosition = coordinates;
+          this.zoomUpdated(16)
+        });*/
 
       this.$api.get('/categories')
         .then(response => {
@@ -179,12 +226,16 @@
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         zoom: 5.0,
         user_coordinates: null,
+        user_address: null,
+        user_city: null,
+        user_cap: null,
         bounds: 5.3,
         personalPosition: null,
         shops: [],
-        center: [41.904176199999995,12.454258099999999],
-        icon:null,
-        address:null,
+        center: [41.904176199999995, 12.454258099999999],
+        icon: null,
+        address: null,
+        positionErrorMessage: null,
         errorMessage: null,
         geosearchOptions: {
           provider: new OpenStreetMapProvider(),
@@ -194,8 +245,23 @@
         selectedIcon,
       };
     },
+    computed: {
+      axiosParamsPosition() {
+        const params = new URLSearchParams();
+        if (this.user_address) {
+          params.append('address', this.user_address);
+        }
+        if (this.user_city) {
+          params.append('city', this.user_city);
+        }
+        if (this.user_cap) {
+          params.append('cap', this.user_cap);
+        }
+        return params;
+      }
+    },
     methods: {
-      clearAddress(){
+      clearAddress() {
         this.address = "";
       },
       zoomUpdated(zoom) {
@@ -206,9 +272,6 @@
       },
       boundsUpdated(bounds) {
         this.bounds = bounds;
-      },
-      getLatLng(marker) {
-        return latLng(marker.lat, marker.lng)
       },
       searchForm: function (e) {
         e.preventDefault();
@@ -256,6 +319,57 @@
         //this.mapRef.panTo(this.user_coordinates);
         this.zoomUpdated(13)
         this.isLoading = false
+      },
+      positionForm: function (e) {
+        e.preventDefault();
+      },
+      position() {
+        this.isLoading = true;
+        this.errorMessage = null;
+        this.$api.get('/coordinates', {params: this.axiosParamsPosition})
+          .then(response => {
+            this.setPosition(response.data.lat, response.data.lng);
+            this.isLoading = false;
+            localStorage.setItem('user_lat', response.data.lat);
+            localStorage.setItem('user_lng', response.data.lng);
+            localStorage.setItem('user_address', this.user_address);
+            localStorage.setItem('user_city', this.user_city);
+            localStorage.setItem('user_cap', this.user_cap);
+            this.scrollToMap(`#search-form`, 300)
+          })
+          .catch(error => {
+            console.log(error);
+            this.isLoading = false;
+            this.errorMessage = "Ops, c'è stato un errore! Non siamo riusciti a trovare il tuo indirizzo... riprova!";
+          });
+      },
+      setPosition(lat, lng, address = null, city = null, cap = null){
+        this.personalPosition = {lat: lat, lng: lng};
+        this.center = {lat: lat, lng: lng};
+        if (address) {
+          this.user_address = address;
+        }
+        if (city) {
+          this.user_city = city;
+        }
+        if (cap) {
+          this.user_cap = cap;
+        }
+        this.zoomUpdated(13);
+        setTimeout( () =>  {
+          this.mapRef.invalidateSize();
+        }, 300);
+      },
+      scrollToMap(element, duration){
+        const options = {
+          easing: 'ease-in',
+          offset: -10,
+          force: true,
+          cancelable: true,
+          x: false,
+          y: true
+        };
+        this.$scrollTo(element, duration, options)
       }
     }
   }
@@ -263,7 +377,29 @@
 
 <style>
     #home {
-        padding-bottom: 180px;
-        margin-bottom: 180px;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c3e50;
+    }
+
+    #location-form {
+        padding-top: 120px;
+        padding-bottom: 140px;
+    }
+
+    #cover {
+        background: url("../assets/grocery.jpg") no-repeat center center fixed;;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    #main-card {
+        position: relative;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+        padding: 10px;
+        background: white;
     }
 </style>
