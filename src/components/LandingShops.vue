@@ -69,7 +69,7 @@
                         <div class="h2">Come funziona</div>
                         <ul>
                             <li>
-                                Scegli come registrare la tua attività tra colligo.shop/xxx, app ColliGo, fb e telegram . 
+                                Scegli come registrare la tua attività tra <a href="/registrati">colligo.shop</a>, app ColliGo, fb e telegram . 
                             </li>
                             <li class="pt-2">
                                 Specifica i canali su cui i tuoi clienti ti contatteranno privatamente.
@@ -120,10 +120,10 @@
                         <div class="h3">Vogliamo aiutare le botteghe del nostro Paese, noi ci crediamo. E tu?</div>
                         <div class="row mt-4">
                             <div class="col-4">
-                                <b-button variant="success" class="btn-block" to="/mappa">Cerca una bottega</b-button>
+                                <b-button variant="success" class="btn-block" to="/registrati">Registra la tua attività</b-button>
                             </div>
                             <div class="col-4">
-                                <b-button variant="outline-success" class="btn-block" to="/commercianti">Registra la tua attività</b-button>
+                                <b-button variant="outline-success" class="btn-block" to="/mappa">Cerca una bottega </b-button>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <div class="col-12">
                         <div class="row mt-4">
                             <div class="col-6">
-                                <b-button variant="success" class="btn-block" to="/commercianti">Registra la tua attività</b-button>
+                                <b-button variant="success" class="btn-block" to="/registrati">Registra la tua attività</b-button>
                             </div>
                             <div class="col-6">
                                 <b-button variant="outline-success" class="btn-block" to="/mappa">Cerca una bottega</b-button>
