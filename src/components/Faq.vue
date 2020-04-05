@@ -1,114 +1,144 @@
 <template>
-    <div class="container">
-        <div class="h1 mt-5 text-center">
+    <div>
+        <div class="h1 mt-5 container">
             Domande Frequenti
         </div>
-        <ul>
-            <li>
-                <div class="h4 mt-5">
-                    Cosa significa ColliGo?
-                </div>
-                <div>
-                    ColliGo è un servizio per mettere in comunicazione clienti e botteghe alimentari di quartiere
-                    ispirato e guidato dai principi del <a href="./Manifesto.pdf" target="_blank">Manifesto
-                </a>.
-                </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                Cosa è ColliGo?
+            </div>
+            <div class="h6">
+                ColliGo è un servizio per mettere in comunicazione clienti e botteghe alimentari di quartiere ispirato e
+                guidato dai principi del <a href="/manifesto">Manifesto</a>.
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
                     ColliGo è un servizio a pagamento?
                 </div>
-                <div>
-                    ColliGo è e sarà sempre un servizio gratuito per tutti i commercianti e clienti che ne
-                    vorranno fare uso.
+                <div class="h6">
+                    ColliGo è e sarà sempre un servizio gratuito per tutti i commercianti e clienti che vorranno farne
+                    uso.
                 </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Nello specifico che servizi offre?
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                Nello specifico che servizi offre?
+            </div>
+            <div class="h6">
+                ColliGo offre 2 servizi: per i negozianti la registrazione <a href="/registrati"></a> del proprio
+                negozio, per
+                il cliente la <a href="/mappa">ricerca di un negozio</a>
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
+                    Cos’è un canale?
                 </div>
-                <div>
-                    ColliGo offre 2 servizi: per i negozianti la
-                    <router-link to="/registrati">registrazione</router-link>
-                    del proprio negozio,
-                    per il cliente la
-                    <router-link to="/mappa">ricerca di un negozio</router-link>
-                    .
+                <div class="h6">
+                    Un canale è qualunque mezzo, per esempio Whatsapp, Telegram, il telefono, Messenger, la mail etc.
+                    con cui cliente e negoziante possono comunicare
                 </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                Posso avere un esempio di uso del canale?
+            </div>
+            <div class="h6">
+                A titolo puramente esemplificativo: 1) il negoziante specifica Whatsapp come canale fornendo il suo
+                contatto, 2) al mattino pubblicizza l’offerta sul canale con video, immagini, listini etc, 3) riceve gli
+                ordini dai clienti sul canale, 4) conferma la disponibilità della merce ordinata e si accorda sulle
+                modalità di ritiro
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
+                    Quindi, ColliGo ha un ruolo nella vendita e distribuzione dei prodotti?
+                </div>
+                <div class="h6">
+                    No, nella misura più assoluta, questo è un fatto privato che riguarda cliente e negoziante, ColliGo
+                    li mette solo in comunicazione.
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                Che tipo di negozi trovo su ColliGo?
+            </div>
+            <div class="h6">
+                Su ColliGo sono presenti tutti i tipi di piccole-medie attività quali: Alimentari, Bio&Equo, Birroteca,
+                Cioccolateria, Enoteca, Formaggeria, Frutteria, Gastronomia, Macelleria, Oleoteca, Panificio,
+                Pasticceria, Pastificio, Pescheria, Teeria, Torrefazione.
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
                     Su quali piattaforme posso trovare ColliGo?
                 </div>
-                <div>
-                    ColliGo sarà disponibile gratuitamente su Telegram e Facebook Messenger tramite l’uso di un bot,
-                    l’app sarà possibile scaricarla gratuitamente su Apple Store e Google Play Store.
+                <div class="h6">
+                    Il servizio di registrazione per i negozianti è disponibile su Web, AppAndroid, App IoS, Telegram,
+                    Messenger. <br>
+                    Il servizio di ricerca per i clienti è disponibile su Web, AppAndroid, App IoS. <br>
+                    I canali di comunicazione, non sono gestiti da ColliGo, come già chiarito sono molteplici per
+                    esempio Whatsapp, Telegram, il telefono, Messenger, la mail etc. e sono tipicamente disponibili in
+                    una molteplicità di piattaforme.
                 </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    I miei dati sono al sicuro?
-                </div>
-                <div>
-                    Le uniche informazioni fornite a ColliGo sono quelle che vengono espressamente richieste. In forza
-                    del principio di libertà, non possediamo informazioni sul colloquio privato tra cliente e
-                    negoziante.
-                </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Che tipo di negozi trovo su ColliGo?
-                </div>
-                <div>
-                    Su ColliGo sono presenti tutti i tipi di piccole-medie attività quali: Alimentari, Bio&Equo,
-                    Birroteca, Cioccolateria, Enoteca, Formaggeria, Frutteria, Gastronomia, Macelleria, Oleoteca,
-                    Panificio, Pasticceria, Pastificio, Pescheria, Teeria, Torrefazione.
-                </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                I miei dati sono al sicuro?
+            </div>
+            <div class="h6">
+                Le uniche informazioni fornite a ColliGo sono quelle che vengono espressamente richieste e non
+                possediamo informa- zioni sul colloquio privato tra cliente e negoziante.
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
                     Perché dovrei usare ColliGo per fare la spesa?
                 </div>
-                <div>
-                    Il principio su cui si basa il funzionamento di questo servizio è quello di ottimizzare le
-                    attese per fare la spesa, preparando una lista degli articoli da comprare e inviandola al
-                    commerciante che, una volta preparata, comunicherà l’orario più idoneo per il ritiro, azzerando il
-                    formarsi di code.
+                <div class="h6">
+                    Per aiutare le botteghe di quartiere, per acquistare prodotti di qualità in modo sicuro e veloce.
+                    Infatti grazie al canale di comunicazione diretto è possibile definire la modalità di
+                    ritiro/consegna della merce più efficace e sicura. Per esempio, il negoziante può preparare la busta
+                    dei prodotti ed il cliente si limita a ritirarla pagando velocemente senza alcuna fila.
                 </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Che informazioni devo inserire per registrarmi come negoziante?
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                ColliGo è open source, cosa significa?
+            </div>
+            <div class="h6">
+                Significa che chiunque può vedere come ColliGo è fatto su <a
+                    href="https://github.com/andreavitaletti/ColliGo">https://github.com/andreavitaletti/ColliGo</a> e
+                proporre miglioramenti.
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h3">
+                    Cosa significa ColliGo?
                 </div>
-                <div>
-                    La registrazione del proprio negozio prevede l’inserimento delle categorie che caratterizzano la tua
-                    attività, la posizione che geolocalizzerà il tuo negozio e,
-                    opzionalmente, puoi inserire il proprio sito Web per chi ne possiede uno.
+                <div class="h6">
+                    Colligo è un termine latino dai molteplici significati, tra cui alcuni pertinenti ai principi che ci
+                    guidano: riunire, ricondurre, guadagnare, richiamare alla memoria, raccogliere.
                 </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Come faccio a conoscere l'offerta di una bottega dopo averla individuata in mappa?
-                </div>
-                <div>
-                    ColliGo è una piattaforma che ti permette di comunicare attraverso più canali con il negoziante.
-                    Sarà lui a pubblicare le proposte in questi canali o a rispondere alle tue richieste indicandoti la
-                    disponibilità di ciò che cerchi e a fornirti, se necessario, delle
-                    alternative.
-                </div>
-            </li>
-            <li>
-                <div class="h4 mt-5">
-                    Come posso incentivare gli acquisti nella mia bottega?
-                </div>
-                <div>
-                    Un utente è tanto più incentivato ad acquistare nella tua bottega quante più informazioni può
-                    reperire sui prodotti in vendita. Può risultare quindi utile pubblicare in tutti i canali(Telegram,
-                    Messenger) un elenco/listino della merce disponibile oltre a video o foto di eventuali offerte
-                    giornaliere con relativa indicazione della disponibilità.
-                </div>
-            </li>
-        </ul>
+            </div>
+        </div>
+        <div class="mt-3 container pt-5 pb-5">
+            <div class="h6">
+                Contattaci su <a href="mailto:info@colligo.shop">info@colligo.shop</a> per ogni chiarimento e/o suggerimento.
+            </div>
+        </div>
     </div>
 </template>
 
