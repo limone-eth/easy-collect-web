@@ -51,10 +51,10 @@
             </div>
         </div>
         <!-- MAPPA -->
-        <div v-show="personalPosition">
-            <div class="container mb-3">
+        <div v-show="personalPosition" class="mt-5 container"  id="leaflet-map">
+            <div class="container mb-3" >
                 <form @submit="searchForm"
-                      @submit.prevent="search">
+                      @submit.prevent="search" id="search-form">
                     <div class="row">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="name" v-model="filter"
@@ -151,6 +151,8 @@
 
 
 <script>
+  /* eslint-disable no-unused-vars */
+
   import Vue from 'vue';
   import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
   import {Icon, LatLng} from "leaflet";
@@ -173,6 +175,10 @@
     },
     mounted() {
       this.mapRef = this.$refs.map.mapObject;
+      if (localStorage.user_lat && localStorage.user_lng) {
+        this.setPosition(localStorage.user_lat, localStorage.user_lng,
+          localStorage.user_address, localStorage.user_city, localStorage.user_cap)
+      }
       /*this.$getLocation({
         enableHighAccuracy: true,
         timeout: Infinity,
@@ -282,7 +288,7 @@
             const lat = new LatLng(response.data.lat, response.data.lng);
             if (response.data.lat != null && response.data.lng != null && response.data.lat != -1) {
               this.mapRef.panTo(lat);
-              this.zoomUpdated(20)
+              this.zoomUpdated(14)
             } else if (response.data.lat == -1) {
               Vue.$toast.open({
                 message: "Indirizzo non trovato! :(",
@@ -313,22 +319,48 @@
         this.errorMessage = null;
         this.$api.get('/coordinates', {params: this.axiosParamsPosition})
           .then(response => {
-            this.personalPosition = {lat: response.data.lat, lng: response.data.lng};
-            this.center = {lat: response.data.lat, lng: response.data.lng};
-            this.zoomUpdated(14);
-            const lat = new LatLng(response.data.lat, response.data.lng);
-            if (response.data.lat != null && response.data.lng != null && response.data.lat !== -1) {
-              this.mapRef.panTo(lat);
-              this.zoomUpdated(16)
-            }
+            this.setPosition(response.data.lat, response.data.lng);
             this.isLoading = false;
-
+            localStorage.setItem('user_lat', response.data.lat);
+            localStorage.setItem('user_lng', response.data.lng);
+            localStorage.setItem('user_address', this.user_address);
+            localStorage.setItem('user_city', this.user_city);
+            localStorage.setItem('user_cap', this.user_cap);
+            this.scrollToMap(`#search-form`, 300)
           })
           .catch(error => {
             console.log(error);
             this.isLoading = false;
             this.errorMessage = "Ops, c'è stato un errore! Non siamo riusciti a trovare il tuo indirizzo... riprova!";
           });
+      },
+      setPosition(lat, lng, address = null, city = null, cap = null){
+        this.personalPosition = {lat: lat, lng: lng};
+        this.center = {lat: lat, lng: lng};
+        if (address) {
+          this.user_address = address;
+        }
+        if (city) {
+          this.user_city = city;
+        }
+        if (cap) {
+          this.user_cap = cap;
+        }
+        this.zoomUpdated(13);
+        setTimeout( () =>  {
+          this.mapRef.invalidateSize();
+        }, 300);
+      },
+      scrollToMap(element, duration){
+        const options = {
+          easing: 'ease-in',
+          offset: -10,
+          force: true,
+          cancelable: true,
+          x: false,
+          y: true
+        };
+        const cancelScroll = this.$scrollTo(element, duration, options)
       }
     }
   }
