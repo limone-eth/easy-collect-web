@@ -18,12 +18,11 @@
             <div class="container d-block d-sm-none">
                 <div class="row pt-5 pb-5">
                     <div class="col-12 align-self-center">
-                        <div class="h1 font-weight-bolder">La spesa facile, veloce, sicura e di qualità</div>
-                        <h5 class="font-weight-bold">Senza mediazioni.</h5>
-                        <b-button variant="light" to="/mappa">Cerca una bottega</b-button>
+                        <div class="h1 font-weight-bolder">La spesa facile, veloce, sicura e di qualità. <br> Senza mediazioni.</div>
+                        <b-button variant="light"  class="mt-2 text-success" to="/mappa">Cerca una bottega</b-button>
                     </div>
                     <div class="col-12 pt-2">
-                        <img src="../assets/cover_3-no-bg.png"  class="mt-2 text-success"  height="250" alt="illustration">
+                        <img src="../assets/cover_3-no-bg.png"   height="250" alt="illustration">
                     </div>
                 </div>
             </div>
