@@ -20,7 +20,7 @@
                             <b-nav-item to="/chi-siamo">Chi siamo</b-nav-item>
                             <b-nav-item to="/domande-frequenti">Domande frequenti</b-nav-item>
                             <b-nav-item>
-                                <router-link to="/esercenti" class="text-success">Sono un commerciante</router-link>
+                                <router-link to="/commercianti" class="text-success">Sono un commerciante</router-link>
                             </b-nav-item>
                         </b-navbar-nav>
                     </b-collapse>
