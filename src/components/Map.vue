@@ -21,7 +21,7 @@
                     <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <select class="form-control" id="categories_id" v-model="categories_id">
                             <option value="null" >Filtra per categoria</option>
-                            <option :key="category" v-for="category in categories" :value="category.id">
+                            <option :key="category.id" v-for="category in categories" :value="category.id">
                                 {{category.name}}
                             </option>
                         </select>
@@ -50,13 +50,13 @@
                         </l-tile-layer>
                         <l-marker v-bind:key="shop.id" v-for="shop in shops"
                                   v-bind:lat-lng="[shop.lat,shop.lng]"
-                                  :icon="shop.icon">
+                                  v-bind:icon="shop.icon">
                           <l-popup>
                               <div>
                               <span class="text-primary h5">
                                   {{shop.name}}
                               </span><br>
-                                  <span v-bind:key="category" v-for="category in shop.categories"
+                                  <span v-bind:key="category.id" v-for="category in shop.categories"
                                         class="h6 font-weight-bold">
                                       <span class="badge badge-success mr-1">{{category.name}}</span>
                                   </span>
@@ -108,19 +108,12 @@
 
 
 <script>
-  // import Vue from 'vue';
   import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
   import L from 'leaflet'
-  import {latLng} from "leaflet"; //LatLng, Icon
+  import {latLng} from "leaflet";
   import { OpenStreetMapProvider } from 'leaflet-geosearch';
   import * as _ from "lodash";
 
-  // delete Icon.Default.prototype._getIconUrl;
-  // Icon.Default.mergeOptions({
-  //   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  //   iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  //   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-  // });
 
   export default {
     components: {
@@ -164,6 +157,20 @@
         });
     },
     data() {
+      const defaultIcon = L.icon({
+            iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-blue.png'),
+            iconUrl: require('../assets/marker_colors/marker-icon-green.png'),
+            iconSize: [30, 50],
+            iconAnchor: [15, 50],
+            popupAnchor: [0, -30]
+        })
+      const selectedIcon = L.icon({
+            iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-green.png'),
+            iconUrl: require('../assets/marker_colors/marker-icon-green.png'),
+            iconSize: [30, 50],
+            iconAnchor: [15, 50],
+            popupAnchor: [0, -30]
+        })
       return {
         categories_id: null,
         mapRef: null,
@@ -183,16 +190,8 @@
           provider: new OpenStreetMapProvider(),
         },
         isLoading: false,
-        defaultIcon: L.icon({
-            iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-            iconUrl: require('leaflet/dist/images/marker-icon.png'),
-            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-        }),
-        selectedIcon: L.icon({
-            iconRetinaUrl: 'src/assets/marker_colors/marker-icon-2x-green.png',
-            iconUrl: 'src/assets/marker_colors/marker-icon-green.png',
-            shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-        }),
+        defaultIcon,
+        selectedIcon,
       };
     },
     methods: {
@@ -217,11 +216,9 @@
       searchFilter() {
         const params = {}
         if (this.name) {
-          console.log('name', this.name)
           params['name'] = this.name
         }
         if (this.categories_id && this.categories_id !== 'null') {
-          console.log('categories_id', this.categories_id)
           params['categories_id'] = this.categories_id
         }
         return params
@@ -235,10 +232,8 @@
                   (item) => item.categories
                       .find(elem => elem.id === params.categories_id)
               )
-            console.log('categoriesFiltered',categoriesFiltered)
             return categoriesFiltered
           }
-          console.log('namesFiltered',namesFiltered)
           return namesFiltered
         } else if(params.categories_id){
           const categoriesFiltered = _
@@ -247,71 +242,20 @@
                   (item) => item.categories
                       .find(elem => elem.id === params.categories_id)
               )
-          console.log('categoriesFiltered',categoriesFiltered)
           return categoriesFiltered
         }
         return []
       },
       search() {
+        this.isLoading = true
         const params = this.searchFilter()
-        console.log('params', params)
         const shopsFiltered = this.filtering(params)
-        console.log('shopsFiltered',shopsFiltered)
-
-        // qua finisce la ricerca vera e propria
-
         _.map(shopsFiltered, (shop) => {
-          console.log(shop)
-          // cambio icona agli shops filtrati
           shop.icon = this.selectedIcon
         })
-        // const lat = new LatLng(this.shops.lat,response.data.lng);
-        // if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
-        //   this.mapRef.panTo(lat);
-        //   this.zoomUpdated(20)
-        // }
-        // else if(response.data.lat == -1){
-        //   Vue.$toast.open({
-        //     message: "Indirizzo non trovato! :(",
-        //     type: "warning",
-        //     position: "top-right",
-        //     onClose: this.clearAddress()
-        //   });
-        // }
-        // this.isLoading = false;
-
-        
-        // this.isLoading = true;
-        // this.errorMessage = null;
-        // this.$api.get('/shops', {params: this.axiosParams})
-        //   .then(response => {
-        //     this.shops = response.data.shops;
-        //     const lat = new LatLng(response.data.lat,response.data.lng);
-        //     if(response.data.lat!=null && response.data.lng!=null && response.data.lat != -1){
-        //       this.mapRef.panTo(lat);
-        //       this.zoomUpdated(20)
-        //     }
-        //     else if(response.data.lat == -1){
-        //       Vue.$toast.open({
-        //         message: "Indirizzo non trovato! :(",
-        //         type: "warning",
-        //         position: "top-right",
-        //         onClose: this.clearAddress()
-        //       });
-        //     }
-        //     this.isLoading = false;
-        //   })
-        //   .catch(error => {
-        //     console.log(error);
-        //     this.isLoading = true;
-        //     this.errorMessage = "Ops, c'è stato un errore!";
-        //     Vue.$toast.open({
-        //       message: "Ops, c'è stato un errore. :(",
-        //       type: "danger",
-        //       position: "top-right",
-        //       onClose: this.clearAddress()
-        //     });
-        //   });
+        //this.mapRef.panTo(this.user_coordinates);
+        this.zoomUpdated(13)
+        this.isLoading = false
       }
     }
   }
