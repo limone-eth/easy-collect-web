@@ -27,7 +27,9 @@
                 </b-navbar>
             </div>
             <router-view></router-view>
+            <Footer></Footer>
         </error-boundary>
+
     </div>
 </template>
 
@@ -35,10 +37,12 @@
 
 
   import ErrorBoundary from "./components/ErrorBoundary";
+  import Footer from "./components/Footer";
 
   export default {
     name: 'App',
     components: {
+      Footer,
       ErrorBoundary
     }
   }
