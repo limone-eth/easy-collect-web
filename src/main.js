@@ -8,7 +8,7 @@ import {faFish, faPhone, faExclamationCircle,
   faGlobe, faMapMarkerAlt, faTags,
   faFont, faStoreAlt, faCity, faEnvelope}
   from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faTelegram} from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faTelegram, faWhatsapp} from '@fortawesome/free-brands-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueGeolocation from 'vue-browser-geolocation';
 import Multiselect from 'vue-multiselect';
@@ -57,6 +57,7 @@ library.add(faEnvelope);
 library.add(faPhone);
 library.add(faFacebook);
 library.add(faTelegram);
+library.add(faWhatsapp);
 
 // leaflet
 Vue.component('l-map', LMap);

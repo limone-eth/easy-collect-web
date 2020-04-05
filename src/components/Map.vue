@@ -1,16 +1,18 @@
 <template>
     <div id="home" class="container-fluid text-center">
 
-        <h2>Cerca i negozi disponibili sulla mappa</h2>
-        <h4>Ordina e ritira la tua spesa in sicurezza</h4>
+        <!--<h2>Cerca i negozi disponibili sulla mappa</h2>
+        <h4>Ordina e ritira la tua spesa in sicurezza</h4>-->
 
         <!--<h6>Hai un negozio?
             <router-link to="/registrati" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
         </h6>-->
 
-        <!-- MAPPA -->
-        <div class="container mb-3">
+        <h2 class="mt-2">Questa funzionalità sarà attiva da Mercoledì 8 Aprile</h2>
+        <img src="../assets/map-screen.png">
 
+        <!-- MAPPA -->
+        <div class="container d-none">
             <form @submit="searchForm"
                   @submit.prevent="search">
                 <div class="row">
@@ -44,7 +46,7 @@
                 </div>
             </form>
         </div>
-        <div class="row">
+        <div class="row d-none">
             <div class="col-lg-1 col-md-3"></div>
             <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                 <div style="height: 700px; width: 100%;">
