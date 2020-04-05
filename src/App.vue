@@ -9,8 +9,6 @@
                                                       style="height: 40px; width: 130px;"></router-link>
                     </b-navbar-brand>
 
-                    <b-navbar-brand></b-navbar-brand>
-
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                     <b-collapse id="nav-collapse" is-nav>
