@@ -8,8 +8,7 @@
                         <div class="h1 font-weight-bolder">La spesa facile, veloce, sicura e di qualità. <br> Senza
                             mediazioni.
                         </div>
-                        <h5 class="font-weight-bold"></h5>
-                        <b-button variant="light" to="/mappa">Cerca una bottega</b-button>
+                        <b-button variant="light" class="mt-2 text-success" to="/mappa">Cerca una bottega</b-button>
                     </div>
                     <div class="col-6">
                         <img src="../assets/cover_3-no-bg.png" height="450" alt="illustration">
@@ -24,7 +23,7 @@
                         <b-button variant="light" to="/mappa">Cerca una bottega</b-button>
                     </div>
                     <div class="col-12 pt-2">
-                        <img src="../assets/cover_3-no-bg.png" height="250" alt="illustration">
+                        <img src="../assets/cover_3-no-bg.png"  class="mt-2 text-success"  height="250" alt="illustration">
                     </div>
                 </div>
             </div>
@@ -40,7 +39,7 @@
                             <div class="pt-2">Per noi il rapporto tra cliente e commerciante è un fatto privato.</div>
                             <div class="pt-2">Leggi il nostro manifesto per saperne di più.</div>
                         </div>
-                        <b-button variant="success" to="/manifesto">Il nostro manifesto</b-button>
+                        <b-button variant="success" class="mt-2" to="/manifesto">Il nostro manifesto</b-button>
                     </div>
                 </div>
             </div>
@@ -52,7 +51,7 @@
                             <div class="pt-2">Per noi il rapporto tra cliente e commerciante è un fatto privato.</div>
                             <div class="pt-2">Leggi il nostro manifesto per saperne di più.</div>
                         </div>
-                        <b-button variant="success" to="/manifesto">Il nostro manifesto</b-button>
+                        <b-button variant="success" class="mt-2" to="/manifesto">Il nostro manifesto</b-button>
                     </div>
 
                 </div>
@@ -60,23 +59,23 @@
         </div>
 
         <!-- SECTION 3 -->
-        <div>
+        <div class="bg-success text-white">
             <div class="container d-none d-sm-block">
                 <div class="row pt-5 pb-5">
                     <div class="col-8 text-left align-self-center">
                         <div class="h2">Come funziona</div>
                         <ul>
-                            <li>
+                            <li class="h5">
                                 Trova le botteghe che ti interessano
                             </li>
-                            <li class="pt-2">
+                            <li class="h5 pt-2">
                                 Contattale privatamente su Facebook, Telegram, Whatsapp,
                                 telefono, email e qualunque altro canale mettano a disposizione.
                             </li>
-                            <li class="pt-2">
+                            <li class="h5 pt-2">
                                 Accordati con il commerciante per concludere l’acquisto.
                             </li>
-                            <li class="pt-2">
+                            <li class="h5 pt-2">
                                 Ritira la spesa o fattela recapitare a casa.
                             </li>
                         </ul>

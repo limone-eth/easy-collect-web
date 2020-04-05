@@ -94,7 +94,8 @@
                         <div class="form-group">
                             <label for="phone">
                                 <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                Telefono</label>
+                                Telefono / <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
+                                Whatsapp</label>
                             <input type="text" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
                         </div>
