@@ -117,7 +117,7 @@
                         <b-button variant="success" class="btn-block" to="/mappa">Cerca una bottega</b-button>
                     </div>
                     <div class="col-4">
-                        <b-button variant="outline-success" class="btn-block" to="/esercenti">Registra la tua attività
+                        <b-button variant="outline-success" class="btn-block" to="/commercianti">Registra la tua attività
                         </b-button>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                         <b-button variant="success" class="btn-block" to="/mappa">Cerca una bottega</b-button>
                     </div>
                     <div class="col-6">
-                        <b-button variant="outline-success" to="/esercenti">Registra la tua attività
+                        <b-button variant="outline-success" to="/commercianti">Registra la tua attività
                         </b-button>
                     </div>
                 </div>
