@@ -250,9 +250,12 @@
         if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
           return
+        } else {
+          e.preventDefault();
+          this.register()
         }
-        e.preventDefault();
-        this.register()
+
+
       },
       register() {
         this.isLoading = true;
