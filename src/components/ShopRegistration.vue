@@ -160,8 +160,8 @@
   import 'vue-loading-overlay/dist/vue-loading.css'
   import * as _ from "lodash";
 
-  var expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
-  var regex = new RegExp(expression)
+  let expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
+  let regex = new RegExp(expression);
 
   export default {
     name: "ShopRegistration",
