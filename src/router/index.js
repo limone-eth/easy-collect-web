@@ -38,8 +38,8 @@ export default new Router({
       component: LandingUsersComponent
     },
     {
-      path: "/esercenti",
-      name: "esercenti",
+      path: "/commercianti",
+      name: "commercianti",
       component: LandingShopsComponent
     },
     {
