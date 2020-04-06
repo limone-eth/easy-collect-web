@@ -102,16 +102,16 @@
                         <div class="form-group">
                             <label for="telegram">
                                 <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                Telegram</label>
+                                Link al canale Telegram</label>
                             <input type="text" class="form-control" id="telegram" v-model="telegram"
                                    placeholder="Inserisci il link al tuo gruppo telegram">
                         </div>
                         <div class="form-group">
                             <label for="facebook">
                                 <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                Pagina Facebook</label>
+                                Link alla Pagina Facebook</label>
                             <input type="text" class="form-control" id="facebook" v-model="facebook"
-                                   placeholder="Inserisci il link alla tua pagina Facebook">
+                                   placeholder="https://www.facebook.com/latuapagina">
                             <span v-if="error.phone" class="text-danger">
                                 {{ error.phone }}
                             </span>
