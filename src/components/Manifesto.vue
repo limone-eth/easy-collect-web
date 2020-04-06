@@ -48,7 +48,7 @@
                 </li>
             </ul>
             ColliGo è anche una comunità che sta sviluppando il servizio e che condivide gli intenti ed i principi di
-            questo manifesto. Se li condividi anche tu faccelo sapere su <a href="mailto:info@colligo.shop">info@colligo.shop</a>
+            questo manifesto. Se li condividi anche tu faccelo sapere su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a>
             <br><br>
             <u>ColliGo è un termine latino</u> dai molteplici significati, tra cui alcuni pertinenti ai principi che ci
             guidano: riunire, ricondurre, guadagnare, richiamare alla memoria, raccogliere.

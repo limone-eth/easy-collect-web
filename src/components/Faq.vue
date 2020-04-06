@@ -136,7 +136,7 @@
         </div>
         <div class="mt-3 container pt-5 pb-5">
             <div class="h6">
-                Contattaci su <a href="mailto:info@colligo.shop">info@colligo.shop</a> per ogni chiarimento e/o suggerimento.
+                Contattaci su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> per ogni chiarimento e/o suggerimento.
             </div>
         </div>
     </div>
