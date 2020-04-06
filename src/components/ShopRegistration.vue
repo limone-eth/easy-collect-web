@@ -289,7 +289,7 @@
           .catch((e) => {
             this.isLoading = false;
             if (e.response.status === 419) {
-              this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
+              this.error.general = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
             }
             else if (e.response.status !== 500) {
               if (e.response.data.error.code === 2) {
