@@ -153,7 +153,7 @@
     },
     data() {
       return {
-        today: moment().format('MM/DD/YYYY'),
+        today: moment().format('DD/MM/YYYY'),
       }
     }
   }
