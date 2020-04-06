@@ -299,6 +299,9 @@
             if (e.response.status === 419) {
               this.error.general = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
             }
+            else if (e.response.status === 422) {
+              this.error.general = "I dati inseriti non sono validi, ricontrolla!"
+            }
             else if (e.response.status !== 500) {
               if (e.response.data.error.code === 2) {
                 this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
