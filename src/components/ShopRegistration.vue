@@ -288,7 +288,10 @@
           )
           .catch((e) => {
             this.isLoading = false;
-            if (e.response.status !== 500) {
+            if (e.response.status === 419) {
+              this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
+            }
+            else if (e.response.status !== 500) {
               if (e.response.data.error.code === 2) {
                 this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
               } else if (e.response.data.errors[0].includes('categories')) {
