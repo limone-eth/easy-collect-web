@@ -104,12 +104,12 @@
                                 <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
                                 Telegram</label>
                             <input type="text" class="form-control" id="telegram" v-model="telegram"
-                                   placeholder="Inserisci il link al tuo canale telegram">
+                                   placeholder="Inserisci il link al tuo gruppo telegram">
                         </div>
                         <div class="form-group">
                             <label for="facebook">
                                 <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                Facebook</label>
+                                Pagina Facebook</label>
                             <input type="text" class="form-control" id="facebook" v-model="facebook"
                                    placeholder="Inserisci il link alla tua pagina Facebook">
                             <span v-if="error.phone" class="text-danger">
@@ -241,6 +241,12 @@
         }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
+        }
+        if (this.facebook && !this.facebook.match(regex)){
+          this.error.general = "Il link alla pagina Facebook non è valido."
+        }
+        if (this.telegram && !this.telegram.match(regex)){
+          this.error.general = "Il link al gruppo Telegram non è valido."
         }
         if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
