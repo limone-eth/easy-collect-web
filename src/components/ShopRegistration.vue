@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <label for="telegram">
                                 <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                Link al canale Telegram</label>
+                                Link al gruppo Telegram</label>
                             <input type="text" class="form-control" id="telegram" v-model="telegram"
                                    placeholder="Inserisci il link al tuo gruppo telegram">
                         </div>
