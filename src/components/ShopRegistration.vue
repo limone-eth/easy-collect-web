@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-3 col-xs-2"></div>
                 <div class="col-md-6 col-xs-8">
-                    <form @submit="registerForm">
+                    <form @submit="registerForm" @submit.prevent="register">
                         <div class="form-group">
                             <h5>Informazioni generali</h5>
                         </div>
@@ -242,12 +242,12 @@
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
         }
-        if (this.facebook && !this.facebook.match(regex)){
+        /*if (this.facebook && !this.facebook.match(regex)){
           this.error.general = "Il link alla pagina Facebook non è valido."
         }
         if (this.telegram && !this.telegram.match(regex)){
           this.error.general = "Il link al gruppo Telegram non è valido."
-        }
+        }*/
         if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
@@ -258,7 +258,6 @@
           return
         } else {
           e.preventDefault();
-          this.register()
         }
 
 
