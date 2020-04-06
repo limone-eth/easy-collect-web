@@ -73,7 +73,7 @@
                             </li>
                             <li class="pt-2">
                                 Specifica i canali su cui i tuoi clienti ti contatteranno privatamente.
-                                Ad esempio: fb, telegram, whatsapp, telefono, email e qualunque altro canale
+                                Ad esempio: Facebook, Telegram, Whatsapp, telefono, email e qualunque altro canale
                                 tu voglia mettere a disposizione.
                             </li>
                             <li class="pt-2">
@@ -96,7 +96,7 @@
                             </li>
                             <li class="h5 pt-2">
                                 Specifica i canali su cui i tuoi clienti ti contatteranno privatamente.
-                                Ad esempio: fb, telegram, whatsapp, telefono, email e qualunque altro canale
+                                Ad esempio: Fb, Telegram, Whatsapp, telefono, email e qualunque altro canale
                                 tu voglia mettere a disposizione. 
                             </li>
                             <li class="h5 pt-2">
