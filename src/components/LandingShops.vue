@@ -92,7 +92,7 @@
                         <div class="h2">Come funziona</div>
                         <ul>
                             <li  class="h5">
-                                Scegli come registrare la tua attività tra colligo.shop/xxx, app ColliGo, fb e telegram . 
+                                Scegli come registrare la tua attività tra <a href="https://colligo.shop/commercianti">colligo.shop</a>, app ColliGo, Facebook e telegram .
                             </li>
                             <li class="h5 pt-2">
                                 Specifica i canali su cui i tuoi clienti ti contatteranno privatamente.

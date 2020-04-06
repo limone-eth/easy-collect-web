@@ -97,7 +97,7 @@
             </div>
             <div class="h6">
                 Le uniche informazioni fornite a ColliGo sono quelle che vengono espressamente richieste e non
-                possediamo informa- zioni sul colloquio privato tra cliente e negoziante.
+                possediamo informazioni sul colloquio privato tra cliente e negoziante.
             </div>
         </div>
         <div class="mt-3 bg-success text-white pt-5 pb-5">
