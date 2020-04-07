@@ -98,6 +98,9 @@
                                 Whatsapp</label>
                             <input type="text" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
+                            <span v-if="error.phone" class="text-danger">
+                                {{ error.phone }}
+                            </span>
                         </div>
                         <div class="form-group">
                             <label for="telegram">
@@ -105,6 +108,9 @@
                                 Link al gruppo Telegram</label>
                             <input type="text" class="form-control" id="telegram" v-model="telegram"
                                    placeholder="Inserisci il link al tuo gruppo telegram">
+                            <span v-if="error.telegram" class="text-danger">
+                                {{ error.telegram }}
+                            </span>
                         </div>
                         <div class="form-group">
                             <label for="facebook">
@@ -112,8 +118,8 @@
                                 Link alla Pagina Facebook</label>
                             <input type="text" class="form-control" id="facebook" v-model="facebook"
                                    placeholder="https://www.facebook.com/latuapagina">
-                            <span v-if="error.phone" class="text-danger">
-                                {{ error.phone }}
+                            <span v-if="error.facebook" class="text-danger">
+                                {{ error.facebook }}
                             </span>
                         </div>
                         <div class="form-check">
@@ -194,6 +200,8 @@
           city: false,
           cap: false,
           website: false,
+          facebook: false,
+          telegram: false,
           phone: false,
           category: false
         }
@@ -236,7 +244,7 @@
           this.error.cap = 'Non hai inserito un CAP valido'
         }
         if (this.website && !this.website.match(regex)) {
-          this.error.website = 'Inserire un sito web valido'
+          this.error.website = 'Inserire un link valido al sito web'
         }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.phone = 'Devi inserire almeno un contatto!'
@@ -244,12 +252,12 @@
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
         }
-        /*if (this.facebook && !this.facebook.match(regex)){
-          this.error.general = "Il link alla pagina Facebook non è valido."
+        if (this.facebook && !this.facebook.match(regex)){
+          this.error.facebook = "Il link alla pagina Facebook non è valido."
         }
         if (this.telegram && !this.telegram.match(regex)){
-          this.error.general = "Il link al gruppo Telegram non è valido."
-        }*/
+          this.error.telegram = "Il link al gruppo Telegram non è valido."
+        }
         if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
@@ -257,7 +265,7 @@
         }
         if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
-          e.preventDefault()
+          e.preventDefault();
           return
         } else {
           this.register()
