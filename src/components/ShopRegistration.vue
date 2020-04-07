@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-3 col-xs-2"></div>
                 <div class="col-md-6 col-xs-8">
-                    <form @submit="registerForm">
+                    <form  @submit.prevent="registerForm">
                         <div class="form-group">
                             <h5>Informazioni generali</h5>
                         </div>
@@ -21,7 +21,7 @@
                             <font-awesome-icon :icon="['fa', 'store-alt']"/>&nbsp;
                             <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" v-model="name"
-                                   placeholder="Inserisci il nome della tua attività" >
+                                   placeholder="Inserisci il nome della tua attività">
                             <span v-if="error.name" class="text-danger">
                                 {{ error.name }}
                             </span>
@@ -38,10 +38,10 @@
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'tags']"/>&nbsp;
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
-                            <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
+                            <multiselect v-model="category" tag-placeholder="Seleziona categoria"
                                          placeholder="Seleziona categoria" label="name" track-by="id"
                                          :options="categories" :multiple="true" :taggable="true"
-                                         ></multiselect>
+                            ></multiselect>
                             <span v-if="error.category" class="text-danger">
                                 {{ error.category }}
                             </span>
@@ -50,7 +50,7 @@
                             <font-awesome-icon :icon="['fa', 'map-marker-alt']"/>&nbsp;
                             <label for="address"> Indirizzo</label>
                             <input type="text" class="form-control" id="address" v-model="address"
-                                   placeholder="Inserisci il tuo indirizzo" >
+                                   placeholder="Inserisci il tuo indirizzo">
                             <span v-if="error.address" class="text-danger">
                                 {{ error.address }}
                             </span>
@@ -60,7 +60,7 @@
                                 <font-awesome-icon :icon="['fa', 'city']"/>&nbsp;
                                 <label for="address"> Città</label>
                                 <input type="text" class="form-control" id="city" v-model="city"
-                                       placeholder="Inserisci la città" >
+                                       placeholder="Inserisci la città">
                                 <span v-if="error.city" class="text-danger">
                                     {{ error.city }}
                                 </span>
@@ -69,7 +69,7 @@
                                 <font-awesome-icon :icon="['fa', 'envelope']"/>&nbsp;
                                 <label for="address"> CAP</label>
                                 <input type="number" class="form-control" id="cap" v-model="cap"
-                                       placeholder="Inserisci il cap" >
+                                       placeholder="Inserisci il cap">
                                 <span v-if="error.cap" class="text-danger">
                                     {{ error.cap }}
                                 </span>
@@ -94,27 +94,42 @@
                         <div class="form-group">
                             <label for="phone">
                                 <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                Telefono</label>
+                                Cellulare / <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
+                                Whatsapp</label>
                             <input type="text" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
-                        </div>
-                        <div class="form-group">
-                            <label for="telegram">
-                                <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                Telegram</label>
-                            <input type="text" class="form-control" id="telegram" v-model="telegram"
-                                   placeholder="Inserisci il link al tuo canale telegram">
-                        </div>
-                        <div class="form-group">
-                            <label for="facebook">
-                                <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                Facebook</label>
-                            <input type="text" class="form-control" id="facebook" v-model="facebook"
-                                   placeholder="Inserisci il link alla tua pagina Facebook">
                             <span v-if="error.phone" class="text-danger">
                                 {{ error.phone }}
                             </span>
                         </div>
+                        <div class="form-group">
+                            <label for="telegram">
+                                <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
+                                Link al gruppo Telegram</label>
+                            <input type="text" class="form-control" id="telegram" v-model="telegram"
+                                   placeholder="Inserisci il link al tuo gruppo telegram">
+                            <span v-if="error.telegram" class="text-danger">
+                                {{ error.telegram }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook">
+                                <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
+                                Link alla Pagina Facebook</label>
+                            <input type="text" class="form-control" id="facebook" v-model="facebook"
+                                   placeholder="https://www.facebook.com/latuapagina">
+                            <span v-if="error.facebook" class="text-danger">
+                                {{ error.facebook }}
+                            </span>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                   v-model="accepts_terms_and_conditions" required>
+                            <label class="form-check-label" for="exampleCheck1">Registrando il mio negozio do il
+                                consenso a utilizzare le immagini del profilo Facebook e Instagram dello stesso per post
+                                che hanno il fine di promuovere l’utilizzo di ColliGo</label>
+                        </div>
+                        <br>
                         <button type="submit" class="btn btn-success btn-block">Registrati</button>
                         <br>
                         <h5 v-if="error.general" class="text-danger">
@@ -151,8 +166,8 @@
   import 'vue-loading-overlay/dist/vue-loading.css'
   import * as _ from "lodash";
 
-  var expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi
-  var regex = new RegExp(expression)
+  let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+  let regex = new RegExp(expression);
 
   export default {
     name: "ShopRegistration",
@@ -174,6 +189,7 @@
         facebook: null,
         registered: true,
         category: null,
+        accepts_terms_and_conditions: false,
         isLoading: false,
         fullPage: true,
         error: {
@@ -184,6 +200,8 @@
           city: false,
           cap: false,
           website: false,
+          facebook: false,
+          telegram: false,
           phone: false,
           category: false
         }
@@ -208,7 +226,9 @@
         if (!this.name) {
           this.error.name = 'Non hai inserito il nome!'
         }
-        if (this.description && this.description.length > 120) {
+        if(!this.description){
+          this.error.description = 'Non hai inserito la descrizione'
+        }else if (this.description && this.description.length > 120) {
           this.error.description = 'La descrizione che hai inserito è troppo lunga!'
         }
         if (!this.address) {
@@ -220,26 +240,38 @@
         if (!this.cap) {
           this.error.cap = 'Non hai inserito il tuo CAP!'
         }
-        if (this.cap && this.cap.length !== 5 ) {
+        if (this.cap && this.cap.length !== 5) {
           this.error.cap = 'Non hai inserito un CAP valido'
         }
-        if (!this.website.match(regex)) {
-          this.error.website = 'Inserire un sito web valido'
+        if (this.website && !this.website.match(regex)) {
+          this.error.website = 'Inserire un link valido al sito web'
         }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.phone = 'Devi inserire almeno un contatto!'
         }
-        if (this.category && this.category.length >= 3) {
+        if (!this.phone && !this.facebook && !this.telegram) {
+          this.error.general = 'Per registrarti devi accettare le condizioni!'
+        }
+        if (this.facebook && !this.facebook.match(regex)){
+          this.error.facebook = "Il link alla pagina Facebook non è valido."
+        }
+        if (this.telegram && !this.telegram.match(regex)){
+          this.error.telegram = "Il link al gruppo Telegram non è valido."
+        }
+        if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
           this.error.category = 'Seleziona almeno una categoria!'
         }
-        if(_.some(this.error)) {
+        if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
+          e.preventDefault();
           return
+        } else {
+          this.register()
         }
-        e.preventDefault();
-        this.register()
+
+
       },
       register() {
         this.isLoading = true;
@@ -251,7 +283,8 @@
           }),
           address: this.address,
           city: this.city,
-          cap: this.cap
+          cap: this.cap,
+          accepts_terms_and_conditions: this.accepts_terms_and_conditions
         };
         if (this.website) {
           payload.website = this.website;
@@ -274,7 +307,13 @@
           )
           .catch((e) => {
             this.isLoading = false;
-            if (e.response.status !== 500) {
+            if (e.response.status === 419) {
+              this.error.general = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
+            }
+            else if (e.response.status === 422) {
+              this.error.general = "I dati inseriti non sono validi, ricontrolla!"
+            }
+            else if (e.response.status !== 500) {
               if (e.response.data.error.code === 2) {
                 this.error = 'Indirizzo non trovato. Verifica di averlo inserito correttamente.'
               } else if (e.response.data.errors[0].includes('categories')) {
@@ -296,17 +335,19 @@
     #register-container {
         padding-bottom: 80px;
     }
+
     /*
-    *  Remove arrows in input number 
-    *  Chrome, Safari, Edge, Opera 
+    *  Remove arrows in input number
+    *  Chrome, Safari, Edge, Opera
     */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
+
     /* Firefox */
     input[type=number] {
-      -moz-appearance: textfield;
+        -moz-appearance: textfield;
     }
 </style>

@@ -8,6 +8,8 @@ import FaqComponent from "../components/Faq";
 import HowToComponent from "../components/HowTo";
 import WhoWeAreComponent from "../components/WhoWeAre";
 import NotFoundComponent from "../components/NotFound";
+import ManifestoComponent from "../components/Manifesto";
+import HomeComponent from "../components/Home";
 
 Vue.use(Router);
 
@@ -17,8 +19,13 @@ export default new Router({
     {
       path: "/",
       redirect: {
-        name: "map"
+        name: "home"
       }
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: HomeComponent
     },
     {
       path: "/mappa",
@@ -31,8 +38,8 @@ export default new Router({
       component: LandingUsersComponent
     },
     {
-      path: "/esercenti",
-      name: "esercenti",
+      path: "/commercianti",
+      name: "commercianti",
       component: LandingShopsComponent
     },
     {
@@ -54,6 +61,11 @@ export default new Router({
       path: "/chi-siamo",
       name: "chi-siamo",
       component: WhoWeAreComponent
+    },
+    {
+      path: "/manifesto",
+      name: "manifesto",
+      component: ManifestoComponent
     },
     { path: '*', component: NotFoundComponent, meta: { layout: 'none' } }
   ],

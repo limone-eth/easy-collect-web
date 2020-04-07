@@ -1,49 +1,47 @@
 <template>
-    <div id="home" class="text-center">
-        <div id="cover">
-            <div id="location-form" class="row">
-                <div class="col-2">
-                </div>
-                <div class="col-8">
-                    <div class="card" id="main-card">
-                        <div class="card-body">
-                            <h2 class="card-title text-success font-weight-bold">Ordina e ritira la spesa in
-                                sicurezza</h2>
-                            <h5 class="card-subtitle mb-2 text-muted font-weight-normal">Inserisci il tuo indirizzo e
-                                trova i negozi più vicini a te</h5>
-                            <br>
-                            <div v-if="positionErrorMessage" class="h6 form-text text-danger">
-                                <font-awesome-icon :icon="['fa', 'exclamation-circle']"/>
-                                {{positionErrorMessage}}
-                            </div>
-                            <form @submit="positionForm"
-                                  @submit.prevent="position">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
-                                        <input type="text" class="form-control" id="user_address" v-model="user_address"
-                                               placeholder="Indirizzo">
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-2">
-                                        <input type="text" class="form-control" id="user_city" v-model="user_city"
-                                               placeholder="Città">
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 mt-2">
-                                        <input type="number" class="form-control" id="user_cap" v-model="user_cap"
-                                               placeholder="CAP">
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-2">
-                                        <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
-                                            <font-awesome-icon :icon="['fa', 'search']"/>
-                                            Trova i negozi!
-                                        </button>
-                                        <button v-else type="submit" class="btn btn-success btn-block" disabled>
-                                            <b-spinner small></b-spinner>
-                                            Cercando...
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div id="home" class="container-fluid text-center">
+
+        <!--<h2>Cerca i negozi disponibili sulla mappa</h2>
+        <h4>Ordina e ritira la tua spesa in sicurezza</h4>-->
+
+        <!--<h6>Hai un negozio?
+            <router-link to="/registrati" class="text-primary">Registrati per essere visibile sulla mappa</router-link>
+        </h6>-->
+
+        <h2 class="mt-2">Questa funzionalità sarà attiva da Mercoledì 8 Aprile</h2>
+        <img src="../assets/map-screen.png">
+
+        <!-- MAPPA -->
+        <div class="container d-none">
+            <form @submit="searchForm"
+                  @submit.prevent="search">
+                <div class="row">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="name" v-model="address"
+                               placeholder="Cerca indirizzo">
+                        <p v-if="this.errorMessage" style="color:red;"> {{this.errorMessage}} </p> 
+                    </div>
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <input type="text" class="form-control" id="name" v-model="filter"
+                               placeholder="Cerca per nome">
+                    </div>
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <select class="form-control" id="categories_id" v-model="categories_id">
+                            <option value="null" >Filtra per categoria</option>
+                            <option :key="category" v-for="category in categories" :value="category.id">
+                                {{category.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
+                            <font-awesome-icon :icon="['fa', 'search']"/>
+                            Cerca
+                        </button>
+                        <button v-else type="submit" class="btn btn-success btn-block" disabled>
+                            <b-spinner small></b-spinner>
+                            Cercando...
+                        </button>
                     </div>
                 </div>
                 <div class="col-2">
@@ -110,18 +108,18 @@
                                         class="h6 font-weight-bold">
                                       <span class="badge badge-success mr-1">{{category.name}}</span>
                                   </span>
-                                        <br>
-                                        <span class="h6">
+                                  <br>
+                                  <span class="h6 mt-2">
                                       {{shop.description}}
                                   </span>
-                                        <p class="h6" v-show="shop.phone !== null">
-                                            <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
-                                            {{shop.address}}
-                                        </p>
-                                        <p class="h6" v-show="shop.website !== null">
-                                            <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
-                                            <a v-bind:href="shop.website" target="_blank">Sito Web</a>
-                                        </p>
+                                  <p class="h6" v-show="shop.phone !== null">
+                                      <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
+                                        {{shop.address}} - {{shop.city}}, {{shop.cap}}
+                                  </p>
+                                  <p class="h6" v-show="shop.website !== null">
+                                      <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                      <a v-bind:href="shop.website" target="_blank">Sito Web</a>
+                                  </p>
 
                                         <p class="h6" v-show="shop.phone !== null">
                                             <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
