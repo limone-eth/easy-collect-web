@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-3 col-xs-2"></div>
                 <div class="col-md-6 col-xs-8">
-                    <form @submit="registerForm" @submit.prevent="register">
+                    <form  @submit.prevent="registerForm">
                         <div class="form-group">
                             <h5>Informazioni generali</h5>
                         </div>
@@ -218,7 +218,9 @@
         if (!this.name) {
           this.error.name = 'Non hai inserito il nome!'
         }
-        if (this.description && this.description.length > 120) {
+        if(!this.description){
+          this.error.description = 'Non hai inserito la descrizione'
+        }else if (this.description && this.description.length > 120) {
           this.error.description = 'La descrizione che hai inserito è troppo lunga!'
         }
         if (!this.address) {
@@ -255,9 +257,10 @@
         }
         if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
+          e.preventDefault()
           return
         } else {
-          e.preventDefault();
+          this.register()
         }
 
 
