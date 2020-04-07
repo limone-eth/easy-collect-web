@@ -160,7 +160,7 @@
   import 'vue-loading-overlay/dist/vue-loading.css'
   import * as _ from "lodash";
 
-  let expression = /^$|[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
+  let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   let regex = new RegExp(expression);
 
   export default {
@@ -235,7 +235,7 @@
         if (this.cap && this.cap.length !== 5) {
           this.error.cap = 'Non hai inserito un CAP valido'
         }
-        if (!this.website.match(regex)) {
+        if (this.website && !this.website.match(regex)) {
           this.error.website = 'Inserire un sito web valido'
         }
         if (!this.phone && !this.facebook && !this.telegram) {
@@ -250,11 +250,11 @@
         if (this.telegram && !this.telegram.match(regex)){
           this.error.general = "Il link al gruppo Telegram non è valido."
         }*/
-        if (this.category && this.category.length > 3) {
+        /*if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
           this.error.category = 'Seleziona almeno una categoria!'
-        }
+        }*/
         if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
           e.preventDefault()
