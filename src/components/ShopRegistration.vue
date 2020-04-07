@@ -250,11 +250,11 @@
         if (this.telegram && !this.telegram.match(regex)){
           this.error.general = "Il link al gruppo Telegram non è valido."
         }*/
-        /*if (this.category && this.category.length > 3) {
+        if (this.category && this.category.length > 3) {
           this.error.category = 'Puoi selezionare massimo 3 categorie!'
         } else if (!this.category) {
           this.error.category = 'Seleziona almeno una categoria!'
-        }*/
+        }
         if (_.some(this.error)) {
           this.error.general = 'Dati non validi, controlla!';
           e.preventDefault()
