@@ -53,9 +53,11 @@
         <!-- MAPPA -->
         <div v-show="personalPosition" class="mt-5 container"  id="leaflet-map">
             <div class="container mb-3" >
+              <div class="text-center h3 mb-3">Cerca i negozi vicino a te </div>
                 <form @submit="searchForm"
                       @submit.prevent="search" id="search-form">
                     <div class="row">
+                        <div class="col-lg-2 col-md-2"/>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="name" v-model="name"
                                    placeholder="Cerca per nome">
@@ -68,7 +70,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <button v-if="!isLoading" type="submit" class="btn btn-success btn-block">
                                 <font-awesome-icon :icon="['fa', 'search']"/>
                                 Cerca
@@ -78,8 +80,14 @@
                                 Cercando...
                             </button>
                         </div>
+                        <div class="col-lg-2 col-md-2"/>
                     </div>
                 </form>
+                <div class="text-center">
+                    <span v-if="errorNotFound" class="text-danger">
+                        {{ errorNotFound }}
+                    </span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-1 col-md-3"></div>
@@ -172,17 +180,6 @@
         this.setPosition(localStorage.user_lat, localStorage.user_lng,
           localStorage.user_address, localStorage.user_city, localStorage.user_cap)
       }
-      /*this.$getLocation({
-        enableHighAccuracy: true,
-        timeout: Infinity,
-        maximumAge: 0
-      })
-        .then(coordinates => {
-          this.center = coordinates;
-          this.personalPosition = coordinates;
-          this.zoomUpdated(16)
-        });*/
-
       this.$api.get('/categories')
         .then(response => {
           response.data.map(category => {
@@ -206,7 +203,7 @@
     data() {
       const defaultIcon = L.icon({
             iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-blue.png'),
-            iconUrl: require('../assets/marker_colors/marker-icon-green.png'),
+            iconUrl: require('../assets/marker_colors/marker-icon-blue.png'),
             iconSize: [30, 50],
             iconAnchor: [15, 50],
             popupAnchor: [0, -30]
@@ -243,6 +240,7 @@
         isLoading: false,
         defaultIcon,
         selectedIcon,
+        errorNotFound: null
       };
     },
     computed: {
@@ -311,12 +309,14 @@
       },
       search() {
         this.isLoading = true
+        _.map(this.shops, (shop) => shop['icon'] = this.defaultIcon)
         const params = this.searchFilter()
         const shopsFiltered = this.filtering(params)
+        this.errorNotFound = shopsFiltered.length > 0 ? null : "Nessun risultato per la tua ricerca"; 
         _.map(shopsFiltered, (shop) => {
           shop.icon = this.selectedIcon
         })
-        //this.mapRef.panTo(this.user_coordinates);
+        this.mapRef.panTo(this.personalPosition);
         this.zoomUpdated(13)
         this.isLoading = false
       },
@@ -401,5 +401,18 @@
         box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
         padding: 10px;
         background: white;
+    }
+    /*
+    *  Remove arrows in input number 
+    *  Chrome, Safari, Edge, Opera 
+    */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
     }
 </style>
