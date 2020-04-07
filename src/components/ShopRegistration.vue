@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <font-awesome-icon :icon="['fa', 'tags']"/>&nbsp;
                             <label for="categories_id">Seleziona fino a 3 categorie</label>
-                            <multiselect v-model="category" tag-placeholder="Aggiungi categoria"
+                            <multiselect v-model="category" tag-placeholder="Seleziona categoria"
                                          placeholder="Seleziona categoria" label="name" track-by="id"
                                          :options="categories" :multiple="true" :taggable="true"
                             ></multiselect>
