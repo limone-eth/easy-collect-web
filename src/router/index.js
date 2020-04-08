@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MapComponent from "../components/Map"
 import ShopRegistrationComponent from "../components/ShopRegistration";
-import LandingUsersComponent from "../components/LandingUsers";
 import LandingShopsComponent from "../components/LandingShops";
 import FaqComponent from "../components/Faq";
 import HowToComponent from "../components/HowTo";
@@ -31,11 +30,6 @@ export default new Router({
       path: "/mappa",
       name: "map",
       component: MapComponent
-    },
-    {
-      path: "/utenti",
-      name: "utenti",
-      component: LandingUsersComponent
     },
     {
       path: "/commercianti",

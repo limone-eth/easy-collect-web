@@ -1,18 +1,17 @@
 <template>
-    <div class="bg-light pb-5 pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-4"></div>
-                <div class="col-2">
-                    <a href="https://fb.me/ColliGo.Italia" target="_blank"><img src="../assets/facebook.svg" width="60"></a>
-                </div>
-                <div class="col-2 d-none">
-                    <a href=""><img src="../assets/instagram.svg" width="60"></a>
-                </div>
-                <div class="col-4"></div>
+    <div class="bg-light pb-4 pt-4">
+        <div class="d-flex justify-content-center">
+            <div class="pr-3">
+                <a href="https://fb.me/ColliGo.Italia" target="_blank"><img src="../assets/facebook.svg" width="50"></a>
+            </div>
+            <div class="pl-3">
+                <a href="https://instagram.com/colligoitalia?igshid=1jo7dpg2rdaig"><img src="../assets/instagram.svg"
+                                                                                        width="50" alt="Instagram"></a>
             </div>
         </div>
-
+        <div class="text-center mt-4">
+            <a href="mailto:colligo.shop@gmail.com">colligo.shop@gmail.com</a>
+        </div>
     </div>
 </template>
 

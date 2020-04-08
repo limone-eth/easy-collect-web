@@ -19,7 +19,7 @@
                     Fruit Hub</u></a> - ufficio stampa - e
                     <a class="text-white" href="https://www.hostingsolutions.it/"><u>Hosting Solutions (Genesys
                         Informatica srl)</u></a> - servizio di hosting. <br><br>
-                    Se sei interessato a collaborare con noi, scrivici a colligo.shop@gmail.com  illustrandoci il con- tributo
+                    Se sei interessato a collaborare con noi, scrivici a colligo.shop@gmail.com  illustrandoci il contributo
                     che
                     pensi di poter dare.
                 </div>
