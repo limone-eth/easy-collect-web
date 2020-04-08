@@ -96,7 +96,7 @@
                                 <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
                                 Cellulare / <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
                                 Whatsapp</label>
-                            <input type="text" class="form-control" id="phone" v-model="phone"
+                            <input type="number" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
                             <span v-if="error.phone" class="text-danger">
                                 {{ error.phone }}
@@ -206,6 +206,16 @@
           category: false
         }
       }
+    },
+    created() {
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1760072,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     },
     mounted() {
       this.registered = false;
