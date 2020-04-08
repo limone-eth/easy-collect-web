@@ -134,8 +134,8 @@
                                                     <font-awesome-icon :icon="['fa', 'phone']" class="text-success h4"/>
                                                     Telefono</a>
                                             </div>
-                                            <div class="col-3" v-bind:style="{opacity: shop.phone ? 1 : 0.3}">
-                                                <a v-bind:href="'tel:' + shop.phone" v-bind:class="shop.phone ? '' : 'disabled'">
+                                            <div class="col-3" v-bind:style="{opacity: shop.whatsapp ? 1 : 0.3}">
+                                                <a v-bind:href="shop.whatsapp" v-bind:class="shop.whatsapp ? '' : 'disabled'">
                                                     <font-awesome-icon :icon="['fab', 'whatsapp']"
                                                                        class="text-success h4"/>
                                                     Whatsapp</a>

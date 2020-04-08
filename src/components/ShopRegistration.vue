@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label for="phone">
                                 <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                Telefono</label>
+                                Telefono / Cellulare</label>
                             <input type="number" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
                             <span v-if="error.phone" class="text-danger">
@@ -104,10 +104,9 @@
                         <div class="form-group">
                             <label for="phone">
                                 <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
-                                Cellulare /
                                 Whatsapp</label>
                             <input type="number" class="form-control" id="whatsapp" v-model="whatsapp"
-                                   placeholder="Inserisci il tuo numero di telefono">
+                                   placeholder="Inserisci il tuo numero di Whatsapp">
                             <span v-if="error.whatsapp" class="text-danger">
                                 {{ error.whatsapp }}
                             </span>
@@ -117,7 +116,7 @@
                                 <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
                                 Link al gruppo Telegram</label>
                             <input type="text" class="form-control" id="telegram" v-model="telegram"
-                                   placeholder="Inserisci il link al tuo gruppo telegram">
+                                   placeholder="Inserisci il link al tuo gruppo Telegram">
                             <span v-if="error.telegram" class="text-danger">
                                 {{ error.telegram }}
                             </span>
@@ -280,7 +279,7 @@
         if (this.whatsapp && !this.whatsapp.match(phoneRegexp)) {
           this.error.whatsapp = 'Il numero di cellulare inserito non è valido!'
         }
-        if (!this.phone && !this.facebook && !this.telegram) {
+        if (!this.accepts_terms_and_conditions) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
         }
         if (this.facebook && !this.facebook.match(regex)){
@@ -295,6 +294,7 @@
           this.error.category = 'Seleziona almeno una categoria!'
         }
         if (_.some(this.error)) {
+          console.log(this.error);
           this.error.general = 'Dati non validi, controlla!';
           e.preventDefault();
           return
