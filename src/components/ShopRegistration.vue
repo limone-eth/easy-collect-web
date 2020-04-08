@@ -294,7 +294,6 @@
           this.error.category = 'Seleziona almeno una categoria!'
         }
         if (_.some(this.error)) {
-          console.log(this.error);
           this.error.general = 'Dati non validi, controlla!';
           e.preventDefault();
           return
