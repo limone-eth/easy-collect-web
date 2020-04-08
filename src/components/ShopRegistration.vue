@@ -94,12 +94,22 @@
                         <div class="form-group">
                             <label for="phone">
                                 <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                Cellulare / <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
-                                Whatsapp</label>
+                                Telefono</label>
                             <input type="number" class="form-control" id="phone" v-model="phone"
                                    placeholder="Inserisci il tuo numero di telefono">
                             <span v-if="error.phone" class="text-danger">
                                 {{ error.phone }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">
+                                <font-awesome-icon :icon="['fab', 'whatsapp']" class="text-success"/>
+                                Cellulare /
+                                Whatsapp</label>
+                            <input type="number" class="form-control" id="whatsapp" v-model="whatsapp"
+                                   placeholder="Inserisci il tuo numero di telefono">
+                            <span v-if="error.whatsapp" class="text-danger">
+                                {{ error.whatsapp }}
                             </span>
                         </div>
                         <div class="form-group">
@@ -169,6 +179,9 @@
   let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   let regex = new RegExp(expression);
 
+  let phoneExp = /^[+]*[(]?[0-9]{1,4}[)]?[-\s/0-9]*$/gi;
+  let phoneRegexp = new RegExp(phoneExp);
+
   export default {
     name: "ShopRegistration",
     components: {
@@ -189,6 +202,7 @@
         facebook: null,
         registered: true,
         category: null,
+        whatsapp: null,
         accepts_terms_and_conditions: false,
         isLoading: false,
         fullPage: true,
@@ -203,7 +217,8 @@
           facebook: false,
           telegram: false,
           phone: false,
-          category: false
+          category: false,
+          whatsapp: false,
         }
       }
     },
@@ -256,8 +271,14 @@
         if (this.website && !this.website.match(regex)) {
           this.error.website = 'Inserire un link valido al sito web'
         }
-        if (!this.phone && !this.facebook && !this.telegram) {
+        if (!this.phone && !this.facebook && !this.telegram && !this.whatsapp) {
           this.error.phone = 'Devi inserire almeno un contatto!'
+        }
+        if (this.phone && !this.phone.match(phoneRegexp)) {
+          this.error.phone = 'Il numero di telefono inserito non è valido!'
+        }
+        if (this.whatsapp && !this.whatsapp.match(phoneRegexp)) {
+          this.error.whatsapp = 'Il numero di cellulare inserito non è valido!'
         }
         if (!this.phone && !this.facebook && !this.telegram) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
@@ -301,6 +322,9 @@
         }
         if (this.phone) {
           payload.phone = this.phone;
+        }
+        if (this.whatsapp) {
+          payload.whatsapp = this.whatsapp;
         }
         if (this.telegram) {
           payload.telegram = this.telegram;
