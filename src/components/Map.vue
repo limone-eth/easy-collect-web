@@ -51,9 +51,9 @@
             </div>
         </div>
         <!-- MAPPA -->
-        <div v-show="personalPosition" class="mt-5 container"  id="leaflet-map">
-            <div class="container mb-3" >
-              <div class="text-center h3 mb-3">Cerca i negozi vicino a te </div>
+        <div v-show="personalPosition" class="mt-5 container" id="leaflet-map">
+            <div class="container mb-3">
+                <div class="text-center h3 mb-3">Cerca i negozi vicino a te</div>
                 <form @submit="searchForm"
                       @submit.prevent="search" id="search-form">
                     <div class="row">
@@ -97,44 +97,62 @@
                                @update:center="centerUpdated" @update:bounds="boundsUpdated">
                             <l-tile-layer :url="url">
 
-                        </l-tile-layer>
-                        <l-marker v-bind:key="shop.id" v-for="shop in shops"
-                                  v-bind:lat-lng="[shop.lat,shop.lng]"
-                                  v-bind:icon="shop.icon">
-                          <l-popup>
-                              <div>
+                            </l-tile-layer>
+                            <l-marker v-bind:key="shop.id" v-for="shop in shops"
+                                      v-bind:lat-lng="[shop.lat,shop.lng]"
+                                      v-bind:icon="shop.icon">
+                                <l-popup>
+                                    <div style="min-width:280px;">
                               <span class="text-primary h5">
                                   {{shop.name}}
                               </span><br>
-                                  <span v-bind:key="category.id" v-for="category in shop.categories"
-                                        class="h6 font-weight-bold">
+                                        <span v-bind:key="category.id" v-for="category in shop.categories"
+                                              class="h6 font-weight-bold">
                                       <span class="badge badge-success mr-1">{{category.name}}</span>
                                   </span>
-                                  <br>
-                                  <span class="h6 mt-2">
+                                        <br>
+                                        <span class="h6 mt-2">
                                       {{shop.description}}
                                   </span>
-                                  <p class="h6" v-show="shop.phone !== null">
-                                      <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
-                                        {{shop.address}} - {{shop.city}}, {{shop.cap}}
-                                  </p>
-                                  <p class="h6" v-show="shop.website !== null">
-                                      <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
-                                      <a v-bind:href="shop.website" target="_blank">Sito Web</a>
-                                  </p>
-
                                         <p class="h6" v-show="shop.phone !== null">
-                                            <font-awesome-icon :icon="['fa', 'phone']" class="text-success"/>
-                                            <a v-bind:href="'tel:' + shop.phone"> {{shop.phone}}</a>
+                                            <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
+                                            {{shop.address}}
+                                            <br>
+                                            <font-awesome-icon :icon="['fa', 'city']" class="text-danger"/>
+                                            {{shop.city}} - {{shop.cap}}
                                         </p>
-                                        <p class="h6" v-show="shop.telegram !== null">
-                                            <font-awesome-icon :icon="['fab', 'telegram']" class="text-primary"/>
-                                            <a v-bind:href="shop.telegram" target="_blank"> Canale Telegram</a>
+                                        <p class="h6" v-show="shop.website !== null">
+                                            <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                            <a v-bind:href="shop.website" target="_blank"> Sito Web</a>
                                         </p>
-                                        <p class="h6" v-show="shop.facebook !== null">
-                                            <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                            <a v-bind:href="shop.facebook" target="_blank"> Pagina Facebook</a>
-                                        </p>
+                                        <hr>
+                                        <div class="h5 text-center">Contatta la bottega</div>
+                                        <br>
+                                        <div class="row text-center">
+                                            <div class="col-3" v-bind:style="{opacity: shop.phone ? 1 : 0.3}">
+                                                <a v-bind:href="'tel:' + shop.phone" v-bind:class="shop.phone ? '' : 'disabled'">
+                                                    <font-awesome-icon :icon="['fa', 'phone']" class="text-success h4"/>
+                                                    Telefono</a>
+                                            </div>
+                                            <div class="col-3" v-bind:style="{opacity: shop.phone ? 1 : 0.3}">
+                                                <a v-bind:href="'tel:' + shop.phone" v-bind:class="shop.phone ? '' : 'disabled'">
+                                                    <font-awesome-icon :icon="['fab', 'whatsapp']"
+                                                                       class="text-success h4"/>
+                                                    Whatsapp</a>
+                                            </div>
+                                            <div class="col-3" v-bind:style="{opacity: shop.facebook ? 1 : 0.3}">
+                                                <a v-bind:href="shop.facebook" target="_blank" v-bind:class="shop.facebook ? '' : 'disabled'">
+                                                    <font-awesome-icon :icon="['fab', 'facebook']"
+                                                                       class="text-primary h4"/>
+                                                    Facebook</a>
+                                            </div>
+                                            <div class="col-3" v-bind:style="{opacity: shop.telegram ? 1 : 0.3}">
+                                                <a v-bind:href="shop.telegram" target="_blank" v-bind:class="shop.telegram ? '' : 'disabled'">
+                                                    <font-awesome-icon :icon="['fab', 'telegram']"
+                                                                       class="text-primary h4" />
+                                                   Telegram</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </l-popup>
                             </l-marker>
@@ -162,7 +180,7 @@
 <script>
   import {LMap, LTileLayer, LMarker, LPopup, LCircleMarker} from 'vue2-leaflet';
   import L from 'leaflet'
-  import { OpenStreetMapProvider } from 'leaflet-geosearch';
+  import {OpenStreetMapProvider} from 'leaflet-geosearch';
   import * as _ from "lodash";
 
 
@@ -202,19 +220,19 @@
     },
     data() {
       const defaultIcon = L.icon({
-            iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-blue.png'),
-            iconUrl: require('../assets/marker_colors/marker-icon-blue.png'),
-            iconSize: [30, 50],
-            iconAnchor: [15, 50],
-            popupAnchor: [0, -30]
-        })
+        iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-blue.png'),
+        iconUrl: require('../assets/marker_colors/marker-icon-blue.png'),
+        iconSize: [30, 50],
+        iconAnchor: [15, 50],
+        popupAnchor: [0, -30]
+      })
       const selectedIcon = L.icon({
-            iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-green.png'),
-            iconUrl: require('../assets/marker_colors/marker-icon-green.png'),
-            iconSize: [30, 50],
-            iconAnchor: [15, 50],
-            popupAnchor: [0, -30]
-        })
+        iconRetinaUrl: require('../assets/marker_colors/marker-icon-2x-green.png'),
+        iconUrl: require('../assets/marker_colors/marker-icon-green.png'),
+        iconSize: [30, 50],
+        iconAnchor: [15, 50],
+        popupAnchor: [0, -30]
+      })
       return {
         categories_id: null,
         mapRef: null,
@@ -285,24 +303,24 @@
         return params
       },
       filtering(params) {
-        if(params.name){
+        if (params.name) {
           const namesFiltered = _.filter(this.shops, (item) => item.name.includes(params.name))
-          if(params.categories_id){
+          if (params.categories_id) {
             const categoriesFiltered = _.filter(
-                  namesFiltered, 
-                  (item) => item.categories
-                      .find(elem => elem.id === params.categories_id)
-              )
+              namesFiltered,
+              (item) => item.categories
+                .find(elem => elem.id === params.categories_id)
+            )
             return categoriesFiltered
           }
           return namesFiltered
-        } else if(params.categories_id){
+        } else if (params.categories_id) {
           const categoriesFiltered = _
-              .filter(
-                  this.shops, 
-                  (item) => item.categories
-                      .find(elem => elem.id === params.categories_id)
-              )
+            .filter(
+              this.shops,
+              (item) => item.categories
+                .find(elem => elem.id === params.categories_id)
+            )
           return categoriesFiltered
         }
         return []
@@ -312,7 +330,7 @@
         _.map(this.shops, (shop) => shop['icon'] = this.defaultIcon)
         const params = this.searchFilter()
         const shopsFiltered = this.filtering(params)
-        this.errorNotFound = shopsFiltered.length > 0 ? null : "Nessun risultato per la tua ricerca"; 
+        this.errorNotFound = shopsFiltered.length > 0 ? null : "Nessun risultato per la tua ricerca";
         _.map(shopsFiltered, (shop) => {
           shop.icon = this.selectedIcon
         })
@@ -343,7 +361,7 @@
             this.errorMessage = "Ops, c'è stato un errore! Non siamo riusciti a trovare il tuo indirizzo... riprova!";
           });
       },
-      setPosition(lat, lng, address = null, city = null, cap = null){
+      setPosition(lat, lng, address = null, city = null, cap = null) {
         this.personalPosition = {lat: lat, lng: lng};
         this.center = {lat: lat, lng: lng};
         if (address) {
@@ -356,11 +374,11 @@
           this.user_cap = cap;
         }
         this.zoomUpdated(13);
-        setTimeout( () =>  {
+        setTimeout(() => {
           this.mapRef.invalidateSize();
         }, 300);
       },
-      scrollToMap(element, duration){
+      scrollToMap(element, duration) {
         const options = {
           easing: 'ease-in',
           offset: -10,
@@ -402,17 +420,24 @@
         padding: 10px;
         background: white;
     }
+
     /*
     *  Remove arrows in input number 
     *  Chrome, Safari, Edge, Opera 
     */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
+
     /* Firefox */
     input[type=number] {
-      -moz-appearance: textfield;
+        -moz-appearance: textfield;
+    }
+
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
     }
 </style>
