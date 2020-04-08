@@ -5,7 +5,7 @@
                 <a href="https://fb.me/ColliGo.Italia" target="_blank"><img src="../assets/facebook.svg" width="50"></a>
             </div>
             <div class="pl-3">
-                <a href="https://instagram.com/colligoitalia?igshid=1jo7dpg2rdaig"><img src="../assets/instagram.svg"
+                <a href="https://instagram.com/colligoitalia?igshid=1jo7dpg2rdaig" target="_blank"><img src="../assets/instagram.svg"
                                                                                         width="50" alt="Instagram"></a>
             </div>
         </div>
