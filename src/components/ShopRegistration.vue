@@ -300,8 +300,6 @@
         } else {
           this.register()
         }
-
-
       },
       register() {
         this.isLoading = true;
