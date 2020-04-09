@@ -30,7 +30,7 @@
                 <div>
                     Alessio Cesaretti, Andrea Aurizi, Andrea
                     Misuraca, Andrea Vitaletti (coordinatore), Angelo Catalani, Arianna Fusilli, Arianna Mauro, Daniele
-                    Iacomini, Danilo Lato, Davide Gimondo, Francesco Colasante, Lorenzo Scollo, Luca Ferrera, Luca
+                    Iacomini, Danilo Lato, Davide Gimondo, Fernanda D'Arienzo, Francesco Colasante, Lorenzo Scollo, Luca Ferrera, Luca
                     Tomei, Marco
                     Zecchini, Mariolina Pepe, Matteo Brandi, Mattia Righetti, Michela Ciommo, Michele Anselmi, Riccardo
                     Bianchini, Simone Cargiani, Simone Silvestri, Simone Staffa, Stefano Latini, Valerio Coretti,
