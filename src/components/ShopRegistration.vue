@@ -182,9 +182,6 @@
   import 'vue-loading-overlay/dist/vue-loading.css'
   import * as _ from "lodash";
   import Multiselect from 'vue-multiselect';
-  // import * as dotenv from "dotenv";
-
-  // dotenv.config({path: '../local.env'});
 
   let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   let regex = new RegExp(expression);
@@ -287,9 +284,6 @@
             (console.log(error))
             this.isLoading = false;
             });
-      },
-      clearAll () {
-        this.searchFacebookPages = []
       },
       registerForm: function (e) {
         this.error = _.mapValues(this.error, () => false);
