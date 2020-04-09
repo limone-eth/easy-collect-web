@@ -124,9 +124,16 @@
                         <div class="form-group">
                             <label for="facebook">
                                 <font-awesome-icon :icon="['fab', 'facebook']" class="text-primary"/>
-                                Link alla Pagina Facebook</label>
-                            <input type="text" class="form-control" id="facebook" v-model="facebook"
-                                   placeholder="https://www.facebook.com/latuapagina">
+                                Pagina Facebook</label>
+                            <multiselect v-model="facebook" 
+                                      placeholder="Cerca la tua pagina Facebook" label="name" track-by="id"
+                                      :custom-label="customLabel"
+                                      :options="facebookPages" :taggable="true"  open-direction="bottom" 
+                                      :limit="5" :limit-text="limitText"
+                                      :close-on-select="true" @search-change="searchFacebookPages"
+                            >
+                              <template slot="noOptions">Cerca la tua pagina Facebook</template>
+                            </multiselect>
                             <span v-if="error.facebook" class="text-danger">
                                 {{ error.facebook }}
                             </span>
@@ -174,6 +181,10 @@
   // Import stylesheet
   import 'vue-loading-overlay/dist/vue-loading.css'
   import * as _ from "lodash";
+  import Multiselect from 'vue-multiselect';
+  // import * as dotenv from "dotenv";
+
+  // dotenv.config({path: '../local.env'});
 
   let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   let regex = new RegExp(expression);
@@ -181,10 +192,14 @@
   let phoneExp = /^[+]*[(]?[0-9]{1,4}[)]?[-\s/0-9]*$/gi;
   let phoneRegexp = new RegExp(phoneExp);
 
+  let facebookAPIUrl = 'https://graph.facebook.com/search'
+  let facebook_access_token = process.env.VUE_APP_FACEBOOK_ACCESS_TOKEN
+
   export default {
     name: "ShopRegistration",
     components: {
-      Loading
+      Loading,
+      Multiselect
     },
     data() {
       return {
@@ -218,7 +233,8 @@
           phone: false,
           category: false,
           whatsapp: false,
-        }
+        },
+        facebookPages: []
       }
     },
     created() {
@@ -245,6 +261,36 @@
         .catch(error => (console.log(error)));
     },
     methods: {
+      customLabel({name, location}){
+         return `${name} — [${location.city}, ${location.street}]`
+      },
+      limitText (count) {
+        return `e ${count} altre pagine Facebook`
+      },
+      searchFacebookPages(query){
+        this.isLoading = true;
+        this.$api.get(facebookAPIUrl,{
+          params:{
+            type:'place',
+            q:query,
+            fields:'id,name,location,link',
+            access_token:facebook_access_token
+          }
+        })
+          .then(response => {
+              console.log(response);
+              this.facebookPages = response.data.data
+              this.isLoading = false;
+            }
+          )
+          .catch(error => {
+            (console.log(error))
+            this.isLoading = false;
+            });
+      },
+      clearAll () {
+        this.searchFacebookPages = []
+      },
       registerForm: function (e) {
         this.error = _.mapValues(this.error, () => false);
         if (!this.name) {
@@ -281,9 +327,6 @@
         }
         if (!this.accepts_terms_and_conditions) {
           this.error.general = 'Per registrarti devi accettare le condizioni!'
-        }
-        if (this.facebook && !this.facebook.match(regex)){
-          this.error.facebook = "Il link alla pagina Facebook non è valido."
         }
         if (this.telegram && !this.telegram.match(regex)){
           this.error.telegram = "Il link al gruppo Telegram non è valido."
@@ -329,7 +372,7 @@
           payload.telegram = this.telegram;
         }
         if (this.facebook) {
-          payload.facebook = this.facebook;
+          payload.facebook = this.facebook.link;
         }
         this.$api.post('/shops', payload)
           .then(response => {
