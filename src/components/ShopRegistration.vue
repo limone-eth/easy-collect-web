@@ -339,7 +339,12 @@
           .catch((e) => {
             this.isLoading = false;
             if (e.response.status === 419) {
-              this.error.general = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
+              console.log(e.response);
+              if (e.response.data.error.code === 4) {
+                this.error.facebook = "Il link alla pagina Facebook non è valido! Assicurati sia corretto."
+              } else if (e.response.data.code === 2) {
+                this.error.address = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
+              }
             }
             else if (e.response.status === 422) {
               this.error.general = "I dati inseriti non sono validi, ricontrolla!"
@@ -353,6 +358,7 @@
                 this.error = "Ops, c'è stato un errore!"
               }
             }
+            this.error.general = "Ci sono degli errori, ricontrolla!"
           });
       },
       onCancel() {

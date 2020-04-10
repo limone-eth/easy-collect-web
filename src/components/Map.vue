@@ -121,36 +121,54 @@
                                             <font-awesome-icon :icon="['fa', 'city']" class="text-danger"/>
                                             {{shop.city}} - {{shop.cap}}
                                         </p>
-                                        <p class="h6" v-show="shop.website !== null">
-                                            <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
-                                            <a v-bind:href="shop.website" target="_blank"> Sito Web</a>
-                                        </p>
+                                        <br>
+                                        <div class="row justify-content-between">
+                                            <div class="col-6">
+                                                <div class="h6" v-show="shop.website !== null">
+                                                    <a v-bind:href="shop.website" target="_blank">
+                                                        <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
+                                                        Sito Web</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="h6" v-show="shop.facebook !== null">
+                                                    <a v-bind:href="shop.facebook" target="_blank" class="text-primary">
+                                                        <font-awesome-icon :icon="['fab', 'facebook']"/>
+                                                        Facebook</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <hr>
                                         <div class="h5 text-center">Contatta la bottega</div>
                                         <br>
                                         <div class="row text-center">
                                             <div class="col-3" v-bind:style="{opacity: shop.phone ? 1 : 0.3}">
-                                                <a v-bind:href="'tel:' + shop.phone" v-bind:class="shop.phone ? '' : 'disabled'">
+                                                <a v-bind:href="'tel:' + shop.phone"
+                                                   v-bind:class="shop.phone ? '' : 'disabled'">
                                                     <font-awesome-icon :icon="['fa', 'phone']" class="text-success h4"/>
                                                     Telefono</a>
                                             </div>
                                             <div class="col-3" v-bind:style="{opacity: shop.whatsapp ? 1 : 0.3}">
-                                                <a v-bind:href="shop.whatsapp" v-bind:class="shop.whatsapp ? '' : 'disabled'">
+                                                <a v-bind:href="shop.whatsapp"
+                                                   v-bind:class="shop.whatsapp ? '' : 'disabled'">
                                                     <font-awesome-icon :icon="['fab', 'whatsapp']"
                                                                        class="text-success h4"/>
                                                     Whatsapp</a>
                                             </div>
-                                            <div class="col-3" v-bind:style="{opacity: shop.facebook ? 1 : 0.3}">
-                                                <a v-bind:href="shop.facebook" target="_blank" v-bind:class="shop.facebook ? '' : 'disabled'">
-                                                    <font-awesome-icon :icon="['fab', 'facebook']"
+                                            <div class="col-3" v-bind:style="{opacity: shop.messenger ? 1 : 0.3}">
+                                                <a v-bind:href="shop.messenger" target="_blank"
+                                                   v-bind:class="shop.messenger ? '' : 'disabled'">
+                                                    <font-awesome-icon :icon="['fab', 'facebook-messenger']"
                                                                        class="text-primary h4"/>
-                                                    Facebook</a>
+                                                    Messenger</a>
                                             </div>
                                             <div class="col-3" v-bind:style="{opacity: shop.telegram ? 1 : 0.3}">
-                                                <a v-bind:href="shop.telegram" target="_blank" v-bind:class="shop.telegram ? '' : 'disabled'">
+                                                <a v-bind:href="shop.telegram" target="_blank"
+                                                   v-bind:class="shop.telegram ? '' : 'disabled'">
                                                     <font-awesome-icon :icon="['fab', 'telegram']"
-                                                                       class="text-primary h4" />
-                                                   Telegram</a>
+                                                                       class="text-primary h4"/>
+                                                    Telegram</a>
                                             </div>
                                         </div>
                                     </div>
