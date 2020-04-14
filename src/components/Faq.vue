@@ -135,8 +135,18 @@
             </div>
         </div>
         <div class="mt-3 container pt-5 pb-5">
+            <div class="h3">
+                Come faccio a cancellare il mio negozio da Colligo?
+            </div>
             <div class="h6">
-                Contattaci su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> per ogni chiarimento e/o suggerimento.
+                È sufficiente inviare una e-mail a <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> specificando il desiderio di cancellarsi.
+            </div>
+        </div>
+        <div class="mt-3 bg-success text-white pt-5 pb-5">
+            <div class="container">
+                <div class="h6">
+                    Contattaci su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> per ogni chiarimento e/o suggerimento.
+                </div>
             </div>
         </div>
     </div>
