@@ -14,6 +14,7 @@
                     <b-collapse id="nav-collapse" is-nav>
                         <!-- Right aligned nav items -->
                         <b-navbar-nav class="ml-auto">
+                            <b-nav-item to="/mappa">Mappa</b-nav-item>
                             <b-nav-item to="/home" class="text-dark">
                                 Come funziona
                             </b-nav-item>

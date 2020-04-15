@@ -98,6 +98,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-toast-notification/dist/theme-default.css';
 
+
 Vue.config.productionTip = false;
 
 new Vue({
