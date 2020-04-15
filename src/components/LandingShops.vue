@@ -9,7 +9,7 @@
                         <div class="h1 font-weight-bolder">
                             Aumenta la tua visibilità e resta sempre in contatto con i tuoi clienti.<br>Senza mediazioni.
                         </div>
-                        <b-button variant="light" to="/registrati">Registra la tua attività</b-button>
+                        <b-button variant="light" to="/registrati" class="text-success">Registra la tua attività</b-button>
                         <b-button style="margin-left:5px" variant="outline-light" to="/howto">Tutorial</b-button>
                     </div>
                     <div class="col-6">
@@ -23,7 +23,7 @@
                         <div class="h1 font-weight-bolder">
                             Aumenta la tua visibilità e resta sempre in contatto con i tuoi clienti.<br>Senza mediazioni.
                         </div>
-                        <b-button variant="light" to="/registrati">Registra la tua attività</b-button>
+                        <b-button variant="light" to="/registrati" class="text-success">Registra la tua attività</b-button>
                         <b-button style="margin-left:5px" variant="outline-light" to="/howto">Tutorial</b-button>
                     </div>
                     <div class="col-12 pt-2">

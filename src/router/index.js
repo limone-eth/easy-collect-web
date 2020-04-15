@@ -10,8 +10,8 @@ import NotFoundComponent from "../components/NotFound";
 import ManifestoComponent from "../components/Manifesto";
 import HomeComponent from "../components/Home";
 import PolicyComponent from "../components/Policy";
-
 Vue.use(Router);
+
 
 export default new Router({
     mode: 'history',
@@ -25,7 +25,7 @@ export default new Router({
         {
             path: "/home",
             name: "home",
-            component: HomeComponent
+            component: HomeComponent,
         },
         {
             path: "/mappa",
