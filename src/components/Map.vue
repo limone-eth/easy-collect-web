@@ -322,7 +322,7 @@
       },
       filtering(params) {
         if (params.name) {
-          const namesFiltered = _.filter(this.shops, (item) => item.name.includes(params.name))
+          const namesFiltered = _.filter(this.shops, (item) => item.name.toLowerCase().includes(params.name.toLowerCase()))
           if (params.categories_id) {
             const categoriesFiltered = _.filter(
               namesFiltered,
