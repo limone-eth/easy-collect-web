@@ -382,13 +382,13 @@
       setPosition(lat, lng, address = null, city = null, cap = null) {
         this.personalPosition = {lat: lat, lng: lng};
         this.center = {lat: lat, lng: lng};
-        if (address) {
+        if (address && address.toString() !== 'null') {
           this.user_address = address;
         }
-        if (city) {
+        if (city && city.toString() !== 'null') {
           this.user_city = city;
         }
-        if (cap) {
+        if (cap && cap.toString() !== 'null') {
           this.user_cap = cap;
         }
         this.zoomUpdated(13);
