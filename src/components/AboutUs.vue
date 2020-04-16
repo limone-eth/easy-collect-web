@@ -6,12 +6,12 @@
                     <div class="h2">Parlano di noi</div>
                     <div class="row mt-4">
                         <div class="col-3 pt-4">
-                            <a href="https://www.mangiaebevi.it/nasce-colligo-lapp-per-fare-la-spesa-nelle-botteghe-di-quartiere-con-un-click/">
+                            <a href="https://www.mangiaebevi.it/nasce-colligo-lapp-per-fare-la-spesa-nelle-botteghe-di-quartiere-con-un-click/" target="_blank">
                                 <img src="../assets/about-us/mangiaebevi.png" alt="Mangia e Bevi" width="200">
                             </a>
                         </div>
                         <div class="col-3 pb-5">
-                            <a href="https://www.corriere.it/pianeta2020/20_aprile_11/niente-piu-file-market-ci-pensa-pizzicagnolo-40-rivincita-botteghe-quartiere-bcf308dc-7b53-11ea-8187-c429688ed758.shtml">
+                            <a href="https://www.corriere.it/pianeta2020/20_aprile_11/niente-piu-file-market-ci-pensa-pizzicagnolo-40-rivincita-botteghe-quartiere-bcf308dc-7b53-11ea-8187-c429688ed758.shtml" target="_blank">
                                 <img src="../assets/about-us/Corriere_della_Sera.png" alt="Corriere della sera" width="200">
                             </a>
                         </div>
@@ -60,12 +60,12 @@
                 <div class="col-12">
                     <div class="row mt-4">
                         <div class="col-6 pt-4">
-                            <a href="https://www.mangiaebevi.it/nasce-colligo-lapp-per-fare-la-spesa-nelle-botteghe-di-quartiere-con-un-click/">
+                            <a href="https://www.mangiaebevi.it/nasce-colligo-lapp-per-fare-la-spesa-nelle-botteghe-di-quartiere-con-un-click/" target="_blank">
                                 <img src="../assets/about-us/mangiaebevi.png" alt="Mangia e Bevi" width="200">
                             </a>
                         </div>
                         <div class="col-6 pb-5">
-                            <a href="https://www.corriere.it/pianeta2020/20_aprile_11/niente-piu-file-market-ci-pensa-pizzicagnolo-40-rivincita-botteghe-quartiere-bcf308dc-7b53-11ea-8187-c429688ed758.shtml">
+                            <a href="https://www.corriere.it/pianeta2020/20_aprile_11/niente-piu-file-market-ci-pensa-pizzicagnolo-40-rivincita-botteghe-quartiere-bcf308dc-7b53-11ea-8187-c429688ed758.shtml" target="_blank">
                                 <img src="../assets/about-us/Corriere_della_Sera.png" alt="Corriere della sera" width="200">
                             </a>
                         </div>
