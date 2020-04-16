@@ -42,7 +42,7 @@
                             <div class="pt-2">Per noi il rapporto tra cliente e commerciante è un fatto privato.</div>
                             <div class="pt-2">Leggi il nostro manifesto per saperne di più.</div>
                         </div>
-                        <b-button variant="success" to="/manifesto">Il nostro manifesto</b-button>
+                        <b-button variant="success" to="/manifesto" class="mt-2">Il nostro manifesto</b-button>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                             <div class="pt-2">Per noi il rapporto tra cliente e commerciante è un fatto privato.</div>
                             <div class="pt-2">Leggi il nostro manifesto per saperne di più.</div>
                         </div>
-                        <b-button variant="success" to="/manifesto">Il nostro manifesto</b-button>
+                        <b-button variant="success" to="/manifesto" class="mt-2">Il nostro manifesto</b-button>
                     </div>
 
                 </div>
@@ -112,6 +112,11 @@
             </div>
         </div>
 
+        <!-- SECTION 5 -->
+        <about-us>
+
+        </about-us>
+
         <!-- SECTION 4 -->
         <div>
             <div class="container d-none d-sm-block">
@@ -152,8 +157,9 @@
 
 
 <script>
+  import AboutUs from "./AboutUs";
   export default {
-
+    components: {AboutUs}
   }
 </script>
 

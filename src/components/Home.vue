@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="home">
         <!-- SECTION 1 --->
         <div class="text-white bg-success">
             <div class="container d-none d-sm-block">
@@ -106,6 +106,8 @@
             </div>
         </div>
 
+        <!-- SECTION 5 -->
+        <about-us></about-us>
         <!-- SECTION 4 -->
         <div>
             <div class="container d-none d-sm-block">
@@ -146,11 +148,18 @@
 </template>
 
 <script>
+  import AboutUs from "./AboutUs";
   export default {
-    name: "Home"
+    name: "Home",
+    components: {AboutUs}
   }
 </script>
 
 <style scoped>
-
+    #home {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c3e50;
+    }
 </style>
