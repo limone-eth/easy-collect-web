@@ -136,7 +136,7 @@
                                    v-model="accepts_terms_and_conditions" required>
                             <label class="form-check-label" for="exampleCheck1">Registrando il mio negozio do il
                                 consenso a utilizzare le immagini del profilo Facebook e Instagram dello stesso per post
-                                che hanno il fine di promuovere l’utilizzo di ColliGo</label>
+                                che hanno il fine di promuovere l’utilizzo di ColliGo. Consulta la nostra <a href="https://www.colligo.shop/policy">policy</a>.</label>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-success btn-block">Registrati</button>
