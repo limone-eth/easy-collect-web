@@ -41,6 +41,11 @@
                                             Cercando...
                                         </button>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mt-2">
+                                        <span v-if="errorMissingCapOrCity || errorMessage" class="text-danger">
+                                            {{ errorMissingCapOrCity || errorMessage }}
+                                        </span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -276,7 +281,8 @@
         isLoading: false,
         defaultIcon,
         selectedIcon,
-        errorNotFound: null
+        errorNotFound: null,
+        errorMissingCapOrCity: null
       };
     },
     computed: {
@@ -362,6 +368,7 @@
       position() {
         this.isLoading = true;
         this.errorMessage = null;
+        this.errorMissingCapOrCity = null;
         this.$api.get('/coordinates', {params: this.axiosParamsPosition})
           .then(response => {
             this.setPosition(response.data.lat, response.data.lng);
@@ -376,7 +383,11 @@
           .catch(error => {
             console.log(error);
             this.isLoading = false;
-            this.errorMessage = "Ops, c'è stato un errore! Non siamo riusciti a trovare il tuo indirizzo... riprova!";
+            if (error.response.data.error.code === 5) {
+              this.errorMissingCapOrCity = "Inserisci il CAP o la Città"
+            } else {
+              this.errorMessage = "Indirizzo non trovato, controlla l'indirizzo inserito";
+            }
           });
       },
       setPosition(lat, lng, address = null, city = null, cap = null) {
