@@ -342,7 +342,7 @@
               console.log(e.response);
               if (e.response.data.error.code === 4) {
                 this.error.facebook = "Il link alla pagina Facebook non è valido! Assicurati sia corretto."
-              } else if (e.response.data.code === 2) {
+              } else if (e.response.data.error.code === 2) {
                 this.error.address = 'Indirizzo non trovato. Verifica che i campi indirizzo, città e cap siano corretti..'
               }
             }
