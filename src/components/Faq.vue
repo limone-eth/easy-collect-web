@@ -136,16 +136,34 @@
         </div>
         <div class="mt-3 container pt-5 pb-5">
             <div class="h3">
-                Come faccio a cancellare il mio negozio da Colligo?
+                Chi può iscriversi su ColliGo?
             </div>
             <div class="h6">
-                È sufficiente inviare una e-mail a <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> specificando il desiderio di cancellarsi.
+                Possono iscriversi le botteghe appartenenti alle categorie indicate in fase di registrazione. In sintesi
+                tutte quelle botteghe/attività che effettuano vendita al dettaglio di beni alimentari, mentre abbiamo
+                ritenuto di non inserire attività che fanno somministrazione anche se sotto forma di delivery. Colligo
+                si riserva il diritto di rimuovere dalla mappa servizi non coerenti con le categorie indicate. Non vuole
+                essere in alcun modo un giudizio nel merito, ma semplicemente un azione necessaria a mantenere il focus
+                sulle botteghe di quartiere per cui ColliGo è nato.
             </div>
         </div>
         <div class="mt-3 bg-success text-white pt-5 pb-5">
             <div class="container">
+                <div class="h3">
+                    Come faccio a cancellare il mio negozio da Colligo?
+                </div>
                 <div class="h6">
-                    Contattaci su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> per ogni chiarimento e/o suggerimento.
+                    È sufficiente inviare una e-mail a <a
+                        href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> specificando il desiderio di
+                    cancellarsi.
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 pt-5 pb-5">
+            <div class="container">
+                <div class="h6">
+                    Contattaci su <a href="mailto:colligo.shop@gmail.com ">colligo.shop@gmail.com </a> per ogni
+                    chiarimento e/o suggerimento.
                 </div>
             </div>
         </div>
