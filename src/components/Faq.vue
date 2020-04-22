@@ -72,7 +72,7 @@
             </div>
             <div class="h6">
                 Su ColliGo sono presenti tutti i tipi di piccole-medie attività quali: Alimentari, Bio&Equo, Birroteca,
-                Cioccolateria, Enoteca, Formaggeria, Frutteria, Gastronomia, Macelleria, Oleoteca, Panificio,
+                Cioccolateria, Enoteca, Formaggeria, Frutteria, Gastronomia, Gelateria, Macelleria, Oleoteca, Panificio,
                 Pasticceria, Pastificio, Pescheria, Teeria, Torrefazione.
             </div>
         </div>
