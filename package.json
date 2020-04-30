@@ -18,7 +18,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.8.0",
     "core-js": "^3.6.4",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "leaflet": "^1.6.0",
     "leaflet-geosearch": "^2.7.0",
     "lodash": "latest",
