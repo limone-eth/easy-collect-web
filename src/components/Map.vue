@@ -119,7 +119,7 @@
                                         <span class="h6 mt-2">
                                       {{shop.description}}
                                   </span>
-                                        <p class="h6" v-show="shop.phone !== null">
+                                        <p class="h6" v-show="shop.phone">
                                             <font-awesome-icon :icon="['fa', 'map-pin']" class="text-danger"/>
                                             {{shop.address}}
                                             <br>
@@ -129,14 +129,14 @@
                                         <br>
                                         <div class="row justify-content-between">
                                             <div class="col-6">
-                                                <div class="h6" v-show="shop.website !== null">
+                                                <div class="h6" v-show="shop.website">
                                                     <a v-bind:href="shop.website" target="_blank">
                                                         <font-awesome-icon :icon="['fa', 'globe']" class="text-info"/>
                                                         Sito Web</a>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <div class="h6" v-show="shop.facebook !== null">
+                                                <div class="h6" v-show="shop.facebook">
                                                     <a v-bind:href="shop.facebook" target="_blank" class="text-primary">
                                                         <font-awesome-icon :icon="['fab', 'facebook']"/>
                                                         Facebook</a>
